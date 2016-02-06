@@ -1,0 +1,12 @@
+*.fasl
+/.sass-cache
+.#*
+.emacs.desktop*
+static/images/gallery/*.png
+static/images/fractals/*.png
+generate-mandelbrot-png
+static/stress-test
+generate-png-queue
+/logs
+/mailgun/credentials.lisp
+/static/stress-test

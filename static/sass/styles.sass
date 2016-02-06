@@ -1,0 +1,300 @@
+$foreground-color: #FFFFFF
+$background-color: #000000
+$background-color-transparent: rgba(0, 0, 0, 0.8)
+$invert-foreground-color: $background-color
+$invert-background-color: $foreground-color
+
+$medium-border-width: .25rem
+
+$thin-border: 1px solid $foreground-color
+$medium-border: $medium-border-width solid $foreground-color
+$invert-medium-border: $medium-border-width solid $invert-foreground-color
+
+$standard-spacing: 1rem
+$large-spacing: 6rem
+$medium-spacing: 3rem
+$small-spacing: 0.5rem
+
+$input-control-padding: 0.7rem
+
+/* --------------------General Purpose-------------------- */
+
+.display-none
+	display: none
+
+.overflow-hidden
+	overflow: hidden
+
+.half-width
+	width: 50%
+
+.full-width
+	width: 100%
+
+.wait-cursor, .canvas-content canvas.wait-cursor
+	cursor: wait
+
+.medium-padding-bottom
+	padding-bottom: $medium-spacing
+
+.medium-margin
+	margin: $medium-spacing
+
+.large-margin
+	margin: $large-spacing
+
+.medium-margin-bottom
+	margin-bottom: $medium-spacing
+
+.large-margin-bottom
+	margin-bottom: $large-spacing
+
+/* --------------------General Purpose-------------------- */
+
+
+/* --------------------Elements-------------------- */
+
+body
+	background-color: $background-color
+	color: $foreground-color
+	text-align: center
+	min-width: 320px
+
+h1, h2, h3, h4, h5, h6, label, a, a:active, a:visited, a:hover
+	color: $foreground-color
+
+a
+	text-decoration: underline
+
+a:hover
+	text-decoration: none
+
+/* --------------------Elements-------------------- */
+
+
+/* --------------------Form Elements-------------------- */
+
+input[type="text"],
+input[type="email"],
+textarea
+	background-color: $background-color
+	color: $foreground-color
+	border: $thin-border
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus
+	color: $invert-foreground-color
+	border: $thin-border
+
+input[type="color"],
+	background-color: $background-color
+	color: $foreground-color
+	border: none
+	padding: 0
+	margin: 0
+	cursor: pointer
+
+select, option,
+select:hover, option:hover,
+select:focus, option:focus,
+	background-color: $background-color
+	width: 100%
+
+.switch label
+	background-color: $background-color
+	border: $medium-border
+
+.switch label:after
+	background-color: $invert-background-color
+	border: $invert-medium-border
+	width: 1rem
+	height: 1rem
+
+.switch input:checked+label
+	background-color: $invert-background-color
+
+button, .button, .tabs .tab-title a
+	height: 38px
+	margin: 0
+	background-color: $background-color
+	outline-color: $foreground-color
+	color: $foreground-color
+	border: none
+	font-size: 1rem
+	line-height: 100%
+	padding-top: $input-control-padding
+	padding-bottom: $input-control-padding
+	padding-left: 1.5rem
+	padding-right: 1.5rem
+	font-weight: normal
+	text-decoration: none
+
+button:hover, button:focus, .button:hover, .button:focus, .tabs .tab-title a:hover
+	background-color: $invert-background-color
+	color: $invert-foreground-color
+
+select, option
+	color: $foreground-color
+
+/* --------------------Form Elements-------------------- */
+
+
+/* --------------------Settings-------------------- */
+
+$settings-spacing: 10px
+
+.settings-icon
+	display: block
+	width: 40px
+	height: 38px
+	padding: $settings-spacing
+	background-color: $background-color
+	float: left
+
+.settings-icon span
+	display: block
+	box-shadow: 0 1px 0 1px $foreground-color, 0 9px 0 1px $foreground-color, 0 17px 0 1px $foreground-color
+	width: 18px
+
+.settings
+	position: absolute
+	top: 0
+	left: 0
+	width: 100%
+	text-align: left
+	max-width: 320px
+	max-height: 100%
+	overflow: auto
+	background-color: $background-color
+
+.settings-hidden
+	width: 40px
+	height: 38px
+	overflow: hidden
+
+.settings-hidden .settings-content
+	display: none
+
+.setting, .settings-navigation, .page-navigation
+	background-color: $background-color
+	margin-bottom: $standard-spacing
+
+.settings-navigation a
+	display: block
+	float: left
+	text-align: center
+	line-height: 200%
+
+.page-navigation
+	border-bottom: 1px solid $foreground-color
+
+.page-navigation .button
+	float: right
+
+.settings-navigation button
+	width: 50%
+	display: block
+	float: left
+
+.settings-navigation button.display-none
+	display: none
+
+.settings-navigation button.full-width
+	width: 100%
+
+select.gradient-colors-presets option
+	width: 100%
+
+.settings input[type="color"]
+	height: 4rem
+
+.setting.colors .color .move
+	cursor: move
+	float: left
+	line-height: 100%
+	padding: 0.7rem 1.5rem
+
+.setting.colors button.plus, .setting.colors button.minus
+	float: right
+
+.setting.colors .color-controls
+	background-color: $background-color
+
+.colors-controls button, .controls-navigation .tabs .tab-title
+	width: 50%
+	text-align: center
+
+.colors-controls, .controls-navigation .tabs .tab-title
+	border-bottom: $thin-border
+	margin-bottom: $standard-spacing
+
+.controls-navigation
+	margin-bottom: $standard-spacing
+
+.quick-controls .row
+	margin-bottom: $standard-spacing
+
+img.generated-png
+	border: $thin-border
+
+.zoom-rate-meter-outer
+	border: $thin-border
+	height: 14px
+	padding: 1px
+	margin: 10px
+	display: none
+
+.zoom-rate-meter-inner
+	background-color: $foreground-color
+	height: 10px
+
+/* --------------------Settings-------------------- */
+
+
+
+/* --------------------Canvas-------------------- */
+
+.canvas-content
+	position: relative
+	width: 180px
+	height: 120px
+	margin-left: auto
+	margin-right: auto
+
+.canvas-content canvas
+	position: absolute
+	top: 0
+	left: 0
+	cursor: crosshair
+
+/* --------------------End Canvas-------------------- */
+
+
+
+/* --------------------Pages-------------------- */
+
+.how-to .columns.separation
+	border: $thin-border
+	border-top: none
+	border-bottom: none
+
+.gallery .columns
+	margin-bottom: 2rem
+
+.instructions-keyboard-shortcuts ul
+	list-style-type: none
+
+.instructions-keyboard-shortcuts strong
+	text-align: right
+	width: 12rem
+	display: inline-block
+	padding: 0 $standard-spacing
+
+.instructions-keyboard-shortcuts span
+	text-align: left
+	width: 20rem
+	display: inline-block
+	padding: 0 $standard-spacing
+
+/* --------------------Pages-------------------- */

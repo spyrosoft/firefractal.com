@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Fire Fractal</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized posters." />
+	<link rel="shortcut icon" href="/images/favicon.ico" />
+	<!-- Zurb Foundation -->
+	<link href="/css/normalize.min.css" rel="stylesheet" type="text/css" />
+	<link href="/css/foundation.min.css" rel="stylesheet" type="text/css" />
+	<link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+	<!-- End Zurb Foundation -->
+	<link href="/css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+	
+	<div class="canvas-content" id="canvas-content">
+		<canvas id="canvas" width="180" height="120"></canvas>
+		<canvas id="canvas-overlay" width="180" height="120"></canvas>
+	</div>
+	
+	<div class="settings settings-hidden">
+		
+		<a href="#settings" class="settings-icon"><span></span></a>
+		
+		<div class="settings-content">
+			
+			<button class="back display-none">Back</button>
+			
+			<div class="settings-navigation settings-component row">
+				<div class="columns">
+					<div class="clearfix">
+						<button class="more-detail" title="Hotkey: M">More Detail</button>
+						<button class="less-detail" title="Hotkey: L">Less Detail</button>
+						<button class="more-zoom" title="Hotkey: +">More Zoom</button>
+						<button class="less-zoom" title="Hotkey: -">Less Zoom</button>
+					</div>
+					<div class="zoom-rate-meter-outer"><div class="zoom-rate-meter-inner"></div></div>
+					<div class="clearfix">
+						<!-- TODO
+						<button class="undo">Undo</button>
+						<button class="redo">Redo</button>
+						-->
+						<button class="full-screen" title="Hotkey: F11">Full Screen</button>
+						<button class="fit-to-screen">Stretch</button>
+						<button class="reset-zoom full-width">Zoom All The Way Out</button>
+					</div>
+					<hr />
+					<div class="clearfix">
+						<label>
+							Fractal Type
+							<select class="fractal">
+								<option value="leaves">Leaves</option>
+								<option value="tendrils">Tendrils</option>
+								<option value="ocean-floor">Ocean Floor</option>
+								<option value="space">Space</option>
+								<option value="generalized-celtic">Generalized Celtic</option>
+								<!-- <option value="test">Test</option> -->
+							</select>
+						</label>
+						<button class="colors-setting" title="Hotkey: C">Colors</button>
+						<button class="controls-setting" title="Hotkey: T">Controls</button>
+						<button class="share-setting">Share</button>
+						<button class="buy-poster-setting">Buy Poster</button>
+					</div>
+					<hr />
+					<a href="/about.html" target="_blank" class="half-width">About</a>
+					<a href="/how-to.html" target="_blank" class="half-width">How To</a>
+					<a href="https://cash.me/$spyrosoft" target="_blank" class="half-width">Donate</a>
+					<a href="/gallery.html" target="_blank" class="half-width">Gallery</a>
+				</div>
+			</div>
+			
+			<div class="setting settings-component colors text-center row">
+				
+				<div class="columns text-left">
+					<label for="gradient-colors-presets">Presets</label>
+					<select class="gradient-colors-presets" id="gradient-colors-presets">
+						<option></option>
+					</select>
+				</div>
+				
+				<div class="columns">
+					<div class="colors-controls">
+						<button class="reverse" title="Hotkey: R">Reverse</button><button class="invert" title="Hotkey: I">Invert</button>
+					</div>
+				</div>
+
+				<div class="gradient-colors">
+					<div class="color columns">
+						<input type="color" value="#000000">
+						<div class="color-controls clearfix">
+							<div class="move">&#8597;</div>
+							<button class="plus">+</button>
+							<button class="minus">-</button>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div class="setting settings-component controls row">
+				
+				<div class="columns">
+					<label for="max-iterations">Max Iterations</label>
+					<input type="text" value="200" id="max-iterations">
+				</div>
+				
+				<div class="columns small-6 medium-6 large-6">
+					<label for="canvas-width">Width</label>
+					<input type="text" value="180" id="canvas-width">
+				</div>
+				
+				<div class="columns small-6 medium-6 large-6">
+					<label for="canvas-height">Height</label>
+					<input type="text" value="120" id="canvas-height">
+				</div>
+				
+				<div class="columns">
+					
+					<label for="zoom-rate">Zoom Rate</label>
+					<input type="text" value="3" id="zoom-rate">
+					
+					<label for="zoom-level">Zoom Level</label>
+					<input type="text" value="60" id="zoom-level">
+					
+					<label for="x">X - Real</label>
+					<input type="text" value="-0.75" id="x">
+					
+					<label for="y">Y - Imaginary</label>
+					<input type="text" value="0" id="y">
+					
+				</div>
+				
+			</div>
+			
+			<div class="setting settings-component share row">
+				<div class="columns">
+					<label for="share-url">Permalink</label>
+					<input type="text" id="share-url" />
+					<hr />
+					<p class="text-center">
+						PNG Image <span class="canvas-dimensions"></span>
+					</p>
+					<img class="generated-png" />
+				</div>
+			</div>
+			
+			<div class="setting settings-component buy-poster row">
+				<div class="columns">
+					<h2>Coming Soon!</h2>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					<h1>&nbsp;</h1>
+					<!-- <form action="" method="POST"> -->
+					<!-- 	<\!-- <script -\-> -->
+					<!-- 	<\!-- 	 src="https://checkout.stripe.com/checkout.js" class="stripe-button" -\-> -->
+					<!-- 	<\!-- 	 data-key="pk_test_6pRNASCoBOKtIshFeQd4XMUh" -\-> -->
+					<!-- 	<\!-- 	 data-amount="2000" -\-> -->
+					<!-- 	<\!-- 	 data-name="Small" -\-> -->
+					<!-- 	<\!-- 	 data-description="Small Poster ($20.00)" -\-> -->
+					<!-- 	<\!-- 	 data-image="/128x128.png" -\-> -->
+					<!-- 	<\!-- 	 data-locale="auto"> -\-> -->
+					<!-- 	<\!-- </script> -\-> -->
+					<!-- </form> -->
+					
+
+					<!-- <form action="" method="POST" class="buy-poster-form"> -->
+					<!-- 	<div class="payment-errors"></div> -->
+						
+					<!-- 	<div class="row"> -->
+					<!-- 		<div class="columns"> -->
+					<!-- 			<label> -->
+					<!-- 				<span>Poster Size</span> -->
+					<!-- 				<select class="poster-size"> -->
+					<!-- 					<option value="small">Small (8.5"x11")</option> -->
+					<!-- 					<option>Medium (16"x20")</option> -->
+					<!-- 					<option>Large (20"x30")</option> -->
+					<!-- 				</select> -->
+					<!-- 			</label> -->
+					<!-- 		</div> -->
+					<!-- 	</div> -->
+						
+					<!-- 	<div class="row"> -->
+					<!-- 		<div class="columns"> -->
+					<!-- 			<label> -->
+					<!-- 				<span>Card Number</span> -->
+					<!-- 				<input type="text" size="20" placeholder="" data-stripe="number"/> -->
+					<!-- 			</label> -->
+					<!-- 		</div> -->
+					<!-- 	</div> -->
+						
+					<!-- 	<div class="row"> -->
+					<!-- 		<div class="columns"> -->
+					<!-- 			<label> -->
+					<!-- 				<span>CVC</span> -->
+					<!-- 				<input type="text" size="4" data-stripe="cvc"/> -->
+					<!-- 			</label> -->
+					<!-- 		</div> -->
+					<!-- 	</div> -->
+						
+					<!-- 	<div class="row"> -->
+					<!-- 		<div class="columns"> -->
+					<!-- 			<span>Expiration</span> -->
+					<!-- 		</div> -->
+					<!-- 		<div class="columns large-4 medium-4 small-4"> -->
+					<!-- 			<label> -->
+					<!-- 				<span>MM</span> -->
+					<!-- 				<input type="text" size="2" data-stripe="exp-month"/> -->
+					<!-- 			</label> -->
+					<!-- 		</div> -->
+					<!-- 		<div class="columns large-6 medium-6 small-6"> -->
+					<!-- 			<label> -->
+					<!-- 				<span>YYYY</span> -->
+					<!-- 				<input type="text" size="4" data-stripe="exp-year"/> -->
+					<!-- 			</label> -->
+					<!-- 		</div> -->
+					<!-- 		<div class="columns large-2 medium-2 small-2"></div> -->
+					<!-- 	</div> -->
+						
+					<!-- 	<button type="submit" class="full-width">Submit Payment</button> -->
+					<!-- </form> -->
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/foundation.min.js"></script>
+	<script src="/js/hammer.min.js"></script>
+	<script src="/js/mandelbrot/mandelbrot-worker.js"></script>
+	<script src="/js/mandelbrot/mandelbrot.js"></script>
+	<!-- <script src="https://js.stripe.com/v2/"></script> -->
+	<!-- <script src="/js/mandelbrot/buy-poster.js"></script> -->
+	<script type="text/javascript">$(document).foundation();</script>
+	
+</body>
+</html>

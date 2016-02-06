@@ -1,0 +1,750 @@
+* Bugs
+
+** Stripe is clobbering something in the global namespace
+	
+** When the canvas is resized smaller than the screen, the settings icon follows
+
+** Loading settings different than the current width and height needs to prompt the user if they want it to fit to their screen
+
+** If a single user tries to create posters too rapidly in succession, the queue becomes locked
+
+
+* Minimally Viable
+
+** Generate images on the server for social media and the gallery
+
+** Add a tips and tricks section to How To
+	 Explaining the affect of raising or lowering iterations
+	 Make a YouTube video (and channel? for animations?)
+
+** Add Buy Poster functionality
+
+** Implement shift+click to reposition until click & drag/swipe is implemented
+
+** Implement click & drag/swipe repositioning like Google Maps
+	 Alternatively consider double click/tap for reposition
+
+** Add a smoothing option switch
+
+** Think of different methods of making money from this besides posters
+
+** Add Ink HTML email in addition to plain text
+
+** Redirect www to flat
+
+** Make custom http error pages
+
+** Add share functionality
+	 Add facebook, twitter, diaspora, and email/permalink
+	 Social Media should link to a page with an image that is generated on the server based on the location - that way they can be loaded by the remote server and it still doesn't take up disk space on the local server
+	 This page should be a link to the interactive location around the image - centered with black background
+	 Use url hashes containing settings save data - they can then email the link to their friends
+	 Add a way to generate Facebook/Twitter banner images
+
+
+* Feature Requests
+
+** Add undo and redo functionality (map to z, ctrl+z, y, & ctrl+y)
+	 Cache previous frames as much as memory will allow
+	 Do a lookup at the beginning of load_settings and draw from the cache
+
+** Add a Terms of Service page
+
+** Add an unobtrusive firefractal.com watermark to generated png images
+
+** Add a pixel smoothing switch
+	 Research supersample anti-alias for smothing out noise pixels
+
+** Make screen savers to sell on the Mac, iPhone, Android, Windows app stores
+
+** For the generated PNG, rather than displaying it on page, open a new tab containing just the image so people can download it
+	 http://eligrey.com/blog/post/saving-generated-files-on-the-client-side/
+	 http://stackoverflow.com/questions/2897619/using-html5-javascript-to-generate-and-save-a-file
+
+** Display what the color gradients look like
+	 Probably display the gradient in the presets select option - in this case, remove the presets button
+	 Maybe have a background color as the gradient itself, and have it run seamlessly into the next gradient
+	 Consider hiding the color range sliders under a div of that color gradient until the user hovers
+	 Or add a div near the hex input with its background color a CSS gradient
+
+** Change the favicon to a self replicating animated gif
+
+** Add arbitrary precision calculations for deep exploration
+	 Maybe instead do the dynamic programming approach that Gabriel was talking about
+
+** Make a Common Lisp backend which generates thumbnail images for Facebook, etc.
+	 If the thumbnails directory exceeds 2GB, delete the oldest files until it is below the limit again
+
+** Try out using a magnifying glass rather than crosshairs
+	 This can be done with the following css:
+	 cursor: url( "/path/to/magnifying-glass.cur" ), -moz-zoom-in;
+
+** Try changing the zoom level, x & y values to replace all non-significant digits with 0's
+
+** Add a You Are Here diagram somewhere
+
+** Refactor the lisp error handling code where multiple error variables exist by concatenating lists and using a single errors variable
+	 Consider swapping out the error handling code with unwind-protect
+
+** Add contrast threshhold text inputs for images with extremely bright or dark pixels
+
+** Add a speed slider to the multicolor gradients group controls which specifies how quickly to traverse that particular gradient
+	 This will have a maximum of the difference of the maximum color slider difference between the previous two sliders
+
+** Consider adding in an Optimize button for the number of iterations - analyze the distribution of iterations and see if there is an algorithm that can be used to set the iterations to an optimal number
+
+** Consider looking for a way to visualize the iterations - such as CPU intensity (thermometer?) and detail (maybe related to the current coordinates)
+
+** Create a walkthrough which uses the interface itself to show the user how to use the application
+	 Include an animated image of a mouse (with the zoom in rectangle?) for the click events
+	 For the text inputs, highlight them (and simulate typing?)
+	 Explain to the user what tips and tricks there are, such as how iterations affect the image - fringes reveal more detail with higher iterations
+	 Explain what makes each frame take more or less time - total size of canvas + # of max iterations
+
+** Hook up Google Webmaster Tools and remove the huge number of spam results
+
+** Make a Random button that loads my favorites
+	 Make a destination submission feature
+	 Add a meter which shows how many posters (or dollar value) have been purchased and a promise to implement user accounts with up/down vote functionality once enough posters have been sold
+
+** Add functionality to generate animations (pure canvas? gif? m4v? webm?)
+	 Include a progress bar
+	 Consider running whatever has been completed up to that point on repeat until it is fully completed
+
+** Add a changelog section to About
+
+** Optimize the server PNG generation process by searching through the existing requests for the exact same request
+	 If it exists, place it directly after rather than at the end
+
+** When the page resizes, resize (if benchmarks allow it) & recenter the canvas
+
+
+* Server
+
+** Set up ssl
+
+** Design static error pages
+	 This functionality doesn't seem to work... submit a patch? The 404 page is not as described - the 404.html document found in ql/hunchentoot/www/errors - it is in ql/hunchentoot/acceptor.lisp in the make-cooked-message function.
+
+** Refactor static-ram.lisp
+
+** Whenever changes are made to static files, the content loaded into ram needs to be refreshed
+
+** Combine all of the css & javascript into one file to be loaded into ram and presented on the front
+	 This would be easier with a static site generation utility like Hyde
+
+** Combine the instructions images into a sprite
+
+
+* Marketing/Publicity
+
+** Split one piece into two, and group them together in a show - sell them separately
+
+** Thirteen pieces make a show
+
+** Make a deviantart.com account and post favorite destinations
+
+** Make a Chrome and Firefox theme
+
+** Hang posters at NextSpace
+
+** Add desktop wallpapers to the meta description
+
+** Make a flickr account
+
+** Submit a Buy Poster request to ink@zurb.com
+
+** Add copy to the about page for search engine clickthrough
+
+** Talk to MAH about setting up an interactive projection
+
+** Submit firefractal.com to stumbleupon.com
+
+** Find a way to make it viral on Reddit
+
+
+* Reaching For The Stars
+
+** Consider changing the navigation interface to arrow keys - up/down/left/right + ctrl for zoom
+
+** Add a video feature which follows the path that the user took from all the way out to all the way in
+
+** Mass produce posters, bookmarks, stickers, jewelry etc. to sell on an Amazon/eBay store
+
+** Add user Sign Up/Log In - all accounts are public
+
+** Add a per user Favorite Spots feature
+
+** Add a voting feature
+
+** Automatically optimize the iterations based on the current location & benchmarks unless custom is enabled
+
+** Try out plotting the difference between two iterations (e.g. 50 and 150)
+
+** Send benchmark data to the server for analysis
+
+** Make share links like firefractal.com/share/4Bc8
+
+** Host a fund raising event where donors match the number of clicks to pennies - maybe a math education foundation or something
+
+** Create statistical graphs on favorite spots
+
+** Utilize the GPU for calculating each pixel
+
+** Add Julia and/or other sets
+
+** Threejs mandelbulb
+
+** Add text overlay so people can add custom messages (like that app Topher pointed out)
+
+** Add a rotation feature
+	 wikipedia transformation matrix
+
+** Buy a large scale printer
+	 Look into Giclee Printers (multi-material printer)
+
+** Find a way to map fractals to sound
+
+
+* Done
+
+** Will a Zoom Out button be the most effective interface for the user?
+	 Let's try right click instead.
+
+** Identify the screen size of the device and set a maximum width & height on the canvas
+
+** Benchmark the mandelbrot generation - compare it to the spyrosoft one - optimize if too slow
+	 It's fine. Even in Chrome. The canvas sizing optimization technique works.
+
+** Make the color sliders square
+	 http://foundation.zurb.com/docs/components/range_slider.html
+
+** Identify the number of calculations per second the processor of the device can handle and size the canvas appropriately
+
+** Print each pixel/row individually upon computing it
+	 Didn't work... D:
+
+** Add a progress bar and an updating display showing how many calculations have been completed
+	 http://foundation.zurb.com/docs/components/progress_bars.html
+	 Didn't work for the same reason... Damn you single threaded JavaScript. Oddly, the old version of Opera worked just fine. Time to step it up, Chrome & FireFox.
+
+** See if there is a js preprocessor - is that what CoffeeScript is?
+	 - CoffeeScript is a big step and would require a rewrite. There seem to be inherent problems with CoffeScript at the moment, as well, such as debugging mapping from JS to CoffeeScript.
+	 One thing I would like from this is to be able to break out different sections of code into different files.
+	 - In that case, it would make the most sense right now to create separate .js files and include them in <head>.
+
+** Look into js namespaces
+	 There may be a way to avoid including "mandelbrot" in every variable name.
+	 - Yes, there is. The best way would be to use a mandelbrot global object. Will this make it better or worse? Leaving it for now
+
+** Are there constants in js?
+	 Nope.
+
+** Look into pixi.js - webgl with canvas fallback
+	 Useful for 3D stuff. Doesn't look like it is possible to utilize the GPU to run iteration calculations.
+
+** See if canvas has layering - if so try flashing a black then white rectangle on the section to be zoomed in on to indicate to the user that their click has been registered
+	 Canvas does not support layers! The recommended hack is to put a secondary canvas on top of it.
+
+** Add an invisible layer over the page while it is thinking so that people don't register more than one click at a time
+
+** Add an option for the user to resize the canvas
+
+** Try setting the canvas to the screen width and height off the bat and reduce it from there based on benchmarks if necessary
+
+** Move settings to an overlay with transparent background
+	 Clicking the background needs to hide the settings overlay.
+
+** Fix the bug where the sliders do not initialize properly if they are hidden
+
+** When settings are open, change the settings icon to an x icon
+	 This doesn't look like it's cross browser compatible - abandoning this idea
+
+** Only set visibility to invisible the first time the settings are hidden
+	 Use display none after that.
+	 I realize it's hacky - not sure how to deal with the sliders not initializing properly issue.
+
+** Fix the bug where dragging the slider all the way to one side and letting the mouse up over the transparent background closes the settings
+
+** Multicolor Gradients
+
+*** Have an option to input hex for super user
+
+*** On mouseover, display hex input, delete button, and add button (no delete button on the first)
+
+*** Fix the bug when stepping a later color back down
+
+*** The first color should have the option to only be displayed as the ground layer or not
+
+*** If the number of max iterations exceeds the slider difference total (color iterations map length - 1), the default behavior should be to traverse the iteration color map back down, and then back up again
+
+*** Optionally, it should continue back through from the last to the first slider group again
+		This idea and the two above this have been scrapped in favor of using contrast to fill in gaps or too few iterations displaying less than optimal detail
+
+*** When sliders are changed, update max iterations and paint the canvas again
+		In mandelbrot_activate_color_range_slider_controls(), $( '.mandelbrot-range-slider-group' ).on( 'change.fndtn.slider', '.range-slider', mandelbrot_color_range_slider_changed )
+		This idea was scrapped in favor of allowing the user to optionally customize the max iterations value
+
+*** Update the hex value when a slider value changes
+
+** Allow the user to specify custom max iterations
+
+*** This needs to tie in with the color sliders
+		Actually, it doesn't - it can, but it doesn't seem to make it better to do so
+
+*** Add a switch to the left of Max Iterations which enables or disables user customization
+		Went with a button on the right instead
+
+*** Add "Best >= 768" comment at the end of the max iterations label text
+		No - going with displaying the iteration color map length when disabled instead
+
+*** Only update max-iterations text input if it is equal to the previously recomended value
+		Nope, don't even have to think about this
+
+*** Remember to set the max iterations global variable during paint canvas initialization
+
+** Add a close X icon to the generated png image
+	 Changed my mind - it's small enough and at the bottom
+
+** Benchmarks
+
+*** Consider putting a time limit on the benchmark process
+		Success! The 40 millisecond technique seems to work flawlessly.
+
+*** If exceeded, notify the user that his/her device does not have the computing horse power to run the app
+		Anyone trying to access this via a device which exceeds the 40 milliseconds should know better
+
+*** Setting benchmark iterations limit seems to do nothing - figure out why
+		Resolved this by executing actual Mandelbrot calculations for the benchmark
+
+*** Identify in what circumstances setting the canvas to the full width and height can be done, when it can't, and what to do about it
+		The new technique using actual Mandelbrot calculations has resolved this
+
+*** Add a benchmark indicator for the previous canvas painting
+
+** Fix the bug where zooming in on all white breaks the color iteration map generation process
+	 This was caused by the max and min values equaling each other. When the maximize contrast functionality was activated, it tried to divide by max-min, which ended up being 0.
+
+** Do not regenerate the iteration color map if the color sliders haven't changed
+	 This idea was scrapped due to there being virtually no overhead compared to the other types of calculations happening.
+
+** Instructions
+
+*** Make it obvious that you should only click once - that calculations are happening in the background
+		No need - the hide overlay delay works splendidly.
+
+** Fix the bug where the scroll bar for the settings shows even when it is invisible
+	 This issue was solved by adding in a delayed action to hide settings whenever the canvas is painted.
+
+** Fix the bug where adding a color range slider group fails to activate the sliders
+	 That was a weird/hard one. Thank goodness for .next()!
+
+** Use visibility hidden on the slider group controls so the height doesn't jump up and down when mousing over and off of color slider groups
+
+** Change the zoom rate to a slider
+
+** Fix the bug where clicking the scroll bar on the settings closes the settings
+
+** Keyboard Shortcuts
+
+*** s : settings
+
+*** i : invert
+
+*** c : contrast
+
+*** esc : close settings
+
+*** + : faster zoom
+
+*** - : slower zoom
+
+*** r : reset
+
+** Add user feedback functionality
+
+*** Give a shoutout to users who contribute good ideas
+
+** Instructions
+
+*** Create SVG images for the instructions overlay which indicate left click to zoom in, (right click, ctrl click, & alt click) to zoom out, and shift click to reposition
+
+*** List the keyboard shortcuts
+
+** Figure out why sometimes the color sliders are messed up - consider elongating the canvas paint delay
+	 Seems to just be a bug in Foundation. Resolved this issue by displaying the instructions on page load, and hiding both upon closing the instructions.
+
+** Move the generated png to an additional overlay
+
+** Center the canvas vertically for smaller sizes
+
+** Have the Contrast setting take advantage of the max iteration when it is greater than the color range difference total
+	 This was tricky. The contrast code needed to run prior to the custom max iterations to color map length translation.
+
+** In Show/Hide (init & user events) append _overlay where appropriate
+
+** Instead of using canvas_multiplier as a global, make an optimal canvas dimensions object
+	 This ended up not working with the loading functionality - instead a new function was created for getting the optimal canvas zoom level based on the old and new canvas dimensions
+
+** Create load & save settings functions
+	 When a settings object is loaded, if it contains canvas width and height, scale width, height, & zoom down to the appropriate size at this time
+	 During initialization, load a global predefined initial settings object - this will solve the Firefox zooming on refresh issue
+
+** Subtract one from the custom max iterations for consistency
+
+** Hide keyboard shortcuts until the user opts to view the instructions page - they are too noisy for the user's initial viewing of the site
+
+** Fix the bug where reducing the max iterations does not scale the colors properly
+
+** Contrast and invert do not require recalculation
+
+** Custom max iterations are not loading properly
+
+** Switch to haproxy & hunchentoot from nginx
+
+** Bug: capture escape key events in text inputs and relay them properly
+
+** Bug: the sliders do not initialize properly sometimes for no obvious reason
+
+** Add a meta description
+
+** Add robots.txt
+
+** Add favicon.ico
+
+** Combine the two zoom images together into one - magnifying glass on left & right click
+
+** Try out combining the overlays and hiding the content
+	 Use a mouseover/click navigation
+	 Move the top close button to a real button in the top right
+	 Make PNG one of the nav items and add move the generate button to the overlay itself
+	 Add about & faq nav items
+
+** Bug: when a user starts with a small canvas and resizes it, the top margin stays
+	 Use same margin top & bottom
+
+** Remove Contrast switch and code making it possible to shut this functionality off
+
+** Create an About section
+	 Include a description of all of the technologies and roles including links to wikipedia or something
+	 - HTML5
+	 - Canvas
+	 - Foundation
+	 - SASS
+	 - jQuery
+	 - SVG
+	 - Internet.bs
+	 - Fedora Linux
+	 - Emacs
+	 - HAProxy
+	 - Hunchentoot
+	 - Common Lisp
+	 - Quicklisp
+	 - ZSH
+
+** Add an Update button to the Colors section
+
+** Bug: Accept enter as Update in text inputs in the Controls section
+	 The selector needed to be updated
+
+** Error on line 318 of user-events.js - show_generate_png_settings
+	 generate_png_of_canvas was calling that function - which no longer exists - and shouldn't have in the first place - that's a side effect
+
+** Show the settings navigation when the settings icon is clicked
+
+** Close settings when hash string loads
+
+** Loading an image of smaller dimensions after having resized the canvas causes a skewed image
+
+** Invert is broken when custom max iterations is on
+
+** Try converting hash settings to base64 encoding
+
+** www is broken
+
+** Convert dotimes i length to iterate
+
+** The instructions blink in and out on page load
+
+** Hide instructions when share link loads
+
+** Close settings when feedback is submitted
+
+** If you don't hit enter in the custom slider color, then move one of the sliders, the color in the text input is wrong
+	 Fix this by checking for a valid hex value on keyup/keydown & change and updating the sliders
+
+** Add pixel blending into the PNG generator
+	 The naive technique increased the execution time by a factor of three and did not blend the pixels as intended - it brought down the brightest and brought up the dimmest where we want full brightness range
+
+** Wrap the canvas in a div of the same dimensions and overflow: hidden, then remove the 8px hack
+	 Turns out that it was already wrapped in a div of the specified width and height - specifying overflow: hidden; did absolutely nothing.
+
+** Change ownership of everything but the generated png directory to root for security
+
+** Have delete buttons next to all color slider groups until there are only two
+
+** Reset has the skew bug
+
+** The slider hex inputs are glitchy - arrow keys don't work with valid hex
+
+** Set up the Go program to listen on a port
+	 This ended up not being the solution - calling Go via (run-program) won.
+
+** Modify the Go program to accept JSON
+
+** Connect Hunchentoot to the Go PNG generator
+
+** Look into Redis
+
+** Set up port knocking
+
+** Add a queue for incoming PNG generation requests
+
+** Use semaphores for processing the PNG request queue
+
+** Create a JSON helper to translate data back and forth from lisp
+
+** Validate the input JSON
+	 max-iterations <= 3000
+	 zoom, width and height +integers <= uint64
+	 x and y float64
+	 poster-size string containing one of the designated poster sizes
+	 invert-enabled boolean
+	 transition-colors list length <= 50 of three, not more or less, +integer <= 255
+	 verify the max depth
+
+** Remove the success page and its redirect - replace them with JSON sent back to the main firefractal.com page
+
+** Before generating a new PNG, check to see if the file exists already
+	 If so, touch the timestamp
+
+** Add a button to purchase a poster which generates a png and sends an email to the user with instructions how to print from VistaPrint
+	 This will require a new JSON generation process which can be Go friendly
+
+** Add a button to buy a much larger dpi image of the current spot
+	 Same as above
+
+** In the success message, list how many images are in the queue ahead of said person
+
+** Set up an email server to send poster email from
+	 Try postfix
+	 Try mailgun API for outgoing emails to mitigate spam filter
+
+** When adding items to the generate PNG queue, also save them to disk
+	 Include the user's IP address in the file for emergencies
+	 When the server starts, check for these files and populate the queue off the bat to continue where it left off in the event of a catastrophic server failure
+
+** If the disk is 80%+ full, delete the oldest image
+	 Consider using a shell script
+
+** Move the feedback form to Lisp and Mailgun
+
+** Convert share links from JSON to get parameters
+	 If it's easy to do both, do so for backwards compatibility, etc.
+	 Consider only including location values for the zoom hash refresh
+
+** Loading a page with no settings pops up the alert
+
+** Replace all instances of "custom-max-iterations" with "max-iterations"
+
+** Brackets don't work in the URL hash for links in emails
+
+** Update the URL hash upon painting the canvas
+
+** If image file exists, don't recreate it - touch its modification date
+
+** Pressing return in the hex input text boxes should repaint
+
+** Consider picking a favorite destination as a starting position and adding a Zoom All the Way Out button
+	 The purpose of this will be fulfilled by the "Take Me Somewhere" button
+
+** Instead of having instructions, have a prompt when the page first loads with two buttons: "Walkthrough" & "Close"
+	 This is a bit too intrusive for people who use the app a lot
+
+** Identify why there is ~4px of space at the bottom of canvas elements in Firefrox and Chrome and how to remove it
+	 The answer is that it is an HTML thing... All browsers add extra space beneath the Canvas tag which cannot be removed with CSS, or by wrapping the canvas in a div of the exact same dimensions as the canvas with oveflow: hidden
+	 The solution to this was to add overflow: hidden to the body tag when the canvas is less than or equal to the same dimensions
+
+** Add a scale button with the option to fit to the screen
+
+** The initialization of the sliders takes forever because it updates the hex input each time
+
+** Generate PNG button needs to generate png automatically - remove secondary button
+
+** Make sure touch interface events work as well as mouse events
+	 Try out hammer.js
+	 Use two finger tap for zooming out and tap (actually click) for zooming in
+
+** Highlight the outer edge of the canvas when zooming out
+
+** Find a better way to draw rectangles in Canvas
+	 Landing the rectangle exactly on a pixel makes it blur - offset it by half a pixel and it won't
+
+** Become an affiliate with VistaPrint
+	 Trick them by pretending to be a business card generator, maybe they will take it seriously
+	 462x264px
+	 Never mind - they refuse to give me an affiliate ID
+
+** Generating new colors needs to be separate from the iteration map
+
+** Hitting the back button blinks the image in and out
+	 The ground up rewrite solved this problem
+
+** Add preset color combinations
+
+** Remove the Invert switch
+	 Add a Reverse button on the colors section, and apply reverse after loading a URL for backwards compatibility
+	 Add an Invert button which inverts all of the colors (0 becomes 255 & vice versa)
+
+** Add latest additional technologies to the About section (Go, etc.)
+
+** In the about section, add context to the final paragraph & change the word scenes to imagery
+
+** Generate PNG should replace the canvas with a PNG and have some sort of indication that it is a PNG and can't be explored, like a Done Saving PNG button
+	 Nope
+
+** Convert the color-sliders url value to hexadecimal where the sliders are each 0-255 in binary smashed together
+
+** Consider switching the color sliders to farbtastic
+	 Nope - went with input type="color"
+
+** Swap out the Zoom Rate slider for Zoom More and Zoom Less buttons
+
+** Rather than using the benchmark canvas size when loading a URL, fit to the screen
+
+** Restructure the navigation
+*** Hovering or clicking the settings icon should display quick settings as well as an actual navigation which should expand upon hovering or clicking
+*** Quick Settings - include "Finer Detail" & "Broader Detail" buttons to move the iterations up and down dynamically
+*** Actual navigation should include Instructions, About, FAQ & Feedback
+
+** Make a Show Navigation icon for the top left corner of the screen
+*** On hover or single click, display the top level navigation icons
+*** Hide again on second click
+*** On top level nav icon hover or click, display the contents right there if possible
+*** Move the about page, instructions, and FAQ to separate static pages
+*** Move Reset to the Controls section
+*** Combine Share and Generate PNG
+*** Highlight the Feedback icon - maybe invert the colors
+
+** Add a Zoom All The Way Out button
+
+** Change Update button text to Redraw
+	 Moot
+
+** Hex input modification jumps the cursor to end
+
+** Load settings should not resize the canvas if new size settings are not provided
+
+** Move user click events from the main mandelbrot canvas to the overlay and have the overlay always visible
+	 This will require removing and adding the click event listener each time
+	 Actually, a painting_in_progress flag was used instead
+
+** Allow the user to rearrange the color range slider groups
+
+** Condense Share and Generate PNG sections
+
+** Condense FAQ and About sections?
+
+** Add checkboxes for which settings the share link should include
+	 Opted insted to minimize the load settings options
+
+** When a user changes the hex input to something incorrect, then pulls on the slider, the hex input shows NaN
+	 No more input sliders
+
+** Add functionality to jump slider to mouse position when clicked, not just dragging the sliders
+	 Ditto
+
+** Add benchmark text to a more obvious place (controls?)
+	 Nope - removed it altogether
+
+** Inverting should not require a recalculation
+	 Divorced the painting functionality from the iteration pixels functionality
+
+** Optimize the paint canvas function if possible
+	 Same
+
+** On the initial instructions overlay, add an option for fullscreen if supported
+	 https://developer.mozilla.org/en-US/docs/Web/Guide/API/DOM/Using_full_screen_mode
+	 http://stackoverflow.com/questions/1125084/how-to-make-in-javascript-full-screen-windows-stretching-all-over-the-screen
+	 This was useful elsewhere
+
+** Figure out how to attach to a TTY on boot
+	 This wasn't actually what was wrong - it was a weird systemd flag
+
+** Set up a script to automatically start hunchentoot if the server goes down and comes back up again
+	 Maybe try that command that the Linux Sysadmin book mentioned to remotely execute commands from an additional monitoring server
+	 Woooo, systemd! It's finally working!
+
+** Switch port knocking to the cryptography technique
+
+** Feedback needs to be ajax
+
+** The Custom preset does not switch automatically when some color changing events occur
+
+** Mouseenter on an option element counts as a mouseleave for its parent element
+
+** Scroll the settings if the container's height exceeds the window height
+
+** Make a feature which loads preset destinations in order
+	 Possible names:
+*** Explore
+*** Jump
+*** Leap
+*** Stumble?
+*** Chaos
+*** Bounce
+
+** Handle legacy url hash data
+	 Decided not to - too few people would benefit - clean slate
+
+** The mouseleave event on settings is not working properly - switch it to mouseenter on the canvas
+	 This resolves the weird browser specific issue where mouseenter on a child <option> element counts as a mouseleave for its parent
+	 This also eases how much settings wants to hide itself - for example when leaving to visit the developer console
+
+** Break the Full Screen button into two buttons: Full Screen and Fit to Screen
+
+** Move Quick Controls to the main settings menu
+
+** When Zoom More or Zoom Less buttons are hovered over, display a heat diagram/slider which disappears again on mouseleave
+
+** When the settings are re-opened, go directly to the main settings
+
+** Listen for keyboard enter event on controls text inputs
+
+** Add keyboard shortcuts
+
+** Add a half second interval prior to closing the settings on mouseout
+
+** Add instructions to how-to.html
+	 Add touch events
+
+** Make the canvas fit to the screen on load unless loading a destination
+*** In the event that the user is visiting for the first time, pick an appropriate screen size
+*** In the event that the user is loading a destination, identify if the number of iterations in combination with the screen size is beyond the device's capability and warn the user - if the user clicks cancel, set the screen size to full & the iterations appropriately and advise the user to continue to zoom out until they see fractals
+		This seems to no longer be an issue with web workers in place
+
+** Warn users when they input an iterations value that is excessively large - add a realistic cap to the max iterations
+	 Web workers did away with this necessity - we can crank it all the way up to 100,000 without much issue
+
+** Add descriptions to the About page for what pieces each of the technologies are for on the site and what parts are visible or invisible to the user
+
+** Add more color presets
+	 Red, Orange, Yellow, Green, Blue, Purple
+
+** Add a donation button
+
+** Explore is loading twice somehow
+
+** Replace the Explore feature with a gallery.html page which displays thumbnails of each of the "Take Me Somewhere" images
+
+** Change the zoom indicator to display on mousedown rather than click
+
+** Change the zoom rate field to double from int
+	 Make the + and - buttons multiply and divide by 2 - if >= 1, floor - if < 0.25, 0.25
+
+** Clicking while canvas is painting still indicates zooming
+
+** Add tooltips for buttons with keyboard shortcuts
+
+** In mobile mode, when the menu is open and the user taps on the fractal, it indicates a zoom when it should not
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg version="1.1"
+	baseProfile="full"
+	width="125" height="125"
+	xmlns="http://www.w3.org/2000/svg"
+	stroke="white"
+	stroke-width="2px"
+	fill="transparent">
+	
+	
+  <circle r="30" cx="40" cy="55" />
+	
+  <circle r="30" cx="85" cy="40" />
+	
+	
+	<path
+		d="M 20 55
+			A 20 20, 0, 0, 1 60 55
+			V 115
+			H 20
+			V 55"
+		fill="black" />
+	
+	<path
+		d="M 25 55
+			A 10 10, 0, 0, 1 55 55
+			V 65
+			A 30 30, 0, 0, 1 25 65
+			V 55"
+		fill="black" />
+	
+	
+	<path
+		d="M 65 40
+			A 20 20, 0, 0, 1 105 40
+			V 115
+			H 65
+			V 40"
+		fill="black" />
+	
+	<path
+		d="M 70 40
+			A 10 10, 0, 0, 1 100 40
+			V 50
+			A 30 30, 0, 0, 1 70 50
+			V 40"
+		fill="black" />
+	
+</svg>

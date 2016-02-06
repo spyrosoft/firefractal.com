@@ -1,0 +1,263 @@
+/* --------------------General Purpose-------------------- */
+.display-none {
+  display: none; }
+
+.overflow-hidden {
+  overflow: hidden; }
+
+.half-width {
+  width: 50%; }
+
+.full-width {
+  width: 100%; }
+
+.wait-cursor, .canvas-content canvas.wait-cursor {
+  cursor: wait; }
+
+.medium-padding-bottom {
+  padding-bottom: 3rem; }
+
+.medium-margin {
+  margin: 3rem; }
+
+.large-margin {
+  margin: 6rem; }
+
+.medium-margin-bottom {
+  margin-bottom: 3rem; }
+
+.large-margin-bottom {
+  margin-bottom: 6rem; }
+
+/* --------------------General Purpose-------------------- */
+/* --------------------Elements-------------------- */
+body {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: center;
+  min-width: 320px; }
+
+h1, h2, h3, h4, h5, h6, label, a, a:active, a:visited, a:hover {
+  color: #FFFFFF; }
+
+a {
+  text-decoration: underline; }
+
+a:hover {
+  text-decoration: none; }
+
+/* --------------------Elements-------------------- */
+/* --------------------Form Elements-------------------- */
+input[type="text"],
+input[type="email"],
+textarea {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF; }
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus {
+  color: #000000;
+  border: 1px solid #FFFFFF; }
+
+input[type="color"] {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer; }
+
+select, option,
+select:hover, option:hover,
+select:focus, option:focus {
+  background-color: #000000;
+  width: 100%; }
+
+.switch label {
+  background-color: #000000;
+  border: 0.25rem solid #FFFFFF; }
+
+.switch label:after {
+  background-color: #FFFFFF;
+  border: 0.25rem solid #000000;
+  width: 1rem;
+  height: 1rem; }
+
+.switch input:checked + label {
+  background-color: #FFFFFF; }
+
+button, .button, .tabs .tab-title a {
+  height: 38px;
+  margin: 0;
+  background-color: #000000;
+  outline-color: #FFFFFF;
+  color: #FFFFFF;
+  border: none;
+  font-size: 1rem;
+  line-height: 100%;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  font-weight: normal;
+  text-decoration: none; }
+
+button:hover, button:focus, .button:hover, .button:focus, .tabs .tab-title a:hover {
+  background-color: #FFFFFF;
+  color: #000000; }
+
+select, option {
+  color: #FFFFFF; }
+
+/* --------------------Form Elements-------------------- */
+/* --------------------Settings-------------------- */
+.settings-icon {
+  display: block;
+  width: 40px;
+  height: 38px;
+  padding: 10px;
+  background-color: #000000;
+  float: left; }
+
+.settings-icon span {
+  display: block;
+  box-shadow: 0 1px 0 1px #FFFFFF, 0 9px 0 1px #FFFFFF, 0 17px 0 1px #FFFFFF;
+  width: 18px; }
+
+.settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: left;
+  max-width: 320px;
+  max-height: 100%;
+  overflow: auto;
+  background-color: #000000; }
+
+.settings-hidden {
+  width: 40px;
+  height: 38px;
+  overflow: hidden; }
+
+.settings-hidden .settings-content {
+  display: none; }
+
+.setting, .settings-navigation, .page-navigation {
+  background-color: #000000;
+  margin-bottom: 1rem; }
+
+.settings-navigation a {
+  display: block;
+  float: left;
+  text-align: center;
+  line-height: 200%; }
+
+.page-navigation {
+  border-bottom: 1px solid #FFFFFF; }
+
+.page-navigation .button {
+  float: right; }
+
+.settings-navigation button {
+  width: 50%;
+  display: block;
+  float: left; }
+
+.settings-navigation button.display-none {
+  display: none; }
+
+.settings-navigation button.full-width {
+  width: 100%; }
+
+select.gradient-colors-presets option {
+  width: 100%; }
+
+.settings input[type="color"] {
+  height: 4rem; }
+
+.setting.colors .color .move {
+  cursor: move;
+  float: left;
+  line-height: 100%;
+  padding: 0.7rem 1.5rem; }
+
+.setting.colors button.plus, .setting.colors button.minus {
+  float: right; }
+
+.setting.colors .color-controls {
+  background-color: #000000; }
+
+.colors-controls button, .controls-navigation .tabs .tab-title {
+  width: 50%;
+  text-align: center; }
+
+.colors-controls, .controls-navigation .tabs .tab-title {
+  border-bottom: 1px solid #FFFFFF;
+  margin-bottom: 1rem; }
+
+.controls-navigation {
+  margin-bottom: 1rem; }
+
+.quick-controls .row {
+  margin-bottom: 1rem; }
+
+img.generated-png {
+  border: 1px solid #FFFFFF; }
+
+.zoom-rate-meter-outer {
+  border: 1px solid #FFFFFF;
+  height: 14px;
+  padding: 1px;
+  margin: 10px;
+  display: none; }
+
+.zoom-rate-meter-inner {
+  background-color: #FFFFFF;
+  height: 10px; }
+
+/* --------------------Settings-------------------- */
+/* --------------------Canvas-------------------- */
+.canvas-content {
+  position: relative;
+  width: 180px;
+  height: 120px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.canvas-content canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: crosshair; }
+
+/* --------------------End Canvas-------------------- */
+/* --------------------Pages-------------------- */
+.how-to .columns.separation {
+  border: 1px solid #FFFFFF;
+  border-top: none;
+  border-bottom: none; }
+
+.gallery .columns {
+  margin-bottom: 2rem; }
+
+.instructions-keyboard-shortcuts ul {
+  list-style-type: none; }
+
+.instructions-keyboard-shortcuts strong {
+  text-align: right;
+  width: 12rem;
+  display: inline-block;
+  padding: 0 1rem; }
+
+.instructions-keyboard-shortcuts span {
+  text-align: left;
+  width: 20rem;
+  display: inline-block;
+  padding: 0 1rem; }
+
+/* --------------------Pages-------------------- */
+
+/*# sourceMappingURL=styles.css.map */

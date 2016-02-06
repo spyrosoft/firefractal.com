@@ -217,6 +217,27 @@ function fractal_generalized_celtic( x0, y0 )
 	return iteration;
 }
 
+function fractal_quantum( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x - y*y < 1 && iteration < max_iterations )
+	{
+		var x_temporary = x*x - Math.sin( y*y ) + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+
 function fractal_test( x0, y0 )
 {
 	var x = 0;

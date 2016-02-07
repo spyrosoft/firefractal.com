@@ -8,8 +8,9 @@ var fractal_function_table = {
 	'leaves' : fractal_leaves,
 	'tendrils' : fractal_tendrils,
 	'ocean-floor' : fractal_ocean_floor,
-	'generalized-celtic' : fractal_generalized_celtic,
 	'space' : fractal_space,
+	'quantum' : fractal_quantum,
+	'generalized-celtic' : fractal_generalized_celtic,
 	'test' : fractal_test
 };
 

@@ -8,9 +8,12 @@ var fractal_function_table = {
 	'leaves' : fractal_leaves,
 	'tendrils' : fractal_tendrils,
 	'ocean-floor' : fractal_ocean_floor,
+	'hyperspace' : fractal_hyperspace,
 	'space' : fractal_space,
 	'quantum' : fractal_quantum,
 	'generalized-celtic' : fractal_generalized_celtic,
+	'burning-ship' : fractal_burning_ship,
+	'halloween' : fractal_halloween,
 	'test' : fractal_test
 };
 
@@ -176,6 +179,27 @@ function fractal_ocean_floor( x0, y0 )
 	return iteration;
 }
 
+function fractal_hyperspace( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x + y*y < 1000 && iteration < max_iterations )
+	{
+		var x_temporary = x*x - Math.tan( y*y ) + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+
 function fractal_space( x0, y0 )
 {
 	var x = 0;
@@ -186,6 +210,27 @@ function fractal_space( x0, y0 )
 	while ( x*x - y*y < 2 && iteration < max_iterations )
 	{
 		var x_temporary = Math.sin( x*x ) - Math.sin( y*y ) + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+
+function fractal_quantum( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x - y*y < 0.2 && iteration < max_iterations )
+	{
+		var x_temporary = x*x - Math.sin( y*y ) + x0;
 		
 		y = 2*x*y + y0;
 		
@@ -218,50 +263,7 @@ function fractal_generalized_celtic( x0, y0 )
 	return iteration;
 }
 
-function fractal_quantum( x0, y0 )
-{
-	var x = 0;
-	var y = 0;
-	
-	var iteration = 0;
-	
-	while ( x*x - y*y < 1 && iteration < max_iterations )
-	{
-		var x_temporary = x*x - Math.sin( y*y ) + x0;
-		
-		y = 2*x*y + y0;
-		
-		x = x_temporary;
-		
-		iteration++;
-	}
-	
-	return iteration;
-}
-
-function fractal_test( x0, y0 )
-{
-	var x = 0;
-	var y = 0;
-	
-	var iteration = 0;
-	
-	while ( x*x - y*y < 1 && iteration < max_iterations )
-	{
-		var x_temporary = x*x - Math.sin( y*y ) + x0;
-		
-		y = 2*x*y + y0;
-		
-		x = x_temporary;
-		
-		iteration++;
-	}
-	
-	return iteration;
-}
-
-/* Burning Ship 
-function mandelbrot_iterate( x0, y0 )
+function fractal_burning_ship( x0, y0 )
 {
 	var x = 0;
 	var y = 0;
@@ -280,6 +282,69 @@ function mandelbrot_iterate( x0, y0 )
 	}
 	
 	return iteration;
-} */
+}
+
+function fractal_halloween( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x + y*y < 10000 && iteration < max_iterations )
+	{
+		var x_temporary = Math.sin( x*x ) - y*y + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+
+function fractal_angles( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x + y*y < 100 && iteration < max_iterations )
+	{
+		var x_temporary = Math.sqrt( x*x ) - Math.sqrt( y*y ) + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+
+function fractal_test( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x + y*y < 100 && iteration < max_iterations )
+	{
+		var x_temporary = ( x*x ) - Math.atan( y*y ) + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
 
 /* --------------------Generate Mandelbrot-------------------- */

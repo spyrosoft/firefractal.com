@@ -282,7 +282,7 @@ function initialize_event_listeners()
 		}
 	);
 	
-	$( 'button.more-zoom, button.less-zoom' )
+	$( 'button.zoom-faster, button.zoom-slower' )
 		.click( set_zoom_rate_meter );
 	
 	$( 'select.gradient-colors-presets' )
@@ -302,10 +302,10 @@ function initialize_event_listeners()
 	$( 'button.less-detail' )
 		.click( less_iterations_detail );
 	
-	$( 'button.more-zoom' )
+	$( 'button.zoom-faster' )
 		.click( higher_zoom_rate );
 	
-	$( 'button.less-zoom' )
+	$( 'button.zoom-slower' )
 		.click( lower_zoom_rate );
 	
 	$( 'button.full-screen' )

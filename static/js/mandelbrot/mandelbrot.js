@@ -134,6 +134,12 @@ initialize_gradient_color_presets();
 
 initialize_event_listeners();
 
+//TODO: Delete this
+if ( window.location.href.match( /debug/ ) ) {
+	show_settings();
+	show_setting( 'buy-poster-payment' );
+}
+
 /* ---------------Initialize Settings--------------- */
 
 function initialize_settings()
@@ -165,23 +171,26 @@ function populate_missing_settings_with_default( new_settings )
 
 function scale_settings_to_screen( new_settings )
 {
-	var scale_ratio = get_settings_to_screen_scale_ratio( new_settings );
 	var screen_width = $( 'html' ).width();
 	var screen_height = $( 'html' ).height();
+	return scale_settings_width_and_height( new_settings, screen_width, screen_height );
+}
+
+function scale_settings_width_and_height( new_settings, new_width, new_height )
+{
+	var scale_ratio = get_settings_scale_ratio( new_settings, new_width, new_height );
 	
-	new_settings[ 'canvas-width' ] = screen_width;
-	new_settings[ 'canvas-height' ] = screen_height;
+	new_settings[ 'canvas-width' ] = new_width;
+	new_settings[ 'canvas-height' ] = new_height;
 	new_settings[ 'zoom-level' ] = new_settings[ 'zoom-level' ] * scale_ratio;
 	
 	return new_settings;
 }
 
-function get_settings_to_screen_scale_ratio( new_settings )
+function get_settings_scale_ratio( new_settings, new_width, new_height )
 {
-	var screen_width = $( 'html' ).width();
-	var screen_height = $( 'html' ).height();
-	var width_ratio = screen_width / new_settings[ 'canvas-width' ];
-	var height_ratio = screen_height / new_settings[ 'canvas-height' ];
+	var width_ratio = new_width / new_settings[ 'canvas-width' ];
+	var height_ratio = new_height / new_settings[ 'canvas-height' ];
 	
 	if ( width_ratio < height_ratio )
 	{
@@ -261,14 +270,14 @@ function initialize_event_listeners()
 		'colors',
 		'controls',
 		'share',
-		'buy-poster'
+		'buy-poster-size-and-orientation'
 	];
 	
 	$.each(
 		settings_buttons,
 		function( index, setting )
 		{
-			$( '.settings-navigation button.' + setting + '-setting' )
+			$( 'button.' + setting + '-setting' )
 				.click( show_setting_button_click );
 		}
 	);
@@ -328,6 +337,14 @@ function initialize_event_listeners()
 	
 	$( 'button.share-setting' )
 		.click( generate_png );
+	
+	$( 'button.buy-poster-preview' ).click( buy_poster_preview );
+	
+	$( 'button.buy-poster-payment-setting' )
+		.click( buy_poster_payment );
+	
+	$( '.buy-poster-form' )
+		.submit( buy_poster_form_submit );
 	
 	/* ----Settings---- */
 	
@@ -1058,7 +1075,7 @@ function generate_iteration_pixels()
 	}
 	else
 	{
-		//TODO: Actually test this
+		//TODO: Actually test this - a local snapshot of the website disables web workers, try it that way
 		var new_settings = get_current_settings();
 		new_settings[ 'initial-row-index' ] = 0;
 		new_settings[ 'final-row-index' ] = settings[ 'canvas-height' ] - 1;
@@ -1575,6 +1592,135 @@ function text_input_escape_input( key_event )
 }
 
 /* --------------------User Events-------------------- */
+
+
+
+/* --------------------Buy Poster-------------------- */
+
+function buy_poster_preview()
+{
+	var poster_dimension_ratios = {
+		'small' : [ 8.5, 11 ],
+		'medium' : [ 16, 20 ],
+		'large' : [ 20, 30 ]
+	};
+	
+	var poster_size = document.getElementsByName( 'poster-size' )[ 0 ].value;
+	var poster_orientation = document.getElementsByName( 'poster-orientation' )[ 0 ].value;
+	
+	var new_settings = get_current_settings();
+	var screen_width = $( 'html' ).width();
+	var screen_height = $( 'html' ).height();
+	var poster_width = poster_dimension_ratios[ poster_size ][ 0 ];
+	var poster_height = poster_dimension_ratios[ poster_size ][ 1 ];
+	var new_width, new_height, poster_ratio;
+	
+	//TODO: This is wrong:
+	if ( poster_orientation === 'landscape' ) {
+		poster_ratio = ( poster_width / poster_height );
+		new_width = screen_width;
+		new_height = screen_height * poster_ratio;
+	} else {
+		poster_ratio = ( poster_width / poster_height );
+		new_width = screen_width * poster_ratio;
+		new_height = screen_height;
+	}
+	
+	load_settings( scale_settings_width_and_height( new_settings, new_width, new_height ) );
+}
+
+function buy_poster_payment() {
+	show_settings_menu();
+	show_setting( 'buy-poster-payment' );
+	buy_poster_populate_total();
+	document.getElementById( 'shipping-first-name' ).select();
+}
+
+function buy_poster_populate_total()
+{
+	var poster_prices = {
+		'small' : '15',
+		'medium' : '40',
+		'large' : '55'
+	};
+	var poster_size = document.getElementsByName( 'poster-size' )[ 0 ].value;
+	$( '.buy-poster-form .total' ).html( '$' + poster_prices[ poster_size ] + '.00' );
+}
+
+function buy_poster_form_submit( submit_event )
+{
+	submit_event.preventDefault();
+	buy_poster();
+}
+
+function buy_poster()
+{
+console.log('here again')
+	var args = {
+		sellerId: "1817037",
+		publishableKey: "E0F6517A-CFCF-11E3-8295-A7DD28100996",
+		ccNo: document.getElementById( 'buy-poster-credit-card-number' ).value,
+		cvv: document.getElementById( 'buy-poster-credit-card-cvv' ).value,
+		expMonth: document.getElementById( 'buy-poster-credit-card-exp-month' ).value,
+		expYear: document.getElementById( 'buy-poster-credit-card-exp-year' ).value
+	};
+
+	TCO.loadPubKey('sandbox', function() {
+		TCO.requestToken(buy_poster_success, buy_poster_error, args);
+	});
+	// var two_checkout_parameters = {
+	// 	sellerId: '901308285',
+	// 	publishableKey: '39F28F3F-3ADA-4AA3-A4C7-818855151390',
+	// 	ccNo: document.getElementById( 'buy-poster-credit-card-number' ).value,
+	// 	cvv: document.getElementById( 'buy-poster-credit-card-cvv' ).value,
+	// 	expMonth: document.getElementById( 'buy-poster-credit-card-exp-month' ).value,
+	// 	expYear: document.getElementById( 'buy-poster-credit-card-exp-year' ).value
+	// };
+	// console.log(document.getElementById( 'buy-poster-credit-card-exp-year' ).value)
+	// TCO.loadPubKey( 'sandbox', function() {
+	// 	TCO.requestToken( buy_poster_success, buy_poster_error, two_checkout_parameters);
+	// });
+}
+
+function buy_poster_success( payment_gateway_response )
+{
+	console.log( payment_gateway_response, 'We did it!' )
+}
+
+function buy_poster_error( payment_gateway_response )
+{
+console.log('yes')
+console.log(payment_gateway_response)
+	var error_codes_and_messages = {
+		'?' : 'An unknown error has occurred. Please contact us and let us know so we can start fixing it.',
+		'200' : 'We are having trouble contacting the payment gateway. Please try again after a while.',
+		'300' : 'Something went wrong with the payment gateway. Please contact us and let us know you received an ERROR 300.',
+		'400' : 'Something went wrong with the payment gateway. Please contact us and let us know you received an ERROR 400.',
+		'401' : 'All fields are required',
+		'500' : 'We are having trouble contacting the payment gateway. Please try again after a while.'
+	};
+	
+	var error_code = payment_gateway_response.errorCode;
+	
+	if ( typeof error_codes_and_messages[ error_code ] === undefined ) {
+		buy_poster_error( error_codes_and_messages[ '?' ] );
+	} else  {
+		buy_poster_error( error_codes_and_messages[ error_code ] );
+		if ( error_code === '401' ) {
+			if ( payment_gateway_response.errorMsg.match( /Card/i ) )
+			{
+				document.getElementById( 'buy-poster-credit-card-number' ).select();
+			}
+		}
+	}
+}
+
+function buy_poster_error( message )
+{
+	$( '.buy-poster-error' ).html( message );
+}
+
+/* --------------------Buy Poster-------------------- */
 
 
 

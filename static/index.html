@@ -21,21 +21,20 @@
 	</div>
 	
 	<div class="settings settings-hidden">
-		
 		<a href="#settings" class="settings-icon"><span></span></a>
-		
 		<div class="settings-content">
-			
 			<button class="back display-none">Back</button>
 			
 			<div class="settings-navigation settings-component row">
 				<div class="columns">
+					
 					<div class="clearfix">
 						<button class="more-detail" title="Hotkey: M">More Detail</button>
 						<button class="less-detail" title="Hotkey: L">Less Detail</button>
 						<button class="more-zoom" title="Hotkey: +">More Zoom</button>
 						<button class="less-zoom" title="Hotkey: -">Less Zoom</button>
 					</div>
+					
 					<div class="zoom-rate-meter-outer"><div class="zoom-rate-meter-inner"></div></div>
 					<div class="clearfix">
 						<!-- TODO
@@ -46,7 +45,9 @@
 						<button class="fit-to-screen">Stretch</button>
 						<button class="reset-zoom full-width">Zoom All The Way Out</button>
 					</div>
+					
 					<hr />
+					
 					<div class="clearfix">
 						<label>
 							Fractal Type
@@ -66,15 +67,19 @@
 						<button class="colors-setting" title="Hotkey: C">Colors</button>
 						<button class="controls-setting" title="Hotkey: T">Controls</button>
 						<button class="share-setting">Share</button>
-						<button class="buy-poster-setting">Buy Poster</button>
+						<!-- <button class="buy-poster-size-and-orientation-setting">Buy Poster</button> -->
 					</div>
+					
 					<hr />
+					
 					<a href="/about.html" target="_blank" class="half-width">About</a>
 					<a href="/how-to.html" target="_blank" class="half-width">How To</a>
 					<a href="https://cash.me/$spyrosoft" target="_blank" class="half-width">Donate</a>
 					<a href="/gallery.html" target="_blank" class="half-width">Gallery</a>
+					
 				</div>
 			</div>
+			
 			
 			<div class="setting settings-component colors text-center row">
 				
@@ -103,6 +108,7 @@
 				</div>
 				
 			</div>
+			
 			
 			<div class="setting settings-component controls row">
 				
@@ -139,57 +145,158 @@
 				
 			</div>
 			
+			
 			<div class="setting settings-component share row">
 				<div class="columns">
+					
 					<label for="share-url">Permalink</label>
 					<input type="text" id="share-url" />
 					<hr />
+					
 					<p class="text-center">
 						PNG Image <span class="canvas-dimensions"></span>
 					</p>
 					<img class="generated-png" />
+					
 				</div>
 			</div>
 			
-			<div class="setting settings-component buy-poster row">
-				<!-- <form action="/buy-poster/" method="post" target="_blank"> -->
-				<!-- 	<div class="columns"> -->
-				<!-- 		<label> -->
-				<!-- 			Poster Size -->
-				<!-- 			<select name="poster-size"> -->
-				<!-- 				<option value="small">Small - 8.5x11&quot; - $15</option> -->
-				<!-- 				<option value="medium">Medium - 16x20&quot; - $35</option> -->
-				<!-- 				<option value="large">Large - 20x30&quot; - $55</option> -->
-				<!-- 			</select> -->
-				<!-- 		</label> -->
-				<!-- 	</div> -->
-				<!-- 	<div class="columns"> -->
-				<!-- 		<label> -->
-				<!-- 			Poster Orientation -->
-				<!-- 			<select name="poster-orientation"> -->
-				<!-- 				<option value="landscape">Landscape</option> -->
-				<!-- 				<option value="portrait">Portrait</option> -->
-				<!-- 			</select> -->
-				<!-- 		</label> -->
-				<!-- 	</div> -->
-				<!-- 	<div class="columns small-6 medium-6 large-6"> -->
-				<!-- 		<button class="buy-poster-preview full-width">Preview</button> -->
-				<!-- 	</div> -->
-				<!-- 	<div class="columns small-6 medium-6 large-6"> -->
-				<!-- 		<button class="full-width" type="submit">Buy Poster</button> -->
-				<!-- 	</div> -->
-				<!-- </form> -->
+			
+			<div class="setting settings-component buy-poster-size-and-orientation row">
+				<form action="/buy-poster/" method="get" target="_blank">
+					
+					<div class="columns">
+						<label>
+							Poster Size
+							<select name="poster-size">
+								<option value="small">Small - 8.5x11&quot; - $15</option>
+								<option value="medium">Medium - 16x20&quot; - $40</option>
+								<option value="large">Large - 20x30&quot; - $55</option>
+							</select>
+						</label>
+					</div>
+					
+					<div class="columns">
+						<label>
+							Poster Orientation
+							<select name="poster-orientation">
+								<option value="landscape">Landscape</option>
+								<option value="portrait">Portrait</option>
+							</select>
+						</label>
+					</div>
+					
+				</form>
+				
 				<div class="columns">
-					<strong>Coming Soon!</strong>
-					<h1>&nbsp;</h1>
-					<h1>&nbsp;</h1>
-					<h1>&nbsp;</h1>
-					<h1>&nbsp;</h1>
+					<button class="buy-poster-preview full-width">Preview</button>
 				</div>
+				
+				<div class="columns">
+					<hr>
+					<button class="buy-poster-payment-setting full-width">Buy Poster</button>
+				</div>
+				
+				<div class="large-margin-bottom">&nbsp;</div>
+				
+			</div>
+			
+			
+			<div class="setting settings-component buy-poster-payment row">
+				<form action="/buy-poster-ajax/" method="post" class="buy-poster-form" autocomplete="off">
+					<div class="columns buy-poster-error"></div>
+
+					<div class="columns">
+						<h6>
+							Total Including Shipping:
+							<strong class="total"></strong>
+						</h6>
+						<hr>
+					</div>
+					
+					<div class="columns small-6 medium-6 large-6">
+						<label>
+							<span>First Name</span>
+							<input type="text" id="shipping-first-name">
+						</label>
+					</div>
+					
+					<div class="columns small-6 medium-6 large-6">
+						<label>
+							<span>Last Name</span>
+							<input type="text" id="shipping-last-name">
+						</label>
+					</div>
+					
+					<div class="columns">
+						<label>
+							<span>Card Number</span>
+							<input type="text" size="20" id="buy-poster-credit-card-number">
+						</label>
+					</div>
+					
+					<div class="columns">
+						<label>
+							<span>CVV</span>
+							<input type="text" size="4" id="buy-poster-credit-card-cvv">
+						</label>
+					</div>
+					
+					<div class="columns">
+						<span>Expiration</span>
+					</div>
+					<div class="columns large-4 medium-4 small-4">
+						<label>
+							<span>MM</span>
+							<input type="text" size="2" id="buy-poster-credit-card-exp-month">
+						</label>
+					</div>
+					<div class="columns large-6 medium-6 small-6">
+						<label>
+							<span>YYYY</span>
+							<input type="text" size="4" id="buy-poster-credit-card-exp-year">
+						</label>
+					</div>
+					<div class="columns large-2 medium-2 small-2"></div>
+					
+					<div class="columns">
+						<hr>
+						<label>
+							<span>Shipping Address</span>
+							<input type="text" size="4" id="shipping-address">
+						</label>
+					</div>
+					
+					<div class="columns">
+						<label>
+							<span>City</span>
+							<input type="text" size="4" id="shipping-city">
+						</label>
+					</div>
+					
+					<div class="columns large-3 medium-3 small-3">
+						<label>
+							<span>State</span>
+							<input type="text" size="2" id="shipping-state">
+						</label>
+					</div>
+					<div class="columns large-6 medium-6 small-6">
+						<label>
+							<span>Zip</span>
+							<input type="text" size="4" id="shipping-zip">
+						</label>
+					</div>
+					<div class="columns large-3 medium-3 small-3"></div>
+					
+					<div class="columns medium-margin-bottom">
+						<hr>
+						<button type="submit" class="full-width">Submit Order</button>
+					</div>
+					
+				</form>
 			</div>
 			
 		</div>
-		
 	</div>
 	
 	<script src="/js/jquery.min.js"></script>
@@ -198,8 +305,7 @@
 	<script src="/js/hammer.min.js"></script>
 	<script src="/js/mandelbrot/mandelbrot-worker.js"></script>
 	<script src="/js/mandelbrot/mandelbrot.js"></script>
-	<!-- <script src="https://js.stripe.com/v2/"></script> -->
-	<!-- <script src="/js/mandelbrot/buy-poster.js"></script> -->
+	<script src="https://2checkout.com/checkout/api/2co.min.js"></script>
 	<script type="text/javascript">$(document).foundation();</script>
 	
 </body>

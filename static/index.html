@@ -191,7 +191,7 @@
 				
 				<div class="columns">
 					<hr>
-					<button class="buy-poster-payment-setting full-width">Buy Poster</button>
+					<button class="buy-poster-payment-setting full-width">Next Step</button>
 				</div>
 				
 				<div class="large-margin-bottom">&nbsp;</div>
@@ -201,7 +201,6 @@
 			
 			<div class="setting settings-component buy-poster-payment row">
 				<form action="/buy-poster-ajax/" method="post" class="buy-poster-form" autocomplete="off">
-					<div class="columns buy-poster-error"></div>
 
 					<div class="columns">
 						<h6>
@@ -210,6 +209,51 @@
 						</h6>
 						<hr>
 					</div>
+					
+					<p class="columns buy-poster-error error"></p>
+					
+					<div class="columns large-8 medium-8 small-8">
+						<label>
+							<span>Card Number</span>
+							<input type="text" size="20" data-stripe="number">
+						</label>
+					</div>
+					
+					<div class="columns large-4 medium-4 small-4">
+						<label>
+							<span>CVC</span>
+							<input type="text" size="4" data-stripe="cvc">
+						</label>
+					</div>
+					
+					<div class="columns">
+						<span>Expiration</span>
+					</div>
+					<div class="columns large-4 medium-4 small-4">
+						<label>
+							<span>MM</span>
+							<input type="text" size="2" data-stripe="exp-month">
+						</label>
+					</div>
+					<div class="columns large-6 medium-6 small-6">
+						<label>
+							<span>YYYY</span>
+							<input type="text" size="4" data-stripe="exp-year">
+						</label>
+					</div>
+					<div class="columns large-2 medium-2 small-2"></div>
+					
+					<div class="columns">
+						<hr>
+						<button class="buy-poster-size-and-orientation-setting half-width left">Previous Step</button>
+						<button class="buy-poster-shipping-setting half-width">Next Step</button>
+					</div>
+					
+				</form>
+			</div>
+			
+			
+			<div class="setting settings-component buy-poster-shipping row">
 					
 					<div class="columns small-6 medium-6 large-6">
 						<label>
@@ -226,38 +270,6 @@
 					</div>
 					
 					<div class="columns">
-						<label>
-							<span>Card Number</span>
-							<input type="text" size="20" id="buy-poster-credit-card-number">
-						</label>
-					</div>
-					
-					<div class="columns">
-						<label>
-							<span>CVV</span>
-							<input type="text" size="4" id="buy-poster-credit-card-cvv">
-						</label>
-					</div>
-					
-					<div class="columns">
-						<span>Expiration</span>
-					</div>
-					<div class="columns large-4 medium-4 small-4">
-						<label>
-							<span>MM</span>
-							<input type="text" size="2" id="buy-poster-credit-card-exp-month">
-						</label>
-					</div>
-					<div class="columns large-6 medium-6 small-6">
-						<label>
-							<span>YYYY</span>
-							<input type="text" size="4" id="buy-poster-credit-card-exp-year">
-						</label>
-					</div>
-					<div class="columns large-2 medium-2 small-2"></div>
-					
-					<div class="columns">
-						<hr>
 						<label>
 							<span>Shipping Address</span>
 							<input type="text" size="4" id="shipping-address">
@@ -285,6 +297,13 @@
 					</div>
 					<div class="columns large-3 medium-3 small-3"></div>
 					
+					<div class="columns">
+						<label>
+							<span>Email</span>
+							<input type="email" id="shipping-email">
+						</label>
+					</div>
+					
 					<div class="columns medium-margin-bottom">
 						<hr>
 						<button type="submit" class="full-width">Submit Order</button>
@@ -302,7 +321,7 @@
 	<script src="/js/hammer.min.js"></script>
 	<script src="/js/mandelbrot/mandelbrot-worker.js"></script>
 	<script src="/js/mandelbrot/mandelbrot.js"></script>
-	<script src="https://2checkout.com/checkout/api/2co.min.js"></script>
+	<script src="https://js.stripe.com/v2/"></script>
 	<script type="text/javascript">$(document).foundation();</script>
 	
 </body>

@@ -11,13 +11,17 @@
 
 * Minimally Viable
 
+** Add Buy Poster functionality
+
+** Change More and Less Zoom to Faster and Slower Zoom
+
+** Add lazy image loading JavaScript to the gallery
+
 ** Generate images on the server for social media and the gallery
 
 ** Add a tips and tricks section to How To
 	 Explaining the affect of raising or lowering iterations
 	 Make a YouTube video (and channel? for animations?)
-
-** Add Buy Poster functionality
 
 ** Implement shift+click to reposition until click & drag/swipe is implemented
 

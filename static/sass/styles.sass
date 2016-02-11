@@ -131,8 +131,16 @@ button:hover, button:focus, .button:hover, .button:focus, .tabs .tab-title a:hov
 	background-color: $invert-background-color
 	color: $invert-foreground-color
 
+button.disabled, button[disabled], .button.disabled, .button[disabled], button.disabled:hover, button[disabled]:hover, .button.disabled:hover, .button[disabled]:hover, button.disabled:focus, button[disabled]:focus, .button.disabled:focus, .button[disabled]:focus
+	background-color: $background-color
+	color: $foreground-color
+	cursor: not-allowed
+
 select, option
 	color: $foreground-color
+
+.error
+	color: #ff0000
 
 /* --------------------Form Elements-------------------- */
 

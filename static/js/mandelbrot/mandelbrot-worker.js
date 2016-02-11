@@ -19,20 +19,23 @@ var fractal_function_table = {
 
 /* --------------------Worker Messaging-------------------- */
 
-onmessage = function( message_event )
+if ( typeof window === 'undefined' )
 {
-	var message = message_event.data;
-	generate_iteration_pixels_section( message );
-	postMessage(
-		{
-			'iteration-pixels' : iteration_pixels,
-			'initial-row-index' : message[ 'initial-row-index' ],
-			'final-row-index' : message[ 'final-row-index' ],
-			'max-iteration-pixel' : max_iteration_pixel,
-			'min-iteration-pixel' : min_iteration_pixel
-		}
-	);
-};
+	onmessage = function( message_event )
+	{
+		var message = message_event.data;
+		generate_iteration_pixels_section( message );
+		postMessage(
+			{
+				'iteration-pixels' : iteration_pixels,
+				'initial-row-index' : message[ 'initial-row-index' ],
+				'final-row-index' : message[ 'final-row-index' ],
+				'max-iteration-pixel' : max_iteration_pixel,
+				'min-iteration-pixel' : min_iteration_pixel
+			}
+		);
+	};
+}
 
 function generate_iteration_pixels_section( new_settings )
 {

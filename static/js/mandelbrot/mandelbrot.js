@@ -137,7 +137,8 @@ initialize_event_listeners();
 //TODO: Delete this
 if ( window.location.href.match( /debug/ ) ) {
 	show_settings();
-	show_setting( 'buy-poster-payment' );
+	$( '.buy-poster-size-and-orientation-setting' ).removeClass( 'display-none' );
+	//show_setting( 'buy-poster-payment' );
 }
 
 /* ---------------Initialize Settings--------------- */
@@ -269,8 +270,7 @@ function initialize_event_listeners()
 	var settings_buttons = [
 		'colors',
 		'controls',
-		'share',
-		'buy-poster-size-and-orientation'
+		'share'
 	];
 	
 	$.each(
@@ -340,8 +340,14 @@ function initialize_event_listeners()
 	
 	$( 'button.buy-poster-preview' ).click( buy_poster_preview );
 	
+	$( 'button.buy-poster-size-and-orientation-setting' )
+		.click( function() { show_buy_poster_setting( 'buy-poster-size-and-orientation' ); } );
+	
 	$( 'button.buy-poster-payment-setting' )
-		.click( buy_poster_payment );
+		.click( function() { show_buy_poster_setting( 'buy-poster-payment' ); } );
+	
+	$( 'button.buy-poster-shipping-setting' )
+		.click( buy_poster );
 	
 	$( '.buy-poster-form' )
 		.submit( buy_poster_form_submit );
@@ -1597,6 +1603,14 @@ function text_input_escape_input( key_event )
 
 /* --------------------Buy Poster-------------------- */
 
+function show_buy_poster_setting( buy_poster_setting )
+{
+	show_settings_menu();
+	show_setting( buy_poster_setting );
+	buy_poster_populate_total();
+	$( '.' + buy_poster_setting + ' input[type="text"]' ).first().select();
+}
+
 function buy_poster_preview()
 {
 	var poster_dimension_ratios = {
@@ -1650,74 +1664,23 @@ function buy_poster_populate_total()
 function buy_poster_form_submit( submit_event )
 {
 	submit_event.preventDefault();
-	buy_poster();
 }
 
 function buy_poster()
 {
-console.log('here again')
-	var args = {
-		sellerId: "1817037",
-		publishableKey: "E0F6517A-CFCF-11E3-8295-A7DD28100996",
-		ccNo: document.getElementById( 'buy-poster-credit-card-number' ).value,
-		cvv: document.getElementById( 'buy-poster-credit-card-cvv' ).value,
-		expMonth: document.getElementById( 'buy-poster-credit-card-exp-month' ).value,
-		expYear: document.getElementById( 'buy-poster-credit-card-exp-year' ).value
-	};
-
-	TCO.loadPubKey('sandbox', function() {
-		TCO.requestToken(buy_poster_success, buy_poster_error, args);
-	});
-	// var two_checkout_parameters = {
-	// 	sellerId: '901308285',
-	// 	publishableKey: '39F28F3F-3ADA-4AA3-A4C7-818855151390',
-	// 	ccNo: document.getElementById( 'buy-poster-credit-card-number' ).value,
-	// 	cvv: document.getElementById( 'buy-poster-credit-card-cvv' ).value,
-	// 	expMonth: document.getElementById( 'buy-poster-credit-card-exp-month' ).value,
-	// 	expYear: document.getElementById( 'buy-poster-credit-card-exp-year' ).value
-	// };
-	// console.log(document.getElementById( 'buy-poster-credit-card-exp-year' ).value)
-	// TCO.loadPubKey( 'sandbox', function() {
-	// 	TCO.requestToken( buy_poster_success, buy_poster_error, two_checkout_parameters);
-	// });
+	Stripe.setPublishableKey( 'pk_test_6pRNASCoBOKtIshFeQd4XMUh' );
+	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', true );
+	Stripe.card.createToken( $( '.buy-poster-form' ), buy_poster_payment_callback );
 }
 
-function buy_poster_success( payment_gateway_response )
+function buy_poster_payment_callback( status, response )
 {
-	console.log( payment_gateway_response, 'We did it!' )
-}
-
-function buy_poster_error( payment_gateway_response )
-{
-console.log('yes')
-console.log(payment_gateway_response)
-	var error_codes_and_messages = {
-		'?' : 'An unknown error has occurred. Please contact us and let us know so we can start fixing it.',
-		'200' : 'We are having trouble contacting the payment gateway. Please try again after a while.',
-		'300' : 'Something went wrong with the payment gateway. Please contact us and let us know you received an ERROR 300.',
-		'400' : 'Something went wrong with the payment gateway. Please contact us and let us know you received an ERROR 400.',
-		'401' : 'All fields are required',
-		'500' : 'We are having trouble contacting the payment gateway. Please try again after a while.'
-	};
-	
-	var error_code = payment_gateway_response.errorCode;
-	
-	if ( typeof error_codes_and_messages[ error_code ] === undefined ) {
-		buy_poster_error( error_codes_and_messages[ '?' ] );
-	} else  {
-		buy_poster_error( error_codes_and_messages[ error_code ] );
-		if ( error_code === '401' ) {
-			if ( payment_gateway_response.errorMsg.match( /Card/i ) )
-			{
-				document.getElementById( 'buy-poster-credit-card-number' ).select();
-			}
-		}
+	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', false );
+	if ( status === 200 ) {
+		show_buy_poster_setting( 'buy-poster-shipping' );
+	} else {
+		$( '.buy-poster-error' ).html( response[ 'error' ][ 'message' ] );
 	}
-}
-
-function buy_poster_error( message )
-{
-	$( '.buy-poster-error' ).html( message );
 }
 
 /* --------------------Buy Poster-------------------- */

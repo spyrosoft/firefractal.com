@@ -105,8 +105,16 @@ button:hover, button:focus, .button:hover, .button:focus, .tabs .tab-title a:hov
   background-color: #FFFFFF;
   color: #000000; }
 
+button.disabled, button[disabled], .button.disabled, .button[disabled], button.disabled:hover, button[disabled]:hover, .button.disabled:hover, .button[disabled]:hover, button.disabled:focus, button[disabled]:focus, .button.disabled:focus, .button[disabled]:focus {
+  background-color: #000000;
+  color: #FFFFFF;
+  cursor: not-allowed; }
+
 select, option {
   color: #FFFFFF; }
+
+.error {
+  color: #ff0000; }
 
 /* --------------------Form Elements-------------------- */
 /* --------------------Settings-------------------- */

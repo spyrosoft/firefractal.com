@@ -200,7 +200,7 @@
 			
 			
 			<div class="setting settings-component buy-poster-payment row">
-				<form action="/buy-poster-ajax/" method="post" class="buy-poster-form" autocomplete="off">
+				<form class="buy-poster-form" autocomplete="off">
 
 					<div class="columns">
 						<h6>
@@ -210,7 +210,9 @@
 						<hr>
 					</div>
 					
-					<p class="columns buy-poster-error error"></p>
+					<div class="columns">
+						<p class="buy-poster-error error"></p>
+					</div>
 					
 					<div class="columns large-8 medium-8 small-8">
 						<label>
@@ -243,17 +245,25 @@
 					</div>
 					<div class="columns large-2 medium-2 small-2"></div>
 					
-					<div class="columns">
-						<hr>
-						<button class="buy-poster-size-and-orientation-setting half-width left">Previous Step</button>
-						<button class="buy-poster-shipping-setting half-width">Next Step</button>
-					</div>
-					
 				</form>
+				
+				<div class="columns">
+					<hr>
+					<button class="buy-poster-size-and-orientation-setting half-width left">Previous Step</button>
+					<button class="buy-poster-shipping-setting half-width">Next Step</button>
+				</div>
+				
 			</div>
 			
 			
 			<div class="setting settings-component buy-poster-shipping row">
+				<form action="/buy-poster/" method="post" class="ship-poster-form" autocomplete="off">
+					
+					<input type="hidden" class="display-none" id="buy-poster-token">
+					
+					<div class="columns">
+						<p class="ship-poster-error error"></p>
+					</div>
 					
 					<div class="columns small-6 medium-6 large-6">
 						<label>
@@ -306,10 +316,23 @@
 					
 					<div class="columns medium-margin-bottom">
 						<hr>
-						<button type="submit" class="full-width">Submit Order</button>
+						<button class="full-width">Submit Order</button>
 					</div>
 					
 				</form>
+			</div>
+			
+			
+			<div class="setting settings-component buy-poster-success row">
+				<div class="columns">
+					<h4>Success!!</h4>
+					<p>
+						We have received your order.
+					</p>
+					<p>
+						If you don't get an email from us in the next few minutes, please contact us via our <a href="/about.html">about page</a> (also linked on the main settings menu) and we will resend it.
+					</p>
+				</div>
 			</div>
 			
 		</div>

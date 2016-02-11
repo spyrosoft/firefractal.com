@@ -20,4 +20,4 @@
 ;; Route /robots.txt to the actual file and serve it as text/plain
 (route-file "/robots.txt" "/" "robots" "txt" "text/plain")
 
-;; Ajax post requests have been added as a handler rather than a route. See buy-poster.lisp.
+(load "buy-poster.lisp")

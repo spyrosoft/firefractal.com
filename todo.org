@@ -13,8 +13,6 @@
 
 ** Add Buy Poster functionality
 
-** Change More and Less Zoom to Faster and Slower Zoom
-
 ** Add lazy image loading JavaScript to the gallery
 
 ** Generate images on the server for social media and the gallery
@@ -751,4 +749,6 @@
 ** Add tooltips for buttons with keyboard shortcuts
 
 ** In mobile mode, when the menu is open and the user taps on the fractal, it indicates a zoom when it should not
+
+** Change More and Less Zoom to Faster and Slower Zoom
 

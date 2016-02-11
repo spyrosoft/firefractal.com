@@ -138,7 +138,7 @@ initialize_event_listeners();
 if ( window.location.href.match( /debug/ ) ) {
 	show_settings();
 	$( '.buy-poster-size-and-orientation-setting' ).removeClass( 'display-none' );
-	//show_setting( 'buy-poster-payment' );
+	show_setting( 'buy-poster-shipping' );
 }
 
 /* ---------------Initialize Settings--------------- */
@@ -351,6 +351,12 @@ function initialize_event_listeners()
 	
 	$( '.buy-poster-form' )
 		.submit( buy_poster_form_submit );
+	
+	$( '.buy-poster-form' ).find( 'input' )
+		.keydown( buy_poster_on_enter );
+	
+	$( '.ship-poster-form' )
+		.submit( ship_poster_form_submit );
 	
 	/* ----Settings---- */
 	
@@ -1573,7 +1579,7 @@ function is_key_event_inside_text_field( event_target )
 	var event_tag_name = event_target.prop( 'tagName' ).toLowerCase();
 	var event_tag_type = event_target.prop( 'type' ).toLowerCase();
 	if ( event_tag_name === 'input'
-		&& ( event_tag_type === 'text' || event_tag_type === 'color' )
+		&& ( event_tag_type === 'text' || event_tag_type === 'color' ) || event_tag_type === 'email'
 		|| event_tag_name === 'textarea'
 	) {
 		return true;
@@ -1609,6 +1615,7 @@ function show_buy_poster_setting( buy_poster_setting )
 	show_setting( buy_poster_setting );
 	buy_poster_populate_total();
 	$( '.' + buy_poster_setting + ' input[type="text"]' ).first().select();
+	$( '.buy-poster-error' ).html( '' );
 }
 
 function buy_poster_preview()
@@ -1643,13 +1650,6 @@ function buy_poster_preview()
 	load_settings( scale_settings_width_and_height( new_settings, new_width, new_height ) );
 }
 
-function buy_poster_payment() {
-	show_settings_menu();
-	show_setting( 'buy-poster-payment' );
-	buy_poster_populate_total();
-	document.getElementById( 'shipping-first-name' ).select();
-}
-
 function buy_poster_populate_total()
 {
 	var poster_prices = {
@@ -1666,9 +1666,17 @@ function buy_poster_form_submit( submit_event )
 	submit_event.preventDefault();
 }
 
+function buy_poster_on_enter( key_event )
+{
+	if ( check_for_enter_key_event( key_event ) )
+	{
+		buy_poster();
+	}
+}
+
 function buy_poster()
 {
-	Stripe.setPublishableKey( 'pk_test_6pRNASCoBOKtIshFeQd4XMUh' );
+	Stripe.setPublishableKey( 'pk_test_a3d3NSbI6QUBR4knlav1Cs0K' );
 	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', true );
 	Stripe.card.createToken( $( '.buy-poster-form' ), buy_poster_payment_callback );
 }
@@ -1679,8 +1687,68 @@ function buy_poster_payment_callback( status, response )
 	if ( status === 200 ) {
 		show_buy_poster_setting( 'buy-poster-shipping' );
 	} else {
-		$( '.buy-poster-error' ).html( response[ 'error' ][ 'message' ] );
+		if ( typeof response[ 'error' ] === 'undefined' || typeof response[ 'error' ][ 'message' ] === 'undefined' ) {
+			$( '.buy-poster-error' ).html( 'Something went wrong connecting with the server. Please try again after a while.' );
+		} else {
+			$( '.buy-poster-error' ).html( response[ 'error' ][ 'message' ] );
+		}
 	}
+}
+
+function ship_poster_form_submit( submit_event )
+{
+	submit_event.preventDefault();
+	ship_poster();
+}
+
+function ship_poster()
+{
+	if ( document.getElementById( 'buy-poster-token' ).value === '' ) {
+		show_buy_poster_setting( 'buy-poster-payment' );
+		$( '.buy-poster-error' ).html( 'Somehow your payment did not go through. Please fill out your payment details again.' );
+		return;
+	}
+	
+	var text_input_ids = [
+		'buy-poster-token',
+		'shipping-first-name',
+		'shipping-last-name',
+		'shipping-address',
+		'shipping-city',
+		'shipping-state',
+		'shipping-zip',
+		'shipping-email'
+	];
+	var ship_poster_data = {};
+	
+	for ( var i in text_input_ids )
+	{
+		var text_input_id = text_input_ids[ i ];
+		if ( document.getElementById( text_input_id ).value === '' )
+		{
+			$( '.ship-poster-error' ).html( 'All fields are required.' );
+			document.getElementById( text_input_id ).select();
+			return;
+		}
+		ship_poster_data[ text_input_id ]
+			= document.getElementById( text_input_id ).value;
+	}
+	
+	ship_poster_data[ 'destination' ] = window.location.origin + '/#' + convert_settings_to_get_parameters();
+	
+	$.post( '/buy-poster/', ship_poster_data )
+		.done( buy_poster_success )
+		.fail( ship_poster_ajax_fail );
+}
+
+function buy_poster_success()
+{
+	show_buy_poster_setting( 'success' );
+}
+
+function ship_poster_ajax_fail()
+{
+	$( '.ship-poster-error' ).html( 'The app is having some trouble connecting to the server. You will not be charged until the full transaction is successful. Please check your internet connection, or try again after a while.' );
 }
 
 /* --------------------Buy Poster-------------------- */
@@ -1916,6 +1984,13 @@ function legacy_gradient_colors_to_six_hex( uri_component )
 		}
 	}
 	return hex_output;
+}
+
+function check_for_enter_key_event( key_event )
+{
+	if ( typeof key_event.keyCode === 'undefined' ) { return false; }
+	if ( key_event.keyCode === 13 ) { return true; }
+	return false;
 }
 
 /* --------------------Utilities-------------------- */

@@ -1,0 +1,53 @@
+Dear CUSTOMER-NAME,
+
+We have received your order for a POSTER-SIZE POSTER-ORIENTATION poster.
+
+Your order total came out to ORDER-TOTAL.
+
+The poster was shipped to the following address:
+SHIPPING-ADDRESS
+SHIPPING-CITY, SHIPPING-STATE SHIPPING-ZIP
+
+The poster was printed from this destination:
+DESTINATION-LINK
+
+We are extatic that you bought a Fire Fractal poster!
+
+If you are interested, let me tell you the story of how firefractal.com came to be. When I was in high school, a burgeoning programmer, I came across someone's blog post about his experience making a Mandelbrot program for fun. He described how blown away he was by the simplicity of the code. I was equally blown away. Here it is, verbatim, from firefractal.com:
+
+function fractal_ocean_floor( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x + y*y < 4 && iteration < max_iterations )
+	{
+		var x_temporary = x*x - y*y + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+(20 lines)
+
+No kidding. The x0 and y0 are coordinates for each pixel on the screen. The rest of the code (more than 100 times as much) is for the user interface.
+
+Eventually the itch to make my own got me and I wrote version 1.0. It was a bit buggy and hard to use. Years later, after having explored quite a bit, it was time to rewrite it with a (much) better user interface. There are many fractal exploration tools out there. Quite a few of them have features that the others don't. It is our goal that firefractal.com be the combination of all of the best features in one.
+
+We would love to hear from you if you have:
+* Feedback about what could be better.
+* Any other comments, questions or ideas.
+* (Our favorite) An incling to just to say hi!
+
+Hit reply and we'll get your message.
+
+Thank you sincerely,
+
+Fire Fractal

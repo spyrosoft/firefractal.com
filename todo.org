@@ -12,6 +12,7 @@
 * Minimally Viable
 
 ** Add Buy Poster functionality
+*** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
 
 ** Add lazy image loading JavaScript to the gallery
 

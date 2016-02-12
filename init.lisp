@@ -26,6 +26,7 @@
                  :message-log-destination "logs/error.log"
                  :port 8082))
 
+(load "utility-belt.lisp")
 (load "destination-requirements.lisp")
 (load "mailgun/email-helper.lisp")
 (load "request-json-helper.lisp")

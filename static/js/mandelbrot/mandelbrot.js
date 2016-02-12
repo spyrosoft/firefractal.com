@@ -1659,6 +1659,10 @@ function buy_poster_populate_total()
 	};
 	var poster_size = document.getElementsByName( 'poster-size' )[ 0 ].value;
 	$( '.buy-poster-form .total' ).html( '$' + poster_prices[ poster_size ] + '.00' );
+	
+	//TODO: This is horrifying:
+	document.getElementById( 'buy-poster-size' ) = document.getElementsByName( 'poster-size' )[ 0 ].value;
+	document.getElementById( 'buy-poster-orientation' ) = document.getElementsByName( 'poster-orientation' )[ 0 ].value;
 }
 
 function buy_poster_form_submit( submit_event )
@@ -1685,6 +1689,7 @@ function buy_poster_payment_callback( status, response )
 {
 	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', false );
 	if ( status === 200 ) {
+		document.getElementById( 'buy-poster-token' ).value = response[ 'id' ];
 		show_buy_poster_setting( 'buy-poster-shipping' );
 	} else {
 		if ( typeof response[ 'error' ] === 'undefined' || typeof response[ 'error' ][ 'message' ] === 'undefined' ) {

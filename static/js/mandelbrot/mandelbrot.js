@@ -138,7 +138,7 @@ initialize_event_listeners();
 if ( window.location.href.match( /debug/ ) ) {
 	show_settings();
 	$( '.buy-poster-size-and-orientation-setting' ).removeClass( 'display-none' );
-	show_setting( 'buy-poster-shipping' );
+	//show_setting( 'buy-poster-shipping' );
 	document.getElementById( 'buy-poster-token' ).value = 'a';
 }
 
@@ -1685,6 +1685,7 @@ function buy_poster()
 
 function buy_poster_payment_callback( status, response )
 {
+	console.log(status, response);
 	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', false );
 	if ( status === 200 ) {
 		document.getElementById( 'buy-poster-token' ).value = response[ 'id' ];
@@ -1749,16 +1750,17 @@ function ship_poster()
 
 function buy_poster_success( response )
 {
-	if ( typeof response[ 'success' ] === 'undefined' ) {
-		show_buy_poster_setting( 'buy-poster-success' );
+	if ( typeof response[ 'response' ] === 'undefined' ) {
+		console.log(response)
+		$( '.ship-poster-error' ).html( 'Something went wrong while communicating with the server. It is possible that the payment gateway is down. Please try again after a while. If the problem persists, please contact us and let us know.' );
 	} else {
-console.log('DO THIS')
-}
+		show_buy_poster_setting( 'buy-poster-success' );
+	}
 }
 
 function ship_poster_ajax_fail()
 {
-	$( '.ship-poster-error' ).html( 'The app is having some trouble connecting to the server. You will not be charged until the full transaction is successful. Please check your internet connection, or try again after a while.' );
+	$( '.ship-poster-error' ).html( 'Your browser is having some trouble connecting to our server. You will not be charged until the full transaction is successful. Please check your internet connection, or try again after a while.' );
 }
 
 /* --------------------Buy Poster-------------------- */

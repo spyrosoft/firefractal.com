@@ -13,6 +13,7 @@
 
 ** Add Buy Poster functionality
 *** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
+*** Combine the payment settings together into one
 *** Validate the /buy-poster/ post data
 
 ** Split off the contact form into a separate page

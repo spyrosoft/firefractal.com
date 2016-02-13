@@ -16,33 +16,26 @@
     (email-mailgun-message email "Order Receipt - firefractal.com" order-email-message)
   ))
 
-;;TODO: There are waaay too many parameters - what can we do about this?
-(defun new-firefractal-order (first-name last-name address city state zip email poster-size poster-orientation destination-link order-total buy-poster-token)
-  (let ((amount 0))
-    (cond ((string-equal poster-size "small")
-           (setq amount "1500"))
-          ((string-equal poster-size "medium")
-           (setq amount "4000"))
-          ((string-equal poster-size "large")
-           (setq amount "5500")))
-    (if (string-equals "OK" (nth-value 7 (drakma:http-request
-     "https://api.stripe.com/v1/charges"
-     :method :post
-     :basic-authorization (list *stripe-test-publishable-key* "")
-     :parameters (list (cons "amount" amount)
-                       (cons "currency" "usd")
-                       (cons "source" buy-poster-token)
-                       (cons "description" (concatenate 'string email " " destination-link))))))
-        (progn
-          (send-firefractal-order-confirmation first-name last-name address city state zip email poster-size poster-orientation destination-link order-total)
-          "{\"success\":true}")
-          "{\"success\":false}" ;;TODO: This is not specific enough
-        )
-    ))
-
 (define-easy-handler (buy-poster
                       :uri "/buy-poster/"
                       :default-request-type :post)
-  (shipping-first-name shipping-last-name shipping-address shipping-city shipping-state shipping-zip shipping-email poster-size poster-orientation destination-link order-total buy-poster-token)
-  (new-firefractal-order shipping-first-name shipping-last-name shipping-address shipping-city shipping-state shipping-zip shipping-email poster-size poster-orientation destination-link order-total buy-poster-token)
-  )
+    (shipping-first-name shipping-last-name shipping-address shipping-city shipping-state shipping-zip shipping-email poster-size poster-orientation destination-link order-total buy-poster-token)
+  (let ((cost-in-cents 0) (payment-gateway-response))
+    (cond ((string-equal poster-size "small")
+           (setq cost-in-cents "1500"))
+          ((string-equal poster-size "medium")
+           (setq cost-in-cents "4000"))
+          ((string-equal poster-size "large")
+           (setq cost-in-cents "5500")))
+    (setq payment-gateway-response (nth-value 7 (drakma:http-request
+     "https://api.stripe.com/v1/charges"
+     :method :post
+     :basic-authorization (list *stripe-test-publishable-key* "")
+     :parameters (list (cons "amount" cost-in-cents)
+                       (cons "currency" "usd")
+                       (cons "source" buy-poster-token)
+                       (cons "description" (concatenate 'string shipping-email " " destination-link))))))
+    (when (string-equal "OK" payment-gateway-response)
+      (send-firefractal-order-confirmation shipping-first-name shipping-last-name shipping-address shipping-city shipping-state shipping-zip shipping-email poster-size poster-orientation destination-link order-total))
+    (concatenate 'string "{\"response\":\"" payment-gateway-response "\"}")
+  ))

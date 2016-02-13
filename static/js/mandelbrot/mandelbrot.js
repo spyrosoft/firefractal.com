@@ -139,6 +139,7 @@ if ( window.location.href.match( /debug/ ) ) {
 	show_settings();
 	$( '.buy-poster-size-and-orientation-setting' ).removeClass( 'display-none' );
 	show_setting( 'buy-poster-shipping' );
+	document.getElementById( 'buy-poster-token' ).value = 'a';
 }
 
 /* ---------------Initialize Settings--------------- */
@@ -1613,7 +1614,8 @@ function show_buy_poster_setting( buy_poster_setting )
 {
 	show_settings_menu();
 	show_setting( buy_poster_setting );
-	buy_poster_populate_total();
+	var total = buy_poster_total();
+	$( '.buy-poster-form .total' ).html( format_human_readable_dollars( total ) );
 	$( '.' + buy_poster_setting + ' input[type="text"]' ).first().select();
 	$( '.buy-poster-error' ).html( '' );
 }
@@ -1650,7 +1652,7 @@ function buy_poster_preview()
 	load_settings( scale_settings_width_and_height( new_settings, new_width, new_height ) );
 }
 
-function buy_poster_populate_total()
+function buy_poster_total()
 {
 	var poster_prices = {
 		'small' : '15',
@@ -1658,11 +1660,7 @@ function buy_poster_populate_total()
 		'large' : '55'
 	};
 	var poster_size = document.getElementsByName( 'poster-size' )[ 0 ].value;
-	$( '.buy-poster-form .total' ).html( '$' + poster_prices[ poster_size ] + '.00' );
-	
-	//TODO: This is horrifying:
-	document.getElementById( 'buy-poster-size' ) = document.getElementsByName( 'poster-size' )[ 0 ].value;
-	document.getElementById( 'buy-poster-orientation' ) = document.getElementsByName( 'poster-orientation' )[ 0 ].value;
+	return poster_prices[ poster_size ];
 }
 
 function buy_poster_form_submit( submit_event )
@@ -1739,16 +1737,23 @@ function ship_poster()
 			= document.getElementById( text_input_id ).value;
 	}
 	
-	ship_poster_data[ 'destination' ] = window.location.origin + '/#' + convert_settings_to_get_parameters();
+	ship_poster_data[ 'destination-link' ] = window.location.origin + '/#' + convert_settings_to_get_parameters();
+	ship_poster_data[ 'poster-size' ] = document.getElementsByName( 'poster-size' )[ 0 ].value;
+	ship_poster_data[ 'poster-orientation' ] = document.getElementsByName( 'poster-orientation' )[ 0 ].value;
+	ship_poster_data[ 'order-total' ] = format_human_readable_dollars( buy_poster_total() );
 	
 	$.post( '/buy-poster/', ship_poster_data )
 		.done( buy_poster_success )
 		.fail( ship_poster_ajax_fail );
 }
 
-function buy_poster_success()
+function buy_poster_success( response )
 {
-	show_buy_poster_setting( 'success' );
+	if ( typeof response[ 'success' ] === 'undefined' ) {
+		show_buy_poster_setting( 'buy-poster-success' );
+	} else {
+console.log('DO THIS')
+}
 }
 
 function ship_poster_ajax_fail()
@@ -1996,6 +2001,38 @@ function check_for_enter_key_event( key_event )
 	if ( typeof key_event.keyCode === 'undefined' ) { return false; }
 	if ( key_event.keyCode === 13 ) { return true; }
 	return false;
+}
+
+function format_human_readable_dollars( number )
+{
+	if ( isNaN( number ) ) { throw "Input to format_human_readable_dollars must be a number. The following was provided: " + number; }
+	var number_string = number.toString();
+	if ( ! number_string.match( /\./ ) ) {
+		number_string += '.00';
+	}
+	var dollars_and_cents = number_string.split( '.' );
+	if ( dollars_and_cents[ 1 ].length > 2 ) {
+		// It's not very obvious what's happening here.
+		// We know that we have more digits than we need, so we want to round up:
+		// We take the first three digits
+		// Convert them to an integer, divide by 10, and take the ceiling
+		dollars_and_cents[ 1 ] = Math.ceil( parseInt( dollars_and_cents[ 1 ].substring( 0, 3 ) ) / 10 ).toString();
+	}
+	while ( dollars_and_cents[ 1 ].length < 2 ) {
+		dollars_and_cents[ 1 ] += '0';
+	}
+	if ( dollars_and_cents[ 0 ].length > 3 ) {
+		var dollars = dollars_and_cents[ 0 ];
+		var new_dollars_and_cents = '';
+		for ( var i = 0; i < dollars.length; i++ ) {
+			if ( i != 0 && i % 3 === 0 ) {
+				new_dollars_and_cents = ',' + new_dollars_and_cents;
+			}
+			new_dollars_and_cents = dollars[ dollars.length - 1 - i ] + new_dollars_and_cents;
+		}
+		dollars_and_cents[ 0 ] = new_dollars_and_cents;
+	}
+	return '$' + dollars_and_cents[ 0 ] + '.' + dollars_and_cents[ 1 ];
 }
 
 /* --------------------Utilities-------------------- */

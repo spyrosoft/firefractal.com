@@ -1,14 +1,14 @@
 Dear CUSTOMER-NAME,
 
-We have received your order for a POSTER-SIZE POSTER-ORIENTATION poster.
+We have received your order for a POSTER-SIZE, POSTER-ORIENTATION poster.
 
-Your order total came out to ORDER-TOTAL.
-
-The poster was shipped to the following address:
+The poster will be shipped to the following address:
 SHIPPING-ADDRESS
 SHIPPING-CITY, SHIPPING-STATE SHIPPING-ZIP
 
-The poster was printed from this destination:
+Your order total came out to ORDER-TOTAL.
+
+The poster will be printed from the following destination:
 DESTINATION-LINK
 
 We are extatic that you bought a Fire Fractal poster!

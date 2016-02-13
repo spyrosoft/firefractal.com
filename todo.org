@@ -13,6 +13,11 @@
 
 ** Add Buy Poster functionality
 *** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
+*** Validate the /buy-poster/ post data
+
+** Split off the contact form into a separate page
+
+** Add navigation to the static pages
 
 ** Add lazy image loading JavaScript to the gallery
 

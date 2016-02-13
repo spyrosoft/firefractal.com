@@ -10,3 +10,4 @@ generate-png-queue
 /logs
 /mailgun/credentials.lisp
 /static/stress-test
+stripe-credentials.lisp

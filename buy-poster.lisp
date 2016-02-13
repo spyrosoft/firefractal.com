@@ -14,7 +14,6 @@
     (setq order-email-message (regex-replace "DESTINATION-LINK" order-email-message destination-link))
     (email-mailgun-message *firefractal-from-email-address* "Order Receipt - firefractal.com" order-email-message)
     (email-mailgun-message email "Order Receipt - firefractal.com" order-email-message)
-    "{\"success\":true}"
   ))
 
 ;;TODO: There are waaay too many parameters - what can we do about this?
@@ -26,15 +25,19 @@
            (setq amount "4000"))
           ((string-equal poster-size "large")
            (setq amount "5500")))
-    (drakma:http-request
+    (if (string-equals "OK" (nth-value 7 (drakma:http-request
      "https://api.stripe.com/v1/charges"
      :method :post
      :basic-authorization (list *stripe-test-publishable-key* "")
      :parameters (list (cons "amount" amount)
                        (cons "currency" "usd")
                        (cons "source" buy-poster-token)
-                       (cons "description" (concatenate 'string email " " destination-link))))
-    (send-firefractal-order-confirmation first-name last-name address city state zip email poster-size poster-orientation destination-link order-total)
+                       (cons "description" (concatenate 'string email " " destination-link))))))
+        (progn
+          (send-firefractal-order-confirmation first-name last-name address city state zip email poster-size poster-orientation destination-link order-total)
+          "{\"success\":true}")
+          "{\"success\":false}" ;;TODO: This is not specific enough
+        )
     ))
 
 (define-easy-handler (buy-poster

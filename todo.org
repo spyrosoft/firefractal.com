@@ -19,6 +19,8 @@
 
 ** Add navigation to the static pages
 
+** Change Teal to Aqua
+	 
 ** Add lazy image loading JavaScript to the gallery
 
 ** Generate images on the server for social media and the gallery
@@ -762,3 +764,5 @@
 
 ** Add Buy Poster functionality
 
+** Change Hyperspace to Lace
+	 

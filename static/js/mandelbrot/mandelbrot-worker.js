@@ -8,7 +8,7 @@ var fractal_function_table = {
 	'leaves' : fractal_leaves,
 	'tendrils' : fractal_tendrils,
 	'ocean-floor' : fractal_ocean_floor,
-	'hyperspace' : fractal_hyperspace,
+	'lace' : fractal_lace,
 	'space' : fractal_space,
 	'quantum' : fractal_quantum,
 	'generalized-celtic' : fractal_generalized_celtic,
@@ -182,7 +182,7 @@ function fractal_ocean_floor( x0, y0 )
 	return iteration;
 }
 
-function fractal_hyperspace( x0, y0 )
+function fractal_lace( x0, y0 )
 {
 	var x = 0;
 	var y = 0;

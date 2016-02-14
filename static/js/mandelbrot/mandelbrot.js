@@ -1618,6 +1618,7 @@ function show_buy_poster_setting( buy_poster_setting )
 	$( '.buy-poster-form .total' ).html( format_human_readable_dollars( total ) );
 	$( '.' + buy_poster_setting + ' input[type="text"]' ).first().select();
 	$( '.buy-poster-error' ).html( '' );
+	$( '.ship-poster-error' ).html( '' );
 }
 
 function buy_poster_preview()
@@ -1685,7 +1686,6 @@ function buy_poster()
 
 function buy_poster_payment_callback( status, response )
 {
-	console.log(status, response);
 	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', false );
 	if ( status === 200 ) {
 		document.getElementById( 'buy-poster-token' ).value = response[ 'id' ];
@@ -1750,11 +1750,13 @@ function ship_poster()
 
 function buy_poster_success( response )
 {
-	if ( typeof response[ 'response' ] === 'undefined' ) {
-		console.log(response)
+	response = JSON.parse( response );
+	if ( typeof response[ 'success' ] === 'undefined' ) {
 		$( '.ship-poster-error' ).html( 'Something went wrong while communicating with the server. It is possible that the payment gateway is down. Please try again after a while. If the problem persists, please contact us and let us know.' );
-	} else {
+	} else if ( response[ 'success' ] === 'true' ) {
 		show_buy_poster_setting( 'buy-poster-success' );
+	} else if ( response[ 'success' ] === 'false' ) {
+		$( '.ship-poster-error' ).html( 'The payment was rejected. Please try again, or use a different payment method.' );
 	}
 }
 

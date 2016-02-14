@@ -1,7 +1,5 @@
 * Bugs
 
-** Stripe is clobbering something in the global namespace
-	
 ** When the canvas is resized smaller than the screen, the settings icon follows
 
 ** Loading settings different than the current width and height needs to prompt the user if they want it to fit to their screen
@@ -11,10 +9,11 @@
 
 * Minimally Viable
 
-** Add Buy Poster functionality
-*** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
-*** Combine the payment settings together into one
-*** Validate the /buy-poster/ post data
+** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
+
+** Combine the buy poster settings together into one setting div
+
+** Validate the /buy-poster/ post data better
 
 ** Split off the contact form into a separate page
 
@@ -758,4 +757,8 @@
 ** In mobile mode, when the menu is open and the user taps on the fractal, it indicates a zoom when it should not
 
 ** Change More and Less Zoom to Faster and Slower Zoom
+
+** Stripe is clobbering something in the global namespace
+
+** Add Buy Poster functionality
 

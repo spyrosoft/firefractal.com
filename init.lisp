@@ -4,6 +4,7 @@
 (ql:quickload :cl-ppcre)
 (ql:quickload :crypto-shortcuts)
 (ql:quickload :drakma)
+(ql:quickload :flexi-streams)
 
 (defpackage :firefractal
   (:use :common-lisp

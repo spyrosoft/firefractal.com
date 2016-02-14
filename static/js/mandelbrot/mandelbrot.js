@@ -134,14 +134,6 @@ initialize_gradient_color_presets();
 
 initialize_event_listeners();
 
-//TODO: Delete this
-if ( window.location.href.match( /debug/ ) ) {
-	show_settings();
-	$( '.buy-poster-size-and-orientation-setting' ).removeClass( 'display-none' );
-	show_setting( 'buy-poster-size-and-orientation' );
-	document.getElementById( 'buy-poster-token' ).value = 'a';
-}
-
 /* ---------------Initialize Settings--------------- */
 
 function initialize_settings()
@@ -259,7 +251,6 @@ function initialize_event_listeners()
 	/* ----Settings---- */
 	
 	$( '.settings-icon' )
-		.mouseenter( show_settings_menu )
 		.click( settings_icon_click );
 	
 	$( '.settings' )
@@ -376,8 +367,8 @@ function initialize_event_listeners()
 	
 	canvas_hammer_manager.on( 'twofingertap', zoom_out_canvas );
 	
-	$( '#canvas-overlay' )
-		.mouseenter( delay_hide_settings );
+	// $( '#canvas-overlay' )
+	// 	.mouseenter( delay_hide_settings );
 	
 	/* ----Canvas---- */
 }
@@ -726,7 +717,6 @@ function show_settings_menu()
 function settings_icon_click( click_event )
 {
 	click_event.preventDefault();
-	//TODO: Test out the mobile friendly check if the settings are open when the canvas is clicked
 	toggle_settings_hidden();
 }
 
@@ -734,6 +724,8 @@ function toggle_settings_hidden()
 {
 	if ( $( '.settings' ).first().hasClass( 'settings-hidden' ) )
 	{
+		//TODO: show_settings_menu() doesn't belong here
+		show_settings_menu();
 		$( '.settings' ).removeClass( 'settings-hidden' );
 	}
 	else

@@ -1,6 +1,6 @@
 * Bugs
 
-** When the canvas is resized smaller than the screen, the settings icon follows
+** When someone types in their credit card incorrectly, the error message doesn't make any sense
 
 ** Loading settings different than the current width and height needs to prompt the user if they want it to fit to their screen
 
@@ -20,6 +20,8 @@
 ** Add navigation to the static pages
 
 ** Change Teal to Aqua
+
+** Add collapsible groups to the main settings: Quick Controls, 
 	 
 ** Add lazy image loading JavaScript to the gallery
 
@@ -36,13 +38,9 @@
 
 ** Add a smoothing option switch
 
-** Think of different methods of making money from this besides posters
-
 ** Add Ink HTML email in addition to plain text
 
 ** Redirect www to flat
-
-** Make custom http error pages
 
 ** Add share functionality
 	 Add facebook, twitter, diaspora, and email/permalink
@@ -51,6 +49,13 @@
 	 Use url hashes containing settings save data - they can then email the link to their friends
 	 Add a way to generate Facebook/Twitter banner images
 
+** Think of different methods of making money from this besides posters
+
+** Update to Foundation 6
+	 Switch to an offscreen menu
+
+** Try out jslint
+	 
 
 * Feature Requests
 
@@ -767,4 +772,9 @@
 ** Change Hyperspace to Lace
 	 
 ** Fix broken buy poster previews for landscape and portrait
+
+** Make custom http error pages
+
+** When the canvas is resized smaller than the screen, the settings icon follows
+	 This is a feature, not a bug :)
 

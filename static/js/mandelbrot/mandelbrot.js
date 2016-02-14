@@ -138,7 +138,7 @@ initialize_event_listeners();
 if ( window.location.href.match( /debug/ ) ) {
 	show_settings();
 	$( '.buy-poster-size-and-orientation-setting' ).removeClass( 'display-none' );
-	//show_setting( 'buy-poster-shipping' );
+	show_setting( 'buy-poster-size-and-orientation' );
 	document.getElementById( 'buy-poster-token' ).value = 'a';
 }
 
@@ -1623,7 +1623,7 @@ function show_buy_poster_setting( buy_poster_setting )
 
 function buy_poster_preview()
 {
-	var poster_dimension_ratios = {
+	var poster_dimensions = {
 		'small' : [ 8.5, 11 ],
 		'medium' : [ 16, 20 ],
 		'large' : [ 20, 30 ]
@@ -1635,22 +1635,30 @@ function buy_poster_preview()
 	var new_settings = get_current_settings();
 	var screen_width = $( 'html' ).width();
 	var screen_height = $( 'html' ).height();
-	var poster_width = poster_dimension_ratios[ poster_size ][ 0 ];
-	var poster_height = poster_dimension_ratios[ poster_size ][ 1 ];
-	var new_width, new_height, poster_ratio;
-	
-	//TODO: This is wrong:
-	if ( poster_orientation === 'landscape' ) {
-		poster_ratio = ( poster_width / poster_height );
-		new_width = screen_width;
-		new_height = screen_height * poster_ratio;
+	var poster_width, poster_height;
+	if ( poster_orientation === 'portrait' ) {
+		poster_width = poster_dimensions[ poster_size ][ 0 ];
+		poster_height = poster_dimensions[ poster_size ][ 1 ];
 	} else {
-		poster_ratio = ( poster_width / poster_height );
-		new_width = screen_width * poster_ratio;
+		poster_width = poster_dimensions[ poster_size ][ 1 ];
+		poster_height = poster_dimensions[ poster_size ][ 0 ];
+	}
+	var screen_ratio = screen_width / screen_height;
+	var poster_ratio = poster_width / poster_height;
+	var new_width, new_height;
+	
+	if ( screen_ratio > poster_ratio ) {
+		new_width = screen_height * poster_ratio;
 		new_height = screen_height;
+	} else {
+		new_width = screen_width;
+		new_height = screen_width / poster_ratio;
 	}
 	
-	load_settings( scale_settings_width_and_height( new_settings, new_width, new_height ) );
+	new_settings[ 'canvas-width' ] = new_width;
+	new_settings[ 'canvas-height' ] = new_height;
+	
+	load_settings( new_settings );
 }
 
 function buy_poster_total()

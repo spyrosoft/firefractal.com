@@ -1687,7 +1687,7 @@ function buy_poster_on_enter( key_event )
 
 function buy_poster()
 {
-	Stripe.setPublishableKey( 'pk_test_a3d3NSbI6QUBR4knlav1Cs0K' );
+	Stripe.setPublishableKey( 'pk_live_5GYzGkxM6bSXlvnIZWNC2n48' );
 	$( '.buy-poster-form' ).find( 'button' ).prop( 'disabled', true );
 	Stripe.card.createToken( $( '.buy-poster-form' ), buy_poster_payment_callback );
 }

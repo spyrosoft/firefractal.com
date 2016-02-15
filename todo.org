@@ -1,7 +1,5 @@
 * Bugs
 
-** When someone types in their credit card incorrectly, the error message doesn't make any sense
-
 ** Loading settings different than the current width and height needs to prompt the user if they want it to fit to their screen
 
 ** If a single user tries to create posters too rapidly in succession, the queue becomes locked
@@ -9,17 +7,15 @@
 
 * Minimally Viable
 
-** Validate the /buy-poster/ post data better
-
 ** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
 
-** When the final step of the payment process is successful, clear the credit card info
+** Validate the /buy-poster/ post data better
 
 ** Split off the contact form into a separate page
 
 ** Add navigation to the static pages
 
-** Change Teal to Aqua
+** Change Teal to Cyan
 
 ** Add collapsible groups to the main settings: Quick Controls, 
 	 
@@ -39,8 +35,6 @@
 ** Add a smoothing option switch
 
 ** Add Ink HTML email in addition to plain text
-
-** Redirect www to flat
 
 ** Add share functionality
 	 Add facebook, twitter, diaspora, and email/permalink
@@ -779,4 +773,10 @@
 	 This is a feature, not a bug :)
 
 ** Combine the buy poster settings together into one setting div
+
+** When someone types in their credit card incorrectly, the error message doesn't make any sense
+
+** When the final step of the payment process is successful, clear the credit card info
+
+** Redirect www to flat
 

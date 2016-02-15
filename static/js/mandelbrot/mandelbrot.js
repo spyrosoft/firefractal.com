@@ -1844,6 +1844,7 @@ function buy_poster_success( response )
 	else if ( response[ 'success' ] === 'true' )
 	{
 		show_buy_poster_step( 'success' );
+		clear_credit_card_fields();
 	}
 	else if ( typeof response[ 'message' ] !== 'undefined' )
 	{
@@ -1858,6 +1859,11 @@ function buy_poster_success( response )
 function ship_poster_ajax_fail()
 {
 	display_buy_poster_error( 'Something went wrong while communicating with the server. It is possible that the payment gateway is down. Please try again after a while. If the problem persists, please contact us and let us know.' );
+}
+
+function clear_credit_card_fields()
+{
+	$( '.create-payment-token-form' )[ 0 ].reset();
 }
 
 /* --------------------Buy Poster-------------------- */

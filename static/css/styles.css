@@ -118,6 +118,9 @@ select, option {
 
 /* --------------------Form Elements-------------------- */
 /* --------------------Settings-------------------- */
+.settings {
+  opacity: 0.85; }
+
 .settings-icon {
   display: block;
   width: 40px;

@@ -14,12 +14,12 @@
 ")))
 		(when message
 			(setq feedback-message (concatenate 'string feedback-message message))
-			(email-mailgun-message *firefractal-from-email-address* "Feedback Form Submission - firefractal.com" feedback-message))))
+			(mailgun-sender:send-message *firefractal-from-email-address* "Feedback Form Submission - firefractal.com" feedback-message))))
 
 (define-easy-handler (feedback-form
-		:uri "/feedback"
-		:default-request-type :post)
-	(name email message)
+                      :uri "/feedback"
+                      :default-request-type :post)
+    (name email message)
 	(send-feedback-email name email message)
 	"{\"success\":true}"
 	)

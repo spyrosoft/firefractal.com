@@ -21,6 +21,7 @@
 (defun send-firefractal-order-confirmation (first-name last-name address city state zip email poster-size poster-orientation destination-link order-total order-id)
   (let ((order-email-message (read-file-into-string "email-templates/order-received.txt")))
     ;;TODO: How can we keep this dry?
+    ;;(mapcar)?
     (setq order-email-message (cl-ppcre:regex-replace "CUSTOMER-NAME" order-email-message (concatenate 'string first-name " " last-name)))
     (setq order-email-message (cl-ppcre:regex-replace "POSTER-SIZE" order-email-message poster-size))
     (setq order-email-message (cl-ppcre:regex-replace "POSTER-ORIENTATION" order-email-message poster-orientation))
@@ -30,8 +31,7 @@
     (setq order-email-message (cl-ppcre:regex-replace "SHIPPING-STATE" order-email-message state))
     (setq order-email-message (cl-ppcre:regex-replace "SHIPPING-ZIP" order-email-message zip))
     (setq order-email-message (cl-ppcre:regex-replace "DESTINATION-LINK" order-email-message destination-link))
-    (email-mailgun-message *firefractal-from-email-address* (concatenate 'string "New Order #" order-id) order-email-message)
-    (email-mailgun-message email (concatenate 'string "Order Receipt - firefractal.com - Order #" order-id) order-email-message)
+    (mailgun-sender:send-message email (concatenate 'string "Order Receipt - firefractal.com - Order #" order-id) order-email-message :bcc *firefractal-from-email-address*)
     ))
 
 (define-easy-handler (buy-poster

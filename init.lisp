@@ -22,8 +22,8 @@
                  :port 8082))
 
 (load "utility-belt.lisp")
+(load "mailgun/mailgun-sender.lisp")
 (load "credentials.lisp")
-(load "mailgun/email-helper.lisp")
 (load "routes.lisp")
 
 (hunchentoot:start firefractal-server)

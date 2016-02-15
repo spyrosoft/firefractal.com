@@ -8,7 +8,7 @@ SHIPPING-CITY, SHIPPING-STATE SHIPPING-ZIP
 
 Your order total came out to ORDER-TOTAL.
 
-The poster will be printed from the following destination:
+If you would ever like to explore this area again, here is a permalink:
 DESTINATION-LINK
 
 We are extatic that you bought a Fire Fractal poster!

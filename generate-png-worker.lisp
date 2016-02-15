@@ -1,3 +1,8 @@
+;; Add the following to init.lisp to use this:
+;; (load "generate-png-worker.lisp")
+;; (make-generate-png-thread)
+;; (populate-generate-png-thread-with-cache)
+
 (defvar *generate-png-queue* '())
 (defvar *generate-png-queue-mutex* (sb-thread:make-mutex :name "Generate PNG queue lock"))
 (defvar *generate-png-semaphore* (sb-thread:make-semaphore :name "Generate PNG semaphore" :count 0))

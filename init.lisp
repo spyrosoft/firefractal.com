@@ -10,7 +10,6 @@
   (:use :common-lisp
         :hunchentoot
         :iterate
-        :cl-ppcre
         :crypto-shortcuts))
 
 (in-package :firefractal)
@@ -28,14 +27,7 @@
                  :port 8082))
 
 (load "utility-belt.lisp")
-(load "destination-requirements.lisp")
 (load "mailgun/email-helper.lisp")
-(load "request-json-helper.lisp")
-(load "generate-png-worker.lisp")
-(make-generate-png-thread)
-(populate-generate-png-thread-with-cache)
 (load "routes.lisp")
-(load "print-poster.lisp")
-(load "feedback-form.lisp")
 
 (hunchentoot:start firefractal-server)

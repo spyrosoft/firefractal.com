@@ -21,3 +21,4 @@
 (route-file "/robots.txt" "/" "robots" "txt" "text/plain")
 
 (load "buy-poster.lisp")
+(load "feedback-form.lisp")

@@ -11,6 +11,8 @@
 
 ** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
 
+** When the final step of the payment process is successful, clear the credit card info
+	 
 ** Validate the /buy-poster/ post data better
 
 ** Split off the contact form into a separate page

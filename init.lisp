@@ -1,16 +1,11 @@
 (ql:quickload :hunchentoot)
-(ql:quickload :iterate)
 (ql:quickload :jsown)
 (ql:quickload :cl-ppcre)
-(ql:quickload :crypto-shortcuts)
 (ql:quickload :drakma)
 (ql:quickload :flexi-streams)
 
 (defpackage :firefractal
-  (:use :common-lisp
-        :hunchentoot
-        :iterate
-        :crypto-shortcuts))
+  (:use :common-lisp :hunchentoot))
 
 (in-package :firefractal)
 

@@ -27,6 +27,7 @@
                  :port 8082))
 
 (load "utility-belt.lisp")
+(load "credentials.lisp")
 (load "mailgun/email-helper.lisp")
 (load "routes.lisp")
 

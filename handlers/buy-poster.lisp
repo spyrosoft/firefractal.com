@@ -1,5 +1,3 @@
-(load "stripe-credentials.lisp")
-
 (defun cost-of-poster-in-cents (poster-size)
   (cond ((string-equal poster-size "small") "1500")
         ((string-equal poster-size "medium") "4000")

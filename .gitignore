@@ -8,6 +8,5 @@ generate-mandelbrot-png
 static/stress-test
 generate-png-queue
 /logs
-/mailgun/credentials.lisp
 /static/stress-test
-stripe-credentials.lisp
+/credentials.lisp

@@ -20,5 +20,5 @@
 ;; Route /robots.txt to the actual file and serve it as text/plain
 (route-file "/robots.txt" "/" "robots" "txt" "text/plain")
 
-(load "buy-poster.lisp")
-(load "feedback-form.lisp")
+(load "handlers/buy-poster.lisp")
+(load "handlers/feedback-form.lisp")

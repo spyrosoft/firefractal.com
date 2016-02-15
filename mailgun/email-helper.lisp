@@ -1,5 +1,3 @@
-(load "mailgun/credentials.lisp")
-
 (defun email-mailgun-message-from-echo-at-firefractal (email-message-to-address email-message-subject email-message-body)
 	(drakma:http-request
 		*mailgun-email-post-url*

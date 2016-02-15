@@ -1723,6 +1723,7 @@ function create_payment_token()
 		.find( 'button' )
 		.prop( 'disabled', true );
 	Stripe.setPublishableKey( 'pk_live_5GYzGkxM6bSXlvnIZWNC2n48' );
+	//Stripe.setPublishableKey( 'pk_test_a3d3NSbI6QUBR4knlav1Cs0K' );
 	Stripe.card.createToken(
 		$( '.create-payment-token-form' ),
 		buy_poster_payment_callback
@@ -1830,7 +1831,12 @@ function populate_ship_poster_additional_fields( ship_poster_data )
 
 function buy_poster_success( response )
 {
-	response = JSON.parse( response );
+	try {
+		response = JSON.parse( response );
+	} catch ( error ) {
+		ship_poster_ajax_fail();
+		return;
+	}
 	if ( typeof response[ 'success' ] === 'undefined' )
 	{
 		ship_poster_ajax_fail();
@@ -1839,9 +1845,13 @@ function buy_poster_success( response )
 	{
 		show_buy_poster_step( 'success' );
 	}
-	else if ( response[ 'success' ] === 'false' )
+	else if ( typeof response[ 'message' ] !== 'undefined' )
 	{
-		display_buy_poster_error( 'The payment was rejected. Please try again, or use a different payment method.' );
+		display_buy_poster_error( 'The transaction was rejected. The payment gateway\'s response: ' + response[ 'message' ] );
+	}
+	else
+	{
+		ship_poster_ajax_fail();
 	}
 }
 

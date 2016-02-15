@@ -4,11 +4,15 @@
         ((string-equal poster-size "large") "5500")))
 
 (defun create-a-payment (cost-in-cents buy-poster-token shipping-email destination-link)
-  (flexi-streams:octets-to-string
+  (let ((stripe-key
+         (if (eq *live-or-dev* 'dev)
+             *stripe-test-secret-key*
+             *stripe-live-secret-key*)))
+    (flexi-streams:octets-to-string
    (drakma:http-request
     "https://api.stripe.com/v1/charges"
     :method :post
-    :basic-authorization (list *stripe-live-secret-key* "")
+    :basic-authorization (list stripe-key "")
     :parameters (list (cons "amount" cost-in-cents)
                       (cons "currency" "usd")
                       (cons "source" buy-poster-token)
@@ -16,7 +20,7 @@
                             (concatenate 'string
                                          shipping-email
                                          " "
-                                         destination-link))))))
+                                         destination-link)))))))
 
 (defun send-firefractal-order-confirmation (first-name last-name address city state zip email poster-size poster-orientation destination-link order-total order-id)
   (let ((order-email-message (read-file-into-string "email-templates/order-received.txt")))
@@ -31,7 +35,7 @@
     (setq order-email-message (cl-ppcre:regex-replace "SHIPPING-STATE" order-email-message state))
     (setq order-email-message (cl-ppcre:regex-replace "SHIPPING-ZIP" order-email-message zip))
     (setq order-email-message (cl-ppcre:regex-replace "DESTINATION-LINK" order-email-message destination-link))
-    (mailgun-sender:send-message email (concatenate 'string "Order Receipt - firefractal.com - Order #" order-id) order-email-message :bcc *firefractal-from-email-address*)
+    (mailgun-sender:send-message email (concatenate 'string "Receipt From firefractal.com - Order #" order-id) order-email-message :bcc *firefractal-from-email-address*)
     ))
 
 (define-easy-handler (buy-poster
@@ -43,10 +47,17 @@
           (create-a-payment cost-in-cents buy-poster-token shipping-email destination-link))
          (payment-gateway-response-json
           (jsown:parse payment-gateway-response))
-         (order-id (jsown:val payment-gateway-response-json "id")))
+         (order-id)
+         (error-message))
+    (handler-case (setq order-id (jsown:val payment-gateway-response-json "id"))
+      (error nil
+        (handler-case (setq error-message (jsown:val (jsown:val payment-gateway-response-json "error") "message"))
+          (error nil (setq error-message "Unable to connect to the payment gateway.")))))
     (if order-id
         (progn
           (send-firefractal-order-confirmation shipping-first-name shipping-last-name shipping-address shipping-city shipping-state shipping-zip shipping-email poster-size poster-orientation destination-link order-total order-id)
           "{\"success\":\"true\"}")
-        "{\"success\":\"false\"}")
+        (concatenate 'string "{\"success\":\"false\",\"message\":\""
+                     error-message
+                     "\"}"))
     ))

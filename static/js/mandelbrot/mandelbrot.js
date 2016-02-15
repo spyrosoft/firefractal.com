@@ -390,9 +390,6 @@ function initialize_event_listeners()
 	
 	canvas_hammer_manager.on( 'twofingertap', zoom_out_canvas );
 	
-	// $( '#canvas-overlay' )
-	// 	.mouseenter( delay_hide_settings );
-	
 	/* ----Canvas---- */
 }
 
@@ -1128,7 +1125,8 @@ function generate_iteration_pixels_spawn_workers()
 {
 	var section_settings = get_current_settings();
 	var total_rows = section_settings[ 'canvas-height' ] / WORKER_ROW_HEIGHT;
-	for ( var i = 0; i < total_rows; i++ ) {
+	for ( var i = 0; i < total_rows; i++ )
+	{
 		section_settings[ 'initial-row-index' ] = i * WORKER_ROW_HEIGHT;
 		section_settings[ 'final-row-index' ] = section_settings[ 'initial-row-index' ] + WORKER_ROW_HEIGHT;
 		if ( section_settings[ 'final-row-index' ] > canvas_element.height )
@@ -1664,10 +1662,13 @@ function buy_poster_preview()
 	var screen_width = $( 'html' ).width();
 	var screen_height = $( 'html' ).height();
 	var poster_width, poster_height;
-	if ( poster_orientation === 'portrait' ) {
+	if ( poster_orientation === 'portrait' )
+	{
 		poster_width = poster_dimensions[ poster_size ][ 0 ];
 		poster_height = poster_dimensions[ poster_size ][ 1 ];
-	} else {
+	}
+	else
+	{
 		poster_width = poster_dimensions[ poster_size ][ 1 ];
 		poster_height = poster_dimensions[ poster_size ][ 0 ];
 	}
@@ -1675,10 +1676,13 @@ function buy_poster_preview()
 	var poster_ratio = poster_width / poster_height;
 	var new_width, new_height;
 	
-	if ( screen_ratio > poster_ratio ) {
+	if ( screen_ratio > poster_ratio )
+	{
 		new_width = screen_height * poster_ratio;
 		new_height = screen_height;
-	} else {
+	}
+	else
+	{
 		new_width = screen_width;
 		new_height = screen_width / poster_ratio;
 	}
@@ -1692,9 +1696,9 @@ function buy_poster_preview()
 function buy_poster_total()
 {
 	var poster_prices = {
-		'small' : '15',
-		'medium' : '40',
-		'large' : '55'
+		'small' : 15,
+		'medium' : 40,
+		'large' : 55
 	};
 	var poster_size = document.getElementsByName( 'poster-size' )[ 0 ].value;
 	return poster_prices[ poster_size ];
@@ -1715,21 +1719,35 @@ function create_payment_token_on_enter( key_event )
 
 function create_payment_token()
 {
+	$( '.create-payment-token-form' )
+		.find( 'button' )
+		.prop( 'disabled', true );
 	Stripe.setPublishableKey( 'pk_live_5GYzGkxM6bSXlvnIZWNC2n48' );
-	$( '.create-payment-token-form' ).find( 'button' ).prop( 'disabled', true );
-	Stripe.card.createToken( $( '.create-payment-token-form' ), buy_poster_payment_callback );
+	Stripe.card.createToken(
+		$( '.create-payment-token-form' ),
+		buy_poster_payment_callback
+	);
 }
 
 function buy_poster_payment_callback( status, response )
 {
-	$( '.create-payment-token-form' ).find( 'button' ).prop( 'disabled', false );
-	if ( status === 200 ) {
+	$( '.create-payment-token-form' )
+		.find( 'button' )
+		.prop( 'disabled', false );
+	
+	if ( status === 200 )
+	{
 		document.getElementById( 'buy-poster-token' ).value = response[ 'id' ];
 		show_buy_poster_step( 'shipping' );
-	} else {
-		if ( typeof response[ 'error' ] === 'undefined' || typeof response[ 'error' ][ 'message' ] === 'undefined' ) {
+	}
+	else
+	{
+		if ( typeof response[ 'error' ] === 'undefined' || typeof response[ 'error' ][ 'message' ] === 'undefined' )
+		{
 			display_buy_poster_error( 'Something went wrong connecting with the server. Please try again after a while.' );
-		} else {
+		}
+		else
+		{
 			display_buy_poster_error( response[ 'error' ][ 'message' ] );
 		}
 	}
@@ -1743,12 +1761,26 @@ function ship_poster_form_submit( submit_event )
 
 function ship_poster()
 {
-	if ( document.getElementById( 'buy-poster-token' ).value === '' ) {
+	if ( document.getElementById( 'buy-poster-token' ).value === '' )
+	{
 		show_buy_poster_step( 'payment' );
 		display_buy_poster_error( 'Somehow your payment did not go through. Please fill out your payment details again.' );
 		return;
 	}
 	
+	var ship_poster_data = populate_ship_poster_text_fields();
+	if ( ship_poster_data === null ) { return; }
+	
+	ship_poster_data = populate_ship_poster_additional_fields( ship_poster_data );
+	
+	$.post( '/buy-poster/', ship_poster_data )
+		.done( buy_poster_success )
+		.fail( ship_poster_ajax_fail );
+}
+
+function populate_ship_poster_text_fields()
+{
+	//TODO: Consider populating this dynamically
 	var text_input_ids = [
 		'buy-poster-token',
 		'shipping-first-name',
@@ -1768,37 +1800,54 @@ function ship_poster()
 		{
 			display_buy_poster_error( 'All fields are required.' );
 			document.getElementById( text_input_id ).select();
-			return;
+			return null;
 		}
 		ship_poster_data[ text_input_id ]
 			= document.getElementById( text_input_id ).value;
 	}
 	
-	ship_poster_data[ 'destination-link' ] = window.location.origin + '/#' + convert_settings_to_get_parameters();
-	ship_poster_data[ 'poster-size' ] = document.getElementsByName( 'poster-size' )[ 0 ].value;
-	ship_poster_data[ 'poster-orientation' ] = document.getElementsByName( 'poster-orientation' )[ 0 ].value;
-	ship_poster_data[ 'order-total' ] = format_human_readable_dollars( buy_poster_total() );
+	return ship_poster_data;
+}
+
+function populate_ship_poster_additional_fields( ship_poster_data )
+{
+	ship_poster_data[ 'destination-link' ]
+		= window.location.origin
+		+ '/#'
+		+ convert_settings_to_get_parameters();
 	
-	$.post( '/buy-poster/', ship_poster_data )
-		.done( buy_poster_success )
-		.fail( ship_poster_ajax_fail );
+	ship_poster_data[ 'poster-size' ]
+		= document.getElementsByName( 'poster-size' )[ 0 ].value;
+	
+	ship_poster_data[ 'poster-orientation' ]
+		= document.getElementsByName( 'poster-orientation' )[ 0 ].value;
+	
+	ship_poster_data[ 'order-total' ]
+		= format_human_readable_dollars( buy_poster_total() );
+	
+	return ship_poster_data;
 }
 
 function buy_poster_success( response )
 {
 	response = JSON.parse( response );
-	if ( typeof response[ 'success' ] === 'undefined' ) {
-		display_buy_poster_error( 'Something went wrong while communicating with the server. It is possible that the payment gateway is down. Please try again after a while. If the problem persists, please contact us and let us know.' );
-	} else if ( response[ 'success' ] === 'true' ) {
+	if ( typeof response[ 'success' ] === 'undefined' )
+	{
+		ship_poster_ajax_fail();
+	}
+	else if ( response[ 'success' ] === 'true' )
+	{
 		show_buy_poster_step( 'success' );
-	} else if ( response[ 'success' ] === 'false' ) {
+	}
+	else if ( response[ 'success' ] === 'false' )
+	{
 		display_buy_poster_error( 'The payment was rejected. Please try again, or use a different payment method.' );
 	}
 }
 
 function ship_poster_ajax_fail()
 {
-	display_buy_poster_error( 'Your browser is having some trouble connecting to our server. You will not be charged until the full transaction is successful. Please check your internet connection, or try again after a while.' );
+	display_buy_poster_error( 'Something went wrong while communicating with the server. It is possible that the payment gateway is down. Please try again after a while. If the problem persists, please contact us and let us know.' );
 }
 
 /* --------------------Buy Poster-------------------- */
@@ -2047,25 +2096,37 @@ function format_human_readable_dollars( number )
 {
 	if ( isNaN( number ) ) { throw "Input to format_human_readable_dollars must be a number. The following was provided: " + number; }
 	var number_string = number.toString();
-	if ( ! number_string.match( /\./ ) ) {
+	if ( ! number_string.match( /\./ ) )
+	{
 		number_string += '.00';
 	}
 	var dollars_and_cents = number_string.split( '.' );
-	if ( dollars_and_cents[ 1 ].length > 2 ) {
+	if ( dollars_and_cents[ 1 ].length > 2 )
+	{
 		// It's not very obvious what's happening here.
 		// We know that we have more digits than we need, so we want to round up:
 		// We take the first three digits
 		// Convert them to an integer, divide by 10, and take the ceiling
-		dollars_and_cents[ 1 ] = Math.ceil( parseInt( dollars_and_cents[ 1 ].substring( 0, 3 ) ) / 10 ).toString();
+		dollars_and_cents[ 1 ]
+			= Math.ceil(
+				parseInt(
+					dollars_and_cents[ 1 ]
+						.substring( 0, 3 )
+				) / 10
+			).toString();
 	}
-	while ( dollars_and_cents[ 1 ].length < 2 ) {
+	while ( dollars_and_cents[ 1 ].length < 2 )
+	{
 		dollars_and_cents[ 1 ] += '0';
 	}
-	if ( dollars_and_cents[ 0 ].length > 3 ) {
+	if ( dollars_and_cents[ 0 ].length > 3 )
+	{
 		var dollars = dollars_and_cents[ 0 ];
 		var new_dollars_and_cents = '';
-		for ( var i = 0; i < dollars.length; i++ ) {
-			if ( i != 0 && i % 3 === 0 ) {
+		for ( var i = 0; i < dollars.length; i++ )
+		{
+			if ( i != 0 && i % 3 === 0 )
+			{
 				new_dollars_and_cents = ',' + new_dollars_and_cents;
 			}
 			new_dollars_and_cents = dollars[ dollars.length - 1 - i ] + new_dollars_and_cents;

@@ -7,8 +7,6 @@
 
 * Minimally Viable
 
-** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
-
 ** Validate the /buy-poster/ post data better
 
 ** Split off the contact form into a separate page
@@ -42,6 +40,8 @@
 	 This page should be a link to the interactive location around the image - centered with black background
 	 Use url hashes containing settings save data - they can then email the link to their friends
 	 Add a way to generate Facebook/Twitter banner images
+
+** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
 
 ** Think of different methods of making money from this besides posters
 

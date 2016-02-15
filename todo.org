@@ -11,8 +11,6 @@
 
 ** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
 
-** Combine the buy poster settings together into one setting div
-
 ** Validate the /buy-poster/ post data better
 
 ** Split off the contact form into a separate page
@@ -777,4 +775,6 @@
 
 ** When the canvas is resized smaller than the screen, the settings icon follows
 	 This is a feature, not a bug :)
+
+** Combine the buy poster settings together into one setting div
 

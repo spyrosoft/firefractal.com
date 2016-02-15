@@ -38,9 +38,9 @@
 					<div class="zoom-rate-meter-outer"><div class="zoom-rate-meter-inner"></div></div>
 					<div class="clearfix">
 						<!-- TODO
-						<button class="undo">Undo</button>
-						<button class="redo">Redo</button>
-						-->
+								 <button class="undo">Undo</button>
+								 <button class="redo">Redo</button>
+								 -->
 						<button class="full-screen" title="Hotkey: F11">Full Screen</button>
 						<button class="fit-to-screen">Stretch</button>
 						<button class="reset-zoom full-width">Zoom All The Way Out</button>
@@ -71,7 +71,7 @@
 						<button class="colors-setting" title="Hotkey: C">Colors</button>
 						<button class="controls-setting" title="Hotkey: T">Controls</button>
 						<button class="share-setting">Share</button>
-						<button class="buy-poster-size-and-orientation-setting">Buy Poster</button>
+						<button class="buy-poster-setting">Buy Poster</button>
 					</div>
 					
 					<hr />
@@ -159,181 +159,180 @@
 			</div>
 			
 			
-			<div class="setting settings-component buy-poster-size-and-orientation row">
-				<form action="/buy-poster/" method="get" target="_blank">
-					
-					<div class="columns">
-						<label>
-							Poster Size
-							<select name="poster-size">
-								<option value="small">Small - 8.5x11&quot; - $15</option>
-								<option value="medium">Medium - 16x20&quot; - $40</option>
-								<option value="large">Large - 20x30&quot; - $55</option>
-							</select>
-						</label>
-					</div>
-					
-					<div class="columns">
-						<label>
-							Poster Orientation
-							<select name="poster-orientation">
-								<option value="landscape">Landscape</option>
-								<option value="portrait">Portrait</option>
-							</select>
-						</label>
-					</div>
-					
-				</form>
-				
-				<div class="columns">
-					<button class="buy-poster-preview full-width">Preview</button>
-				</div>
-				
-				<div class="columns">
-					<hr>
-					<button class="buy-poster-payment-setting full-width">Next Step</button>
-				</div>
-				
-				<div class="large-margin-bottom">&nbsp;</div>
-				
-			</div>
-			
-			
-			<div class="setting settings-component buy-poster-payment row">
-				<form class="buy-poster-form" autocomplete="off">
+			<div class="setting settings-component buy-poster row">
 
-					<div class="columns">
-						<h6>
-							Total Including Shipping:
-							<strong class="total"></strong>
-						</h6>
-						<hr>
-					</div>
-					
-					<div class="columns">
-						<p class="buy-poster-error error"></p>
-					</div>
-					
-					<div class="columns large-8 medium-8 small-8">
-						<label>
-							<span>Card Number</span>
-							<input type="text" size="20" data-stripe="number">
-						</label>
-					</div>
-					<div class="columns large-3 medium-3 small-3">
-						<label>
-							<span>CVC</span>
-							<input type="text" size="4" data-stripe="cvc">
-						</label>
-					</div>
-					<div class="columns large-1 medium-1 small-1"></div>
-					
-					<div class="columns">
-						<span>Expiration</span>
-					</div>
-					<div class="columns large-3 medium-3 small-3">
-						<label>
-							<span>MM</span>
-							<input type="text" size="2" data-stripe="exp-month">
-						</label>
-					</div>
-					<div class="columns large-4 medium-4 small-4">
-						<label>
-							<span>YYYY</span>
-							<input type="text" size="4" data-stripe="exp-year">
-						</label>
-					</div>
-					<div class="columns large-5 medium-5 small-5"></div>
-					
-				</form>
+				<div class="columns">
+					Total Including Shipping:
+					<strong class="total">$0.00</strong>
+				</div>
 				
 				<div class="columns">
+					<div class="buy-poster-error error"></div>
 					<hr>
-					<button class="buy-poster-size-and-orientation-setting half-width left">Previous Step</button>
-					<button class="buy-poster-shipping-setting half-width">Next Step</button>
+				</div>
+				
+				<div class="buy-poster-step size-and-orientation">
+					
+					<form action="/buy-poster/" method="get" target="_blank">
+						
+						<div class="columns">
+							<label>
+								Poster Size
+								<select name="poster-size">
+									<option value="small">Small - 8.5x11&quot;</option>
+									<option value="medium">Medium - 16x20&quot;</option>
+									<option value="large">Large - 20x30&quot;</option>
+								</select>
+							</label>
+						</div>
+						
+						<div class="columns">
+							<label>
+								Poster Orientation
+								<select name="poster-orientation">
+									<option value="landscape">Landscape</option>
+									<option value="portrait">Portrait</option>
+								</select>
+							</label>
+						</div>
+						
+					</form>
+					
+					<div class="columns">
+						<button class="buy-poster-preview full-width">Preview</button>
+					</div>
+					
+					<div class="columns">
+						<hr>
+						<button class="payment-step full-width">Next Step</button>
+					</div>
+					
+				</div>
+				
+				
+				<div class="buy-poster-step payment">
+					
+					<form class="create-payment-token-form" autocomplete="off">
+						
+						<div class="columns large-8 medium-8 small-8">
+							<label>
+								<span>Card Number</span>
+								<input type="text" size="20" data-stripe="number">
+							</label>
+						</div>
+						<div class="columns large-3 medium-3 small-3">
+							<label>
+								<span>CVC</span>
+								<input type="text" size="4" data-stripe="cvc">
+							</label>
+						</div>
+						<div class="columns large-1 medium-1 small-1"></div>
+						
+						<div class="columns">
+							<span>Expiration</span>
+						</div>
+						<div class="columns large-3 medium-3 small-3">
+							<label>
+								<span>MM</span>
+								<input type="text" size="2" data-stripe="exp-month">
+							</label>
+						</div>
+						<div class="columns large-4 medium-4 small-4">
+							<label>
+								<span>YYYY</span>
+								<input type="text" size="4" data-stripe="exp-year">
+							</label>
+						</div>
+						<div class="columns large-5 medium-5 small-5"></div>
+						
+					</form>
+					
+					<div class="columns">
+						<hr>
+						<button class="size-and-orientation-step half-width left">Previous Step</button>
+						<button class="create-payment-token half-width">Next Step</button>
+					</div>
+					
+				</div>
+				
+				
+				<div class="buy-poster-step shipping">
+					
+					<form action="/buy-poster/" method="post" class="ship-poster-form" autocomplete="off">
+						<input type="hidden" id="buy-poster-token">
+						
+						<div class="columns small-6 medium-6 large-6">
+							<label>
+								<span>First Name</span>
+								<input type="text" id="shipping-first-name">
+							</label>
+						</div>
+						
+						<div class="columns small-6 medium-6 large-6">
+							<label>
+								<span>Last Name</span>
+								<input type="text" id="shipping-last-name">
+							</label>
+						</div>
+						
+						<div class="columns">
+							<label>
+								<span>Shipping Address</span>
+								<input type="text" size="4" id="shipping-address">
+							</label>
+						</div>
+						
+						<div class="columns">
+							<label>
+								<span>City</span>
+								<input type="text" size="4" id="shipping-city">
+							</label>
+						</div>
+						
+						<div class="columns large-3 medium-3 small-3">
+							<label>
+								<span>State</span>
+								<input type="text" size="2" id="shipping-state">
+							</label>
+						</div>
+						<div class="columns large-6 medium-6 small-6">
+							<label>
+								<span>Zip</span>
+								<input type="text" size="4" id="shipping-zip">
+							</label>
+						</div>
+						<div class="columns large-3 medium-3 small-3"></div>
+						
+						<div class="columns">
+							<label>
+								<span>Email</span>
+								<input type="email" id="shipping-email">
+							</label>
+						</div>
+						
+						<div class="columns medium-margin-bottom">
+							<hr>
+							<button class="full-width">Submit Order</button>
+						</div>
+						
+					</form>
+					
+				</div>
+				
+				
+				<div class="buy-poster-step success">
+					<div class="columns">
+						<h4>Success!!</h4>
+						<p>
+							We have received your order.
+						</p>
+						<p>
+							We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please <a href="/about.html">contact us</a>.
+						</p>
+					</div>
 				</div>
 				
 			</div>
-			
-			
-			<div class="setting settings-component buy-poster-shipping row">
-				<form action="/buy-poster/" method="post" class="ship-poster-form" autocomplete="off">
-					<input type="hidden" id="buy-poster-token">
-					
-					<div class="columns">
-						<p class="ship-poster-error error"></p>
-					</div>
-					
-					<div class="columns small-6 medium-6 large-6">
-						<label>
-							<span>First Name</span>
-							<input type="text" id="shipping-first-name">
-						</label>
-					</div>
-					
-					<div class="columns small-6 medium-6 large-6">
-						<label>
-							<span>Last Name</span>
-							<input type="text" id="shipping-last-name">
-						</label>
-					</div>
-					
-					<div class="columns">
-						<label>
-							<span>Shipping Address</span>
-							<input type="text" size="4" id="shipping-address">
-						</label>
-					</div>
-					
-					<div class="columns">
-						<label>
-							<span>City</span>
-							<input type="text" size="4" id="shipping-city">
-						</label>
-					</div>
-					
-					<div class="columns large-3 medium-3 small-3">
-						<label>
-							<span>State</span>
-							<input type="text" size="2" id="shipping-state">
-						</label>
-					</div>
-					<div class="columns large-6 medium-6 small-6">
-						<label>
-							<span>Zip</span>
-							<input type="text" size="4" id="shipping-zip">
-						</label>
-					</div>
-					<div class="columns large-3 medium-3 small-3"></div>
-					
-					<div class="columns">
-						<label>
-							<span>Email</span>
-							<input type="email" id="shipping-email">
-						</label>
-					</div>
-					
-					<div class="columns medium-margin-bottom">
-						<hr>
-						<button class="full-width">Submit Order</button>
-					</div>
-					
-				</form>
-			</div>
-			
-			
-			<div class="setting settings-component buy-poster-success row">
-				<div class="columns">
-					<h4>Success!!</h4>
-					<p>
-						We have received your order.
-					</p>
-					<p>
-						We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please <a href="/about.html">contact us</a>.
-					</p>
-				</div>
-			</div>
-			
 		</div>
 	</div>
 	

@@ -1864,6 +1864,7 @@ function ship_poster_ajax_fail()
 function clear_credit_card_fields()
 {
 	$( '.create-payment-token-form' )[ 0 ].reset();
+	$( '#buy-poster-token' ).val( '' );
 }
 
 /* --------------------Buy Poster-------------------- */

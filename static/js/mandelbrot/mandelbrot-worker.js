@@ -14,6 +14,7 @@ var fractal_function_table = {
 	'generalized-celtic' : fractal_generalized_celtic,
 	'burning-ship' : fractal_burning_ship,
 	'halloween' : fractal_halloween,
+	'angles' : fractal_angles,
 	'test' : fractal_test
 };
 

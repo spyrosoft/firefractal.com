@@ -88,6 +88,9 @@
 	 This can be done with the following css:
 	 cursor: url( "/path/to/magnifying-glass.cur" ), -moz-zoom-in;
 
+** Animate the colors
+	 Maybe shift the bottom color to the top every period of time
+
 ** Try changing the zoom level, x & y values to replace all non-significant digits with 0's
 
 ** Add a You Are Here diagram somewhere

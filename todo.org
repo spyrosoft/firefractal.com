@@ -7,6 +7,8 @@
 
 * Minimally Viable
 
+** Close settings on right click and two finger tap as well as left click
+
 ** Validate the /buy-poster/ post data better
 
 ** Split off the contact form into a separate page

@@ -15,15 +15,15 @@
 
 (defvar firefractal-server
   (make-instance 'hunchentoot:easy-acceptor
-                 :document-root "static"
-                 :error-template-directory "static/error-templates/"
+                 :document-root "web-root"
+                 :error-template-directory "web-root/error-templates/"
                  :access-log-destination "logs/access.log"
                  :message-log-destination "logs/error.log"
                  :port 8082))
 
-(load "utility-belt.lisp")
-(load "mailgun/mailgun-sender.lisp")
-(load "credentials.lisp")
+(load "utilities/utility-belt.lisp")
+(load "packages/mailgun.lisp")
+(load "private/credentials.lisp")
 (load "routes.lisp")
 
 (hunchentoot:start firefractal-server)

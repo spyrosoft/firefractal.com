@@ -1,4 +1,9 @@
-(load "routing.lisp")
+(defvar *this-file* #.(or *compile-file-pathname* *load-truename*))
+
+(load "utilities/routing.lisp")
+
+(load "acceptors/buy-poster.lisp")
+(load "acceptors/feedback-form.lisp")
 
 ;; Route / to index.html and serve it as text/html
 (route-file "/" "/" "index" "html" "text/html")
@@ -19,6 +24,3 @@
 
 ;; Route /robots.txt to the actual file and serve it as text/plain
 (route-file "/robots.txt" "/" "robots" "txt" "text/plain")
-
-(load "handlers/buy-poster.lisp")
-(load "handlers/feedback-form.lisp")

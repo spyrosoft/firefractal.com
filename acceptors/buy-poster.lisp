@@ -35,7 +35,7 @@
     (setq order-email-message (cl-ppcre:regex-replace "SHIPPING-STATE" order-email-message state))
     (setq order-email-message (cl-ppcre:regex-replace "SHIPPING-ZIP" order-email-message zip))
     (setq order-email-message (cl-ppcre:regex-replace "DESTINATION-LINK" order-email-message destination-link))
-    (mailgun-sender:send-message email (concatenate 'string "Receipt From firefractal.com - Order #" order-id) order-email-message :bcc *firefractal-from-email-address*)
+    (mailgun:send-message email (concatenate 'string "Receipt From firefractal.com - Order #" order-id) order-email-message :bcc *firefractal-from-email-address*)
     ))
 
 (define-easy-handler (buy-poster

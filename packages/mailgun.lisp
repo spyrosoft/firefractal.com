@@ -1,11 +1,11 @@
 (ql:quickload :drakma)
 (ql:quickload :jsown)
 
-(defpackage :mailgun-sender
+(defpackage :mailgun
 	(:use :common-lisp)
 	(:export :set-credentials :send-message :validate-email-address))
 
-(in-package :mailgun-sender)
+(in-package :mailgun)
 
 (defvar *mailgun-credentials* (make-hash-table :test 'eq))
 

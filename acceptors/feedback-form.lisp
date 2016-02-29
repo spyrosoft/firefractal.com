@@ -14,7 +14,7 @@
 ")))
 		(when message
 			(setq feedback-message (concatenate 'string feedback-message message))
-			(mailgun-sender:send-message *firefractal-from-email-address* "Feedback Form Submission - firefractal.com" feedback-message))))
+			(mailgun:send-message *firefractal-from-email-address* "Feedback Form Submission - firefractal.com" feedback-message))))
 
 (define-easy-handler (feedback-form
                       :uri "/feedback"

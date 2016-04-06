@@ -1490,7 +1490,13 @@ function indicate_zoom_in_to_user( mouse_event )
 
 function canvas_right_clicked( mouse_event )
 {
+	if ( ! $( '.settings' ).hasClass( 'settings-hidden' ) )
+	{
+		$( '.settings' ).addClass( 'settings-hidden' );
+		return;
+	}
 	if ( painting_in_progress ) { return; }
+	
 	offset_canvas_to_click_x_y( mouse_event );
 	zoom_out_canvas();
 }

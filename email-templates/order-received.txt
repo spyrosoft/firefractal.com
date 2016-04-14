@@ -11,7 +11,7 @@ Your order total came out to ORDER-TOTAL.
 If you would ever like to explore this area again, here is a permalink:
 DESTINATION-LINK
 
-We are extatic that you bought a Fire Fractal poster!
+We are ecstatic that you bought a Fire Fractal poster!
 
 If you are interested, let me tell you the story of how firefractal.com came to be. When I was in high school, a burgeoning programmer, I came across someone's blog post about his experience making a Mandelbrot program for fun. He described how blown away he was by the simplicity of the code. I was equally blown away. Here it is, verbatim, from firefractal.com:
 
@@ -44,7 +44,7 @@ Eventually the itch to make my own got me and I wrote version 1.0. It was a bit 
 We would love to hear from you if you have:
 * Feedback about what could be better.
 * Any other comments, questions or ideas.
-* (Our favorite) An incling to just to say hi!
+* (Our favorite) An inkling to just to say hi!
 
 Hit reply and we'll get your message.
 

@@ -21,10 +21,9 @@ var (
 )
 
 func loadCredentials() {
-	var credentials []byte
-	credentials, error := ioutil.ReadFile( "private/credentials.json" )
+	rawCredentials, error := ioutil.ReadFile( "private/credentials.json" )
 	panicOnError( error )
-	error = json.Unmarshal( credentials, &credentials )
+	error = json.Unmarshal( rawCredentials, &credentials )
 	panicOnError( error )
 }
 
@@ -36,7 +35,6 @@ func panicOnError( error error ) { if error != nil { panic( error ) } }
 
 func main() {
 	loadCredentials()
-	fmt.Println(credentials)
 	router := httprouter.New()
 	router.GET("/feedback", feedbackSubmission)
 	router.NotFound = http.FileServer(http.Dir("web-root"))

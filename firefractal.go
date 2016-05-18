@@ -1,4 +1,4 @@
-package main
+package firefractal
 
 import (
 	"fmt"
@@ -7,18 +7,15 @@ import (
 	"log"
 	"encoding/json"
 	"io/ioutil"
-//	"net/smtp"
 )
 
 type Credentials struct {
-	NoReplyAddress string `json:"no-reply-address"`
-	NoReplyPassword string `json:"no-reply-password"`
-	NoReplyHost string `json:"no-reply-host"`
+	AddressName string `json:"no-reply-address-name"`
+	Address string `json:"no-reply-address"`
+	Password string `json:"no-reply-password"`
+	Host string `json:"no-reply-host"`
+	Port string `json:"no-reply-host"`
 }
-
-var (
-	credentials = Credentials{}
-)
 
 func loadCredentials() {
 	rawCredentials, error := ioutil.ReadFile( "private/credentials.json" )
@@ -28,6 +25,8 @@ func loadCredentials() {
 }
 
 func feedbackSubmission(responseWriter http.ResponseWriter, request *http.Request, requestParameters httprouter.Params) {
+	//feedbackMessage := ""
+	fmt.Println(request.PostFormValue("testing"))
 	fmt.Fprint(responseWriter, "{\"error\":\"The message was not sent.\"}")
 }
 

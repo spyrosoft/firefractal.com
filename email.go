@@ -6,21 +6,41 @@ import (
 	"log"
 	"net/mail"
 	"net/smtp"
+	"encoding/json"
+	"io/ioutil"
 )
 
+type Credentials struct {
+	NoReplyAddressName string `json:"no-reply-address-name"`
+	NoReplyAddress string `json:"no-reply-address"`
+	NoReplyPassword string `json:"no-reply-password"`
+	Host string `json:"no-reply-host"`
+	Port string `json:"no-reply-host"`
+}
+
+func loadCredentials() {
+	rawCredentials, error := ioutil.ReadFile("private/credentials.json")
+	panicOnError(error)
+	error = json.Unmarshal(rawCredentials, &credentials)
+	panicOnError(error)
+}
+
 var (
+	credentials = Credentials{}
 	credentialsHaveBeenSet = false
 )
 
 func setCredentials(address string, password string, host string, port string) {
-	credentials.Address = address
+	credentials.NoReplyAddress = address
 	credentialsHaveBeenSet = true
 }
 
 func sendMessage(recipientAddress string, subject string, messageBody string) {
-	if ! credentialsHaveBeenSet { log.Panic("Outgoing email credentials have not been set. Cannot send message.") }
+	if ! credentialsHaveBeenSet {
+		log.Panic("Outgoing email credentials have not been set. Cannot send message.")
+	}
 	
-	from := mail.Address{credentials.AddressName, credentials.Address}
+	from := mail.Address{credentials.NoReplyAddressName, credentials.NoReplyAddress}
 
 	headers := make(map[string]string)
 	headers["From"] = from.String()
@@ -33,7 +53,7 @@ func sendMessage(recipientAddress string, subject string, messageBody string) {
 	}
 	message += "\r\n" + messageBody
 
-	mailAuth := smtp.PlainAuth("", credentials.Address, credentials.Password, credentials.Host)
+	mailAuth := smtp.PlainAuth("", credentials.NoReplyAddress, credentials.NoReplyPassword, credentials.Host)
 
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: true,
@@ -49,7 +69,7 @@ func sendMessage(recipientAddress string, subject string, messageBody string) {
 	error = smtpClient.Auth(mailAuth)
 	panicOnError(error)
 
-	error = smtpClient.Mail(credentials.Address)
+	error = smtpClient.Mail(credentials.NoReplyAddress)
 	panicOnError(error)
 
 	error = smtpClient.Rcpt(recipientAddress)
@@ -66,5 +86,3 @@ func sendMessage(recipientAddress string, subject string, messageBody string) {
 
 	smtpClient.Quit()
 }
-
-func panicOnError(error error) { if error != nil { log.Panic(error) } }

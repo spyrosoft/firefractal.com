@@ -6,6 +6,11 @@ import (
 	"log"
 )
 
+type fileHandlerWithFallback struct {
+	directory http.Dir
+	fallback http.Handler
+}
+
 func panicOnError( error error ) { if error != nil { log.Panic( error ) } }
 
 func main() {

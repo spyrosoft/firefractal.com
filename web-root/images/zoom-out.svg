@@ -1,33 +1,33 @@
 <svg version="1.1"
-     baseProfile="full"
-     width="150" height="200"
-     xmlns="http://www.w3.org/2000/svg"
-		 stroke="white"
-		 stroke-width="2px"
-		 fill="transparent">
-
+		baseProfile="full"
+		width="150" height="200"
+		xmlns="http://www.w3.org/2000/svg"
+		stroke="white"
+		stroke-width="2px"
+		fill="transparent">
+	
 	<defs>
 		<mask id="magnifying-glass">
 			<rect width="100%" height="100%" fill="white" />
 			<circle r="35" cx="75" cy="70" fill="black" />
 		</mask>
 	</defs>
-
+	
 	<!-- Outline -->
 	<path d="M 65 120
 		A 50 50, 0, 1, 1, 85 120
 		V 170
 		A 10 10, 0, 0, 1, 65 170
 		V 120" fill="black" mask="url(#magnifying-glass)" />
-
+	
 	<!-- Glass Outline -->
 	<circle r="35" cx="75" cy="70" />
-
+	
 	<!-- Plus -->
 	<path d="M 50 65
 		H 100
 		V 75
 		H 50
 		V 65" fill="black" />
-
+	
 </svg>

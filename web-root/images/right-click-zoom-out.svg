@@ -1,62 +1,62 @@
 <svg version="1.1"
-     baseProfile="full"
-     width="350" height="200"
-     xmlns="http://www.w3.org/2000/svg"
-		 stroke="white"
-		 stroke-width="2px"
-		 fill="transparent">
-
+		baseProfile="full"
+		width="350" height="200"
+		xmlns="http://www.w3.org/2000/svg"
+		stroke="white"
+		stroke-width="2px"
+		fill="transparent">
+	
 	<!-- A rx ry, x-axis-rotation, large-arc-flag, sweep-flag, x y -->
-
+	
 	<!-- Mouse Outline -->
 	<path d="M 25 75
 		A 50 55, 0, 0, 1, 125 75
 		V 125
 		A 50 50, 0, 0, 1, 25 130
 		V 75" fill="black" />
-
+	
 	<!-- Button -->
 	<path d="M 120 70
 		A 50 55, 0, 0, 0, 75 25
 		V 70" stroke="transparent" fill="white" />
-
-
+	
+	
 	<defs>
 		<mask id="magnifying-glass">
 			<rect width="100%" height="100%" fill="white" />
 			<circle r="35" cx="75" cy="70" fill="black" />
 		</mask>
 	</defs>
-
+	
 	<!-- Magnifier Outline -->
 	<path d="M 265 120
 		A 50 50, 0, 1, 1, 285 120
 		V 170
 		A 10 10, 0, 0, 1, 265 170
 		V 120" fill="black" mask="url(#magnifying-glass)" />
-
+	
 	<!-- Glass Outline -->
 	<circle r="35" cx="275" cy="70" />
-
+	
 	<!-- Minus -->
 	<path d="M 250 65
 		H 300
 		V 75
 		H 250
 		V 65" fill="black" />
-
-
+	
+	
 	<!-- Equals -->
 	<path d="M 150 82
 		H 200
 		V 92
 		H 150
 		V 82" fill="black" />
-
+	
 	<path d="M 150 104
 		H 200
 		V 114
 		H 150
 		V 104" fill="black" />
-
+	
 </svg>

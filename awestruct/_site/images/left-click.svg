@@ -1,0 +1,23 @@
+<svg version="1.1"
+		baseProfile="full"
+		width="150" height="200"
+		xmlns="http://www.w3.org/2000/svg"
+		stroke="white"
+		stroke-width="2px"
+		fill="transparent">
+	
+	<!-- A rx ry, x-axis-rotation, large-arc-flag, sweep-flag, x y -->
+	
+	<!-- Outline -->
+	<path d="M 25 75
+		A 50 55, 0, 0, 1, 125 75
+		V 125
+		A 50 50, 0, 0, 1, 25 130
+		V 75" fill="black" />
+	
+	<!-- Button -->
+	<path d="M 30 70
+		A 50 55, 0, 0, 1, 75 25
+		V 70" stroke="transparent" fill="white" />
+	
+</svg>

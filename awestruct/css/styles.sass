@@ -10,10 +10,11 @@ $thin-border: 1px solid $foreground-color
 $medium-border: $medium-border-width solid $foreground-color
 $invert-medium-border: $medium-border-width solid $invert-foreground-color
 
-$standard-spacing: 1rem
-$large-spacing: 6rem
-$medium-spacing: 3rem
-$small-spacing: 0.5rem
+$tiny-spacing: 0.5rem
+$small-spacing: 1rem
+$medium-spacing: 2rem
+$large-spacing: 4rem
+$huge-spacing: 10rem
 
 $input-control-padding: 0.7rem
 
@@ -187,7 +188,7 @@ $settings-spacing: 10px
 
 .setting, .settings-navigation, .page-navigation
 	background-color: $background-color
-	margin-bottom: $standard-spacing
+	margin-bottom: $small-spacing
 
 .settings-navigation a
 	display: block
@@ -236,13 +237,13 @@ select.gradient-colors-presets option
 
 .colors-controls, .controls-navigation .tabs .tab-title
 	border-bottom: $thin-border
-	margin-bottom: $standard-spacing
+	margin-bottom: $small-spacing
 
 .controls-navigation
-	margin-bottom: $standard-spacing
+	margin-bottom: $small-spacing
 
 .quick-controls .row
-	margin-bottom: $standard-spacing
+	margin-bottom: $small-spacing
 
 img.generated-png
 	border: $thin-border
@@ -281,6 +282,25 @@ img.generated-png
 
 
 
+/* --------------------Nav-------------------- */
+
+nav.main li
+	float: left
+	list-style-type: none
+
+nav.main li a
+	display: block
+	padding: $tiny-spacing $small-spacing
+
+@media screen and (max-width: 39.9375em)
+	nav.main li
+		width: 50%
+		text-align: center
+
+/* --------------------Nav-------------------- */
+
+
+
 /* --------------------Pages-------------------- */
 
 .how-to .columns.separation
@@ -298,12 +318,12 @@ img.generated-png
 	text-align: right
 	width: 12rem
 	display: inline-block
-	padding: 0 $standard-spacing
+	padding: 0 $small-spacing
 
 .instructions-keyboard-shortcuts span
 	text-align: left
 	width: 20rem
 	display: inline-block
-	padding: 0 $standard-spacing
+	padding: 0 $small-spacing
 
 /* --------------------Pages-------------------- */

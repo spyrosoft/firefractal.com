@@ -1,0 +1,48 @@
+!!!
+%html{lang: 'en-US'}
+  %head
+    %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}
+    %meta{charset: 'utf-8'}
+    %meta{content: 'ie=edge', 'http-equiv' => 'x-ua-compatible'}
+    %meta{content: 'width=device-width, initial-scale=1.0', name: 'viewport'}
+    -if page.title
+      %title #{page.title} - #{site.title}
+    -else
+      %title #{site.title}
+    -if page.description
+      %meta{name: 'description', content: page.description}
+    %link{href: '/images/favicon.ico', rel: 'shortcut icon'}
+    / Zurb Foundation
+    %link{href: '/css/normalize.min.css', rel: 'stylesheet', type: 'text/css'}
+    %link{href: '/css/foundation.min.css', rel: 'stylesheet', type: 'text/css'}
+    %link{href: '/css/jquery-ui.min.css', rel: 'stylesheet', type: 'text/css'}
+    / End Zurb Foundation
+    %link{href: '/css/styles.css', rel: 'stylesheet', type: 'text/css'}
+  %body
+    -if page.nav
+      %nav.main.clearfix
+        %li
+          %a{href: '/'} Home
+        %li
+          %a{href: '/about.html'} About
+        %li
+          %a{href: '/how-to.html'} How To
+        %li
+          %a{href: '/gallery.html'} Gallery
+        %li
+          %a{href: 'https://cash.me/$spyrosoft'} Donate
+    ~ content
+    %script{src: '/js/jquery.min.js'}
+    -if page.jquery_ui
+      %script{src: '/js/jquery-ui.min.js'}
+    %script{src: '/js/foundation.min.js'}
+    :javascript
+      $(document).foundation();
+    -if page.hammer_js
+      %script{:src => "/js/hammer.min.js"}
+    -if page.script
+      %script{:src => page.script}
+    -if page.script_2
+      %script{:src => page.script_2}
+    -if page.script_3
+      %script{:src => page.script_3}

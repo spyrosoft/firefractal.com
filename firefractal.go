@@ -1,4 +1,4 @@
-package firefractal
+package main
 
 import (
 	"github.com/julienschmidt/httprouter"
@@ -17,6 +17,6 @@ func main() {
 	loadCredentials()
 	router := httprouter.New()
 	router.POST("/feedback", feedbackSubmission)
-	router.NotFound = http.FileServer(http.Dir("web-root"))
+	router.NotFound = http.FileServer(http.Dir("awestruct/_site"))
 	log.Fatal(http.ListenAndServe(":8082", router))
 }

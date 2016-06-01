@@ -1,4 +1,4 @@
-package firefractal
+package main
 
 import (
 	"crypto/tls"

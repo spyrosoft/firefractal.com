@@ -18,21 +18,24 @@
     %link{href: '/css/jquery-ui.min.css', rel: 'stylesheet', type: 'text/css'}
     / End Zurb Foundation
     %link{href: '/css/styles.css', rel: 'stylesheet', type: 'text/css'}
+    %script{src: '/js/jquery.min.js'}
   %body
     -if page.nav
-      %nav.main.clearfix
-        %li
-          %a{href: '/'} Home
-        %li
-          %a{href: '/about.html'} About
-        %li
-          %a{href: '/how-to.html'} How To
-        %li
-          %a{href: '/gallery.html'} Gallery
-        %li
-          %a{href: 'https://cash.me/$spyrosoft'} Donate
+      .row
+        .columns.no-padding
+          %nav.main.clearfix
+            %li
+              %a{href: '/'} Home
+            %li
+              %a{href: '/about.html'} About
+            %li
+              %a{href: '/how-to.html'} How To
+            %li
+              %a{href: '/gallery.html'} Gallery
+            %li
+              %a{href: 'https://cash.me/$spyrosoft'} Donate
+          %hr.no-margin
     ~ content
-    %script{src: '/js/jquery.min.js'}
     -if page.jquery_ui
       %script{src: '/js/jquery-ui.min.js'}
     %script{src: '/js/foundation.min.js'}

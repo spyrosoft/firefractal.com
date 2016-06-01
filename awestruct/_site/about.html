@@ -14,25 +14,31 @@
     <link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
     <!-- End Zurb Foundation -->
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery.min.js"></script>
   </head>
   <body>
-    <nav class="main clearfix">
-      <li>
-        <a href="/">Home</a>
-      </li>
-      <li>
-        <a href="/about.html">About</a>
-      </li>
-      <li>
-        <a href="/how-to.html">How To</a>
-      </li>
-      <li>
-        <a href="/gallery.html">Gallery</a>
-      </li>
-      <li>
-        <a href="https://cash.me/$spyrosoft">Donate</a>
-      </li>
-    </nav>
+    <div class="row">
+      <div class="columns no-padding">
+        <nav class="main clearfix">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li>
+            <a href="/about.html">About</a>
+          </li>
+          <li>
+            <a href="/how-to.html">How To</a>
+          </li>
+          <li>
+            <a href="/gallery.html">Gallery</a>
+          </li>
+          <li>
+            <a href="https://cash.me/$spyrosoft">Donate</a>
+          </li>
+        </nav>
+        <hr class="no-margin">
+      </div>
+    </div>
     <div class="row text-left">
       <div class="columns medium-6 large-6">
         <h1>Feedback</h1>
@@ -185,12 +191,6 @@
           </li>
           <li>
             <strong>
-              <a href="http://internet.bs">Internet.bs</a>
-            </strong>
-            is a domain registrar with very competitive prices and a fairly good user interface.
-          </li>
-          <li>
-            <strong>
               <a href="https://www.centos.org/">CentOS</a>
             </strong>
             is the open source, stable distribution of Linux in the (commercial) Red Hat family. Stable means it uses the tried and true rather than the very latest (sometimes buggy or vulnerable) versions of software.
@@ -203,43 +203,19 @@
           </li>
           <li>
             <strong>
-              <a href="http://weitz.de/hunchentoot/">Hunchentoot</a>
-            </strong>
-            is a powerful yet minimal web server as well as web framework. It makes it easy to do things like serve static files (images, css, JavaScript, etc. ) from ram.
-          </li>
-          <li>
-            <strong>
-              <a href="http://psg.com/~dlamkins/sl/contents.html">Common Lisp</a>
-            </strong>
-            is the programming language which Hunchentoot was written in. One of the most amazing things it has the ability to do, in comparison with other languages such as PHP, is make changes to programs WHILE THEY ARE RUNNING. This happens after the code has been compiled and loaded into ram.
-          </li>
-          <li>
-            <strong>
-              <a href="https://github.com/quicklisp/quicklisp-projects">Quicklisp</a>
-            </strong>
-            is the well known package manager for Common Lisp. It makes literally thousands of Common Lisp packages available, most of which are free and open source, and does away with dependency headaches.
-          </li>
-          <li>
-            <strong>
               <a href="https://golang.org/">Go</a>
             </strong>
             is a compiled and strictly typed language invented by three (awesome) Google employees. It is lightning fast, and tries to be a friend to the developer as much as possible.
           </li>
           <li>
             <strong>
-              <a href="http://www.emacswiki.org/emacs?interface=en">Emacs</a>
+              <a href="http://internet.bs">Internet.bs</a>
             </strong>
-            is an extremely powerful text editor. You may have heard of the Vim/Emacs flame wars. Emacs is particularly well suited for editing Lisp because it was written in it.
-          </li>
-          <li>
-            <strong>
-              <a href="http://ohmyz.sh/">ZSH</a>
-            </strong>
-            is Bash with intelligence built in. It streamlines just about everything a sysadmin needs from the command line.
+            is a domain registrar with very competitive prices and a fairly good user interface.
           </li>
         </ol>
         <p>
-          Most websites have a laundry list of technologies of similar length to this one and it takes on the order of 400 man hours to produce this type of project. The software behind the scenes has been through many iterations (JavaScript, C, Processing, Go, Common Lisp, and a ground-up JavaScript rewrite).
+          Most websites have a laundry list of technologies of similar length to this one and it takes on the order of 400 man hours to produce this type of project. The software behind the scenes has been through many iterations (JavaScript, C, Processing, Go, Common Lisp, and a number of ground-up JavaScript rewrites).
         </p>
       </div>
       <div class="text-center medium-margin">
@@ -248,7 +224,6 @@
         </a>
       </div>
     </div>
-    <script src="/js/jquery.min.js"></script>
     <script src="/js/foundation.min.js"></script>
     <script>
       $(document).foundation();

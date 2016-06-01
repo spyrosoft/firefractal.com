@@ -50,6 +50,19 @@ $input-control-padding: 0.7rem
 .large-margin-bottom
 	margin-bottom: $large-spacing
 
+.no-margin
+	margin: 0 auto
+
+.no-padding
+	padding: 0
+
+.no-spacing
+	margin: 0 auto
+	padding: 0
+
+ol, ul
+	margin-left: $medium-spacing
+
 /* --------------------General Purpose-------------------- */
 
 
@@ -290,7 +303,12 @@ nav.main li
 
 nav.main li a
 	display: block
-	padding: $tiny-spacing $small-spacing
+	padding: $small-spacing
+	text-decoration: none
+	font-weight: bold
+
+nav.main li a:hover
+	text-decoration: underline
 
 @media screen and (max-width: 39.9375em)
 	nav.main li

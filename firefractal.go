@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"log"
 	"strings"
-	"os"
+	"path"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -17,25 +17,19 @@ func (sh *StaticHandler) ServeHttp(responseWriter http.ResponseWriter, request *
 	staticFilePath := staticFilePath(request)
 	
 	fileHandle, error := sh.Open(staticFilePath)
-	if error != nil {
-		serve404(responseWriter, request)
-		return
-	}
+	if serve404OnError(error, responseWriter) { return }
 	defer fileHandle.Close()
 	
 	fileInfo, error := fileHandle.Stat()
-	if error != nil {
-		serve404(responseWriter, request)
-		return
-	}
+	if serve404OnError(error, responseWriter) { return }
 	
 	if fileInfo.IsDir() {
-		indexFileHandle, error := sh.Open(staticFilePath + "index.html")
-		if error != nil {
-			serve404(responseWriter, request)
-			return
-		}
-		return
+		fileHandle, error = sh.Open(staticFilePath + "index.html")
+		if serve404OnError(error, responseWriter) { return }
+		defer fileHandle.Close()
+		
+		fileInfo, error = fileHandle.Stat()
+		if serve404OnError(error, responseWriter) { return }
 	}
 	
 	http.ServeContent(responseWriter, request, fileInfo.Name(), fileInfo.ModTime(), fileHandle)
@@ -52,7 +46,15 @@ func staticFilePath(request *http.Request) string {
 
 func serveStaticFilesOr404(responseWriter http.ResponseWriter, request *http.Request) {
 	staticHandler := StaticHandler{"awestruct/_site"}
-	
+	staticHandler.ServeHttp(responseWriter, request)
+}
+
+func serve404OnError(error error, responseWriter http.ResponseWriter) bool {
+	if error != nil {
+		fmt.Fprint(responseWriter, "placeholder for 404 html")
+		return true
+	}
+	return false
 }
 
 func panicOnError(error error) { if error != nil { log.Panic(error) } }

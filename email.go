@@ -16,6 +16,7 @@ type Credentials struct {
 	NoReplyPassword string `json:"no-reply-password"`
 	Host string `json:"no-reply-host"`
 	Port string `json:"no-reply-host"`
+	ReplyAddress string `json:"reply-address"`
 }
 
 func loadCredentials() {
@@ -23,20 +24,16 @@ func loadCredentials() {
 	panicOnError(error)
 	error = json.Unmarshal(rawCredentials, &credentials)
 	panicOnError(error)
+	credentialsHaveBeenLoaded = true
 }
 
 var (
 	credentials = Credentials{}
-	credentialsHaveBeenSet = false
+	credentialsHaveBeenLoaded = false
 )
 
-func setCredentials(address string, password string, host string, port string) {
-	credentials.NoReplyAddress = address
-	credentialsHaveBeenSet = true
-}
-
 func sendMessage(recipientAddress string, subject string, messageBody string) {
-	if ! credentialsHaveBeenSet {
+	if ! credentialsHaveBeenLoaded {
 		log.Panic("Outgoing email credentials have not been set. Cannot send message.")
 	}
 	

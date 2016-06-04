@@ -7,12 +7,19 @@ import (
 )
 
 func feedbackSubmission(responseWriter http.ResponseWriter, request *http.Request, requestParameters httprouter.Params) {
-	//feedbackMessage := ""
-	//testingValue := request.PostFormValue("testing")
-	//if testingValue != "" {
-		//fmt.Fprint(responseWriter, "{\"success\":\"" + testingValue + "\"}")
-	//} else {
-		//fmt.Fprint(responseWriter, "{\"error\":\"The message was not sent.\"}")
-	//}
-	fmt.Fprint(responseWriter, "Nope.")
+	message := ""
+	nameValue := request.PostFormValue("name")
+	emailValue := request.PostFormValue("email")
+	messageValue := request.PostFormValue("message")
+	if emailValue != "" {
+		message += "From: " + emailValue + "\r\n\r\n"
+	}
+	if nameValue != "" {
+		message += "Name: " + nameValue + "\r\n\r\n"
+	}
+	if messageValue != "" {
+		message += messageValue
+	}
+	sendMessage(credentials.ReplyAddress, "Feedback Form Submission - firefractal.com", message)
+	fmt.Fprint(responseWriter, "{\"success\":true}")
 }

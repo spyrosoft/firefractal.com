@@ -40,7 +40,7 @@ nav: true
         $.post( '/feedback', feedback_sumbission_object )
           .done(
             function() {
-              alert( 'We got your message. Thank you for your feedback.'  );
+              alert( 'Thank you for your feedback.'  );
               $( '#feedback-form [name=name]' ).val( '' );
               $( '#feedback-form [name=email]' ).val( '' );
               $( '#feedback-form [name=message]' ).val( '' );

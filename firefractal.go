@@ -56,7 +56,7 @@ func serveStaticFilesOr404(responseWriter http.ResponseWriter, request *http.Req
 
 func serve404OnError(error error, responseWriter http.ResponseWriter) bool {
 	if error != nil {
-		//TODO: This does not seem like the Go way:
+		//TODO: There must be a better way:
 		responseWriter.WriteHeader(http.StatusNotFound)
 		errorTemplate404Content, error := ioutil.ReadFile(webRoot + "/error-templates/404.html")
 		panicOnError(error)

@@ -6,12 +6,17 @@ import (
 	"log"
 	"strings"
 	"path"
+	"io/ioutil"
 	"github.com/julienschmidt/httprouter"
 )
 
 type StaticHandler struct {
 	http.Dir
 }
+
+var (
+	webRoot = "awestruct/_site"
+)
 
 func (sh *StaticHandler) ServeHttp(responseWriter http.ResponseWriter, request *http.Request) {
 	staticFilePath := staticFilePath(request)
@@ -45,13 +50,17 @@ func staticFilePath(request *http.Request) string {
 }
 
 func serveStaticFilesOr404(responseWriter http.ResponseWriter, request *http.Request) {
-	staticHandler := StaticHandler{"awestruct/_site"}
+	staticHandler := StaticHandler{http.Dir(webRoot)}
 	staticHandler.ServeHttp(responseWriter, request)
 }
 
 func serve404OnError(error error, responseWriter http.ResponseWriter) bool {
 	if error != nil {
-		fmt.Fprint(responseWriter, "placeholder for 404 html")
+		//TODO: This does not seem like the Go way:
+		responseWriter.WriteHeader(http.StatusNotFound)
+		errorTemplate404Content, error := ioutil.ReadFile(webRoot + "/error-templates/404.html")
+		panicOnError(error)
+		fmt.Fprint(responseWriter, string(errorTemplate404Content))
 		return true
 	}
 	return false

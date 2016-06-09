@@ -96,6 +96,7 @@ func main() {
 	loadCredentials()
 	router := httprouter.New()
 	router.POST("/feedback", feedbackSubmission)
+	router.POST("/buy-poster", buyPoster)
 	router.NotFound = http.HandlerFunc(serveStaticFilesOr404)
 	log.Fatal(http.ListenAndServe(":8082", router))
 }

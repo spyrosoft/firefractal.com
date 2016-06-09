@@ -10,13 +10,37 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+type Credentials struct {
+	LiveOrDev string `json:"live-or-dev"`
+	NoReplyAddressName string `json:"no-reply-address-name"`
+	NoReplyAddress string `json:"no-reply-address"`
+	NoReplyPassword string `json:"no-reply-password"`
+	Host string `json:"no-reply-host"`
+	Port string `json:"no-reply-port"`
+	ReplyAddress string `json:"reply-address"`
+	StripeTestSecretKey string `json:"stripe-test-secret-key"`
+	StripeTestPublishableKey string `json:"stripe-test-publishable-key"`
+	StripeLiveSecretKey string `json:"stripe-live-secret-key"`
+	StripeLivePublishableKey string `json:"stripe-live-publishable-key"`
+}
+
 type StaticHandler struct {
 	http.Dir
 }
 
 var (
 	webRoot = "awestruct/_site"
+	credentials = Credentials{}
+	credentialsHaveBeenLoaded = false
 )
+
+func loadCredentials() {
+	rawCredentials, error := ioutil.ReadFile("private/credentials.json")
+	panicOnError(error)
+	error = json.Unmarshal(rawCredentials, &credentials)
+	panicOnError(error)
+	credentialsHaveBeenLoaded = true
+}
 
 func (sh *StaticHandler) ServeHttp(responseWriter http.ResponseWriter, request *http.Request) {
 	staticFilePath := staticFilePath(request)

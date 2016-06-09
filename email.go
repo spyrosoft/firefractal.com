@@ -10,28 +10,6 @@ import (
 	"io/ioutil"
 )
 
-type Credentials struct {
-	NoReplyAddressName string `json:"no-reply-address-name"`
-	NoReplyAddress string `json:"no-reply-address"`
-	NoReplyPassword string `json:"no-reply-password"`
-	Host string `json:"no-reply-host"`
-	Port string `json:"no-reply-port"`
-	ReplyAddress string `json:"reply-address"`
-}
-
-var (
-	credentials = Credentials{}
-	credentialsHaveBeenLoaded = false
-)
-
-func loadCredentials() {
-	rawCredentials, error := ioutil.ReadFile("private/credentials.json")
-	panicOnError(error)
-	error = json.Unmarshal(rawCredentials, &credentials)
-	panicOnError(error)
-	credentialsHaveBeenLoaded = true
-}
-
 func sendMessage(recipientAddress string, subject string, messageBody string) {
 	if ! credentialsHaveBeenLoaded {
 		log.Panic("Outgoing email credentials have not been set. Cannot send message.")

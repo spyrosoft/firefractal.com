@@ -157,14 +157,10 @@ script_3: https://js.stripe.com/v2/
       .buy-poster-step.shipping
         %form.ship-poster-form{action: '/buy-poster/', autocomplete: 'off', method: 'post'}
           %input#buy-poster-token{type: 'hidden'}
-          .columns.small-6.medium-6.large-6
+          .columns
             %label
-              %span First Name
-              %input#shipping-first-name{type: 'text'}
-          .columns.small-6.medium-6.large-6
-            %label
-              %span Last Name
-              %input#shipping-last-name{type: 'text'}
+              %span Name
+              %input#shipping-name{type: 'text'}
           .columns
             %label
               %span Shipping Address

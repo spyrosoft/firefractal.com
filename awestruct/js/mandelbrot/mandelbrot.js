@@ -138,6 +138,12 @@ $( '.setting' ).hide();
 $( '.buy-poster-step' ).hide();
 $( '.buy-poster-step' ).first().show();
 
+var dev_or_live = 'live';
+if ( window.location.hostname === 'localhost' ) {
+	dev_or_live = 'dev';
+	initialize_test_cc_info();
+}
+
 /* ---------------Initialize Settings--------------- */
 
 function initialize_settings()
@@ -242,6 +248,18 @@ function clone_gradient_color_presets( new_presets )
 		}
 	);
 	$( 'select.gradient-colors-presets option' ).first().remove();
+}
+
+function initialize_test_cc_info() {
+	$('.create-payment-token-form input[data-stripe="number"]').val(4111111111111111);
+	$('.create-payment-token-form input[data-stripe="cvc"]').val(111);
+	$('.create-payment-token-form input[data-stripe="exp-month"]').val('01');
+	$('.create-payment-token-form input[data-stripe="exp-year"]').val('2020');
+	$('#shipping-name').val('Fire Fractal');
+	$('#shipping-address').val('111 Mandelbrot Way');
+	$('#shipping-city').val('Town City');
+	$('#shipping-state').val('CA');
+	$('#shipping-zip').val('99999');
 }
 
 /* ---------------Initialize Settings--------------- */
@@ -1728,8 +1746,11 @@ function create_payment_token()
 	$( '.create-payment-token-form' )
 		.find( 'button' )
 		.prop( 'disabled', true );
-	Stripe.setPublishableKey( 'pk_live_5GYzGkxM6bSXlvnIZWNC2n48' );
-	//Stripe.setPublishableKey( 'pk_test_a3d3NSbI6QUBR4knlav1Cs0K' );
+	if ( dev_or_live === 'dev' ) {
+		Stripe.setPublishableKey( 'pk_test_a3d3NSbI6QUBR4knlav1Cs0K' );
+	} else {
+		Stripe.setPublishableKey( 'pk_live_5GYzGkxM6bSXlvnIZWNC2n48' );
+	}
 	Stripe.card.createToken(
 		$( '.create-payment-token-form' ),
 		buy_poster_payment_callback
@@ -1780,18 +1801,17 @@ function ship_poster()
 	
 	ship_poster_data = populate_ship_poster_additional_fields( ship_poster_data );
 	
-	$.post( '/buy-poster/', ship_poster_data )
+	$.post( '/buy-poster', ship_poster_data )
 		.done( buy_poster_success )
 		.fail( ship_poster_ajax_fail );
 }
 
 function populate_ship_poster_text_fields()
 {
-	//TODO: Consider populating this dynamically
+	//TODO: Consider populating this via the text input contents
 	var text_input_ids = [
 		'buy-poster-token',
-		'shipping-first-name',
-		'shipping-last-name',
+		'shipping-name',
 		'shipping-address',
 		'shipping-city',
 		'shipping-state',

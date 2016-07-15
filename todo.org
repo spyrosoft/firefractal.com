@@ -178,6 +178,25 @@
 ** Find a way to make it viral on Reddit
 
 
+* Other Fractal Sites
+
+** http://math.hws.edu/eck/jsdemo/jsMandelbrot.html
+
+** http://mandelbrot-set.com/
+
+** The readme.md for the github repository for that last one has some other performance ideas (left as an exercise for the reader)
+https://github.com/cslarsen/mandelbrot-js
+
+** If your computer and browser have a halfway decent video card, you might find this mandelbrot explorer as a WebGL fragment shader to be quite fast:
+http://learningwebgl.com/lessons/example01/
+
+** Another fragment shader example. Shift-scroll wheel to adjust iterations.
+http://fract.ured.me/
+
+** And another one. This one includes 3D fractals.
+http://hirnsohle.de/test/fractalLab/
+
+
 * Reaching For The Stars
 
 ** Consider changing the navigation interface to arrow keys - up/down/left/right + ctrl for zoom

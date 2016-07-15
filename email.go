@@ -6,8 +6,6 @@ import (
 	"log"
 	"net/mail"
 	"net/smtp"
-	"encoding/json"
-	"io/ioutil"
 )
 
 func sendMessage(recipientAddress string, subject string, messageBody string) {

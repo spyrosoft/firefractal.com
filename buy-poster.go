@@ -1,11 +1,14 @@
 package main
 
 import (
+	"strings"
+	"fmt"
 	"net/http"
 	"encoding/json"
 	"io/ioutil"
 	"github.com/julienschmidt/httprouter"
 	"github.com/stripe/stripe-go"
+	"github.com/stripe/stripe-go/charge"
 )
 
 type SuccessMessage struct {
@@ -45,16 +48,18 @@ func buyPoster(responseWriter http.ResponseWriter, request *http.Request, reques
 		Currency: "usd",
 		Desc: request.PostFormValue("shipping-email") + " " + request.PostFormValue("destination-link"),
 	}
-	chargeParams.SetSource(request.PostFormValue("buy-poster-token"))
-	charge, error := charge.New(chargeParams)
+	chargeParams.SetSource(buyPosterToken)
+	chargeResults, error := charge.New(chargeParams)
 	if error != nil {
-		successMessage.SetMessage(false, error)
+		successMessage.SetMessage(false, error.Error())
 		json.NewEncoder(responseWriter).Encode(successMessage)
 		return
 	}
 	json.NewEncoder(responseWriter).Encode(successMessage)
+	fmt.Println(chargeResults)
 }
 
+//TODO: Validate all incoming variables
 func validBuyPosterPostVariables(request *http.Request) SuccessMessage {
 	successMessage := SuccessMessage{}
 	if request.PostFormValue("buy-poster-token") == "" {
@@ -69,8 +74,32 @@ func sendBuyPosterSuccessEmail(request *http.Request, orderId string) SuccessMes
 	if error != nil {
 		successMessage.SetMessage(false, "Unable to open email template file.")
 	}
-	message = responseEmailTemplate
-	sendMessage(credentials.ReplyAddress, "Receipt From firefractal.com - Order #" + orderId, message)
-	sendMessage(credentials.ReplyAddress, "Feedback Form Submission - firefractal.com", message)
+	message := searchReplaceResponseEmailTemplate(request, string(responseEmailTemplate))
+	sendEmail(request.PostFormValue("shipping-email"), "Receipt From firefractal.com - Order #" + orderId, message)
+	sendEmail(credentials.ReplyAddress, "Receipt From firefractal.com - Order #" + orderId, message)
 	return successMessage
+}
+
+func searchReplaceResponseEmailTemplate(request *http.Request, responseEmailTemplate string) string {
+	message := searchReplaceFromForm(request, responseEmailTemplate, "CUSTOMER-NAME", "shipping-name")
+	message = searchReplaceFromForm(request, message, "POSTER-SIZE", "poster-size")
+	message = searchReplaceFromForm(request, message, "POSTER-ORIENTATION", "poster-orientation")
+	message = searchReplaceFromForm(request, message, "SHIPPING-ADDRESS", "shipping-address")
+	message = searchReplaceFromForm(request, message, "SHIPPING-CITY", "shipping-city")
+	message = searchReplaceFromForm(request, message, "SHIPPING-STATE", "shipping-state")
+	message = searchReplaceFromForm(request, message, "SHIPPING-ZIP", "shipping-zip")
+	orderTotal := centsToHumanReadableDollars(posterCostInCents[request.PostFormValue("poster-size")])
+	message = searchReplaceFromForm(request, message, "ORDER-TOTAL", orderTotal)
+	message = searchReplaceFromForm(request, message, "DESTINATION-LINK", "destination-link")
+	return message
+}
+
+func searchReplaceFromForm(request *http.Request, preSearchReplace string, search string, replace string) string {
+	postSearchReplace := strings.Replace(preSearchReplace, search, request.PostFormValue(replace), -1)
+	return postSearchReplace
+}
+
+func centsToHumanReadableDollars(cents uint64) string {
+	dollars := float64(cents) / 100
+	return fmt.Sprintf("%5.2f", dollars)
 }

@@ -8,7 +8,7 @@ import (
 	"net/smtp"
 )
 
-func sendMessage(recipientAddress string, subject string, messageBody string) {
+func sendEmail(recipientAddress string, subject string, messageBody string) {
 	if ! credentialsHaveBeenLoaded {
 		log.Panic("Outgoing email credentials have not been set. Cannot send message.")
 	}

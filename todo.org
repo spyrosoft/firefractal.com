@@ -51,6 +51,8 @@
 ** Update to Foundation 6
 	 Switch to an offscreen menu
 
+** To reduce pixelation average top left and bottom right of each pixel
+
 ** Try out jslint
 	 
 

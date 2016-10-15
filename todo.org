@@ -7,6 +7,12 @@
 
 * Minimally Viable
 
+** Implement Google Maps style interface
+*** Click & drag/swipe repositioning
+		Use the existing data and only generate the remaining portions in two rectangular chunks
+*** Alternatively consider double click/tap for reposition
+		https://jnvm.github.io/diyfractal/
+
 ** Close settings on right click and two finger tap as well as left click
 
 ** Validate the /buy-poster/ post data better
@@ -28,10 +34,6 @@
 	 Make a YouTube video (and channel? for animations?)
 
 ** Implement shift+click to reposition until click & drag/swipe is implemented
-
-** Implement click & drag/swipe repositioning like Google Maps
-	 Alternatively consider double click/tap for reposition
-	 https://jnvm.github.io/diyfractal/
 
 ** Add a smoothing option switch
 

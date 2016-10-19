@@ -29,7 +29,6 @@ var (
 	}
 )
 
-//TODO: Break this out into functions
 func buyPoster(responseWriter http.ResponseWriter, request *http.Request, requestParameters httprouter.Params) {
 	successMessage := validBuyPosterPostVariables(request)
 	if ! successMessage.Success {
@@ -56,21 +55,41 @@ func buyPoster(responseWriter http.ResponseWriter, request *http.Request, reques
 		return
 	}
 	json.NewEncoder(responseWriter).Encode(successMessage)
-	fmt.Println(chargeResults)
+	sendBuyPosterSuccessEmail(request, chargeResults.ID)
 }
 
-//TODO: Validate all incoming variables
 func validBuyPosterPostVariables(request *http.Request) SuccessMessage {
 	successMessage := SuccessMessage{}
 	if request.PostFormValue("buy-poster-token") == "" {
-		
+		successMessage.Message += "Somehow your payment did not go through. Please fill out your payment details again. "
+	}
+	if request.PostFormValue("shipping-name") == "" {
+		successMessage.Message += "The shipping name field is required. "
+	}
+	if request.PostFormValue("shipping-address") == "" {
+		successMessage.Message += "The shipping address field is required. "
+	}
+	if request.PostFormValue("shipping-city") == "" {
+		successMessage.Message += "The shipping city field is required. "
+	}
+	if request.PostFormValue("shipping-state") == "" {
+		successMessage.Message += "The shipping state field is required. "
+	}
+	if request.PostFormValue("shipping-zip") == "" {
+		successMessage.Message += "The shipping zip code field is required. "
+	}
+	if request.PostFormValue("shipping-email") == "" {
+		successMessage.Message += "The shipping email field is required. "
+	}
+	if successMessage.Message == "" {
+		successMessage.Success = true
 	}
 	return successMessage
 }
 
 func sendBuyPosterSuccessEmail(request *http.Request, orderId string) SuccessMessage {
 	successMessage := SuccessMessage{Success: true}
-	responseEmailTemplate, error := ioutil.ReadFile("/email-templates/order-received.txt")
+	responseEmailTemplate, error := ioutil.ReadFile("email-templates/order-received.txt")
 	if error != nil {
 		successMessage.SetMessage(false, "Unable to open email template file.")
 	}
@@ -89,7 +108,7 @@ func searchReplaceResponseEmailTemplate(request *http.Request, responseEmailTemp
 	message = searchReplaceFromForm(request, message, "SHIPPING-STATE", "shipping-state")
 	message = searchReplaceFromForm(request, message, "SHIPPING-ZIP", "shipping-zip")
 	orderTotal := centsToHumanReadableDollars(posterCostInCents[request.PostFormValue("poster-size")])
-	message = searchReplaceFromForm(request, message, "ORDER-TOTAL", orderTotal)
+	message = strings.Replace(message, "ORDER-TOTAL", orderTotal, -1)
 	message = searchReplaceFromForm(request, message, "DESTINATION-LINK", "destination-link")
 	return message
 }

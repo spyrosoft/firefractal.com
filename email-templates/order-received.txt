@@ -6,7 +6,7 @@ The poster will be shipped to the following address:
 SHIPPING-ADDRESS
 SHIPPING-CITY, SHIPPING-STATE SHIPPING-ZIP
 
-Your order total came out to ORDER-TOTAL.
+Your order total came out to $ORDER-TOTAL.
 
 If you would ever like to explore this area again, here is a permalink:
 DESTINATION-LINK

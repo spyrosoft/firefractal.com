@@ -1770,7 +1770,7 @@ function buy_poster_payment_callback( status, response )
 	}
 	else
 	{
-		if ( typeof response[ 'error' ] === 'undefined' || typeof response[ 'error' ][ 'message' ] === 'undefined' )
+		if ( response[ 'error' ] === undefined || response[ 'error' ][ 'message' ] === undefined )
 		{
 			display_buy_poster_error( 'Something went wrong connecting with the server. Please try again after a while.' );
 		}
@@ -1863,18 +1863,18 @@ function buy_poster_success( response )
 		ship_poster_ajax_fail();
 		return;
 	}
-	if ( typeof response[ 'success' ] === 'undefined' )
+	if ( response[ 'Success' ] === undefined )
 	{
 		ship_poster_ajax_fail();
 	}
-	else if ( response[ 'success' ] === 'true' )
+	else if ( response[ 'Success' ] === true )
 	{
 		show_buy_poster_step( 'success' );
 		clear_credit_card_fields();
 	}
-	else if ( typeof response[ 'message' ] !== 'undefined' )
+	else if ( response[ 'Message' ] !== undefined )
 	{
-		display_buy_poster_error( 'The transaction was rejected. The payment gateway\'s response: ' + response[ 'message' ] );
+		display_buy_poster_error( 'The transaction was rejected. The payment gateway\'s response: ' + response[ 'Message' ] );
 	}
 	else
 	{
@@ -2130,7 +2130,7 @@ function legacy_gradient_colors_to_six_hex( uri_component )
 
 function check_for_enter_key_event( key_event )
 {
-	if ( typeof key_event.keyCode === 'undefined' ) { return false; }
+	if ( key_event.keyCode === undefined ) { return false; }
 	if ( key_event.keyCode === 13 ) { return true; }
 	return false;
 }

@@ -2,7 +2,7 @@
 
 ** Loading settings different than the current width and height needs to prompt the user if they want it to fit to their screen
 
-** If a single user tries to create posters too rapidly in succession, the queue becomes locked
+** If a single user tries to create prints too rapidly in succession, the queue becomes locked
 
 
 * Minimally Viable
@@ -15,7 +15,7 @@
 
 ** Close settings on right click and two finger tap as well as left click
 
-** Validate the /buy-poster/ post data better
+** Validate the /buy-print/ post data better
 
 ** Split off the contact form into a separate page
 
@@ -48,7 +48,7 @@
 
 ** Add steps with checkmarks to the checkout process - maybe squares that get filled in?
 
-** Think of different methods of making money from this besides posters
+** Think of different methods of making money from this besides prints
 
 ** Update to Foundation 6
 	 Switch to an offscreen menu
@@ -124,7 +124,7 @@
 
 ** Make a Random button that loads my favorites
 	 Make a destination submission feature
-	 Add a meter which shows how many posters (or dollar value) have been purchased and a promise to implement user accounts with up/down vote functionality once enough posters have been sold
+	 Add a meter which shows how many prints (or dollar value) have been purchased and a promise to implement user accounts with up/down vote functionality once enough prints have been sold
 
 ** Add functionality to generate animations (pure canvas? gif? m4v? webm?)
 	 Include a progress bar
@@ -165,13 +165,13 @@
 
 ** Make a Chrome and Firefox theme
 
-** Hang posters at NextSpace
+** Hang prints at NextSpace
 
 ** Add desktop wallpapers to the meta description
 
 ** Make a flickr account
 
-** Submit a Buy Poster request to ink@zurb.com
+** Submit a Buy Print request to ink@zurb.com
 
 ** Add copy to the about page for search engine clickthrough
 
@@ -207,7 +207,7 @@ http://hirnsohle.de/test/fractalLab/
 
 ** Add a video feature which follows the path that the user took from all the way out to all the way in
 
-** Mass produce posters, bookmarks, stickers, jewelry etc. to sell on an Amazon/eBay store
+** Mass produce prints, bookmarks, stickers, jewelry etc. to sell on an Amazon/eBay store
 
 ** Add user Sign Up/Log In - all accounts are public
 
@@ -546,7 +546,7 @@ http://hirnsohle.de/test/fractalLab/
 	 max-iterations <= 3000
 	 zoom, width and height +integers <= uint64
 	 x and y float64
-	 poster-size string containing one of the designated poster sizes
+	 print-size string containing one of the designated print sizes
 	 invert-enabled boolean
 	 transition-colors list length <= 50 of three, not more or less, +integer <= 255
 	 verify the max depth
@@ -556,7 +556,7 @@ http://hirnsohle.de/test/fractalLab/
 ** Before generating a new PNG, check to see if the file exists already
 	 If so, touch the timestamp
 
-** Add a button to purchase a poster which generates a png and sends an email to the user with instructions how to print from VistaPrint
+** Add a button to purchase a print which generates a png and sends an email to the user with instructions how to print from VistaPrint
 	 This will require a new JSON generation process which can be Go friendly
 
 ** Add a button to buy a much larger dpi image of the current spot
@@ -564,7 +564,7 @@ http://hirnsohle.de/test/fractalLab/
 
 ** In the success message, list how many images are in the queue ahead of said person
 
-** Set up an email server to send poster email from
+** Set up an email server to send print email from
 	 Try postfix
 	 Try mailgun API for outgoing emails to mitigate spam filter
 
@@ -790,18 +790,18 @@ http://hirnsohle.de/test/fractalLab/
 
 ** Stripe is clobbering something in the global namespace
 
-** Add Buy Poster functionality
+** Add Buy Print functionality
 
 ** Change Hyperspace to Lace
 	 
-** Fix broken buy poster previews for landscape and portrait
+** Fix broken buy print previews for landscape and portrait
 
 ** Make custom http error pages
 
 ** When the canvas is resized smaller than the screen, the settings icon follows
 	 This is a feature, not a bug :)
 
-** Combine the buy poster settings together into one setting div
+** Combine the buy print settings together into one setting div
 
 ** When someone types in their credit card incorrectly, the error message doesn't make any sense
 

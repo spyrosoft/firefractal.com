@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 binary_file="firefractal.com"
+build_command="go build"
+file_extension_expression=\.go$
 
-go build && ./$binary_file &
+$build_command && ./$binary_file &
 
 inotifywait --format "%f" -me close_write -q . | while read file
 do
-	if [[ ! "$file" =~ \.go$ ]]; then continue; fi
+	if [[ ! "$file" =~ $file_extension_expression ]]; then continue; fi
 	go build && killall $binary_file && echo "File modified: $file. Restarting server." && ./$binary_file &
 done
 

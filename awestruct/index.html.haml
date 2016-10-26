@@ -1,7 +1,7 @@
 ---
 layout: general
 title: Fractal Exploration Tool
-description: 'Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized posters.'
+description: 'Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized prints.'
 jquery_ui: true
 hammer_js: true
 script: /js/mandelbrot/mandelbrot-worker.js
@@ -55,7 +55,7 @@ script_3: https://js.stripe.com/v2/
           %button.colors-setting{title: 'Hotkey C'} Colors
           %button.controls-setting{title: 'Hotkey T'} Controls
           %button.share-setting Share
-          %button.buy-poster-setting Buy Poster
+          %button.buy-print-setting Buy Print
         %hr
         %a.half-width{href: '/about.html', target: '_blank'} About
         %a.half-width{href: '/how-to.html', target: '_blank'} How To
@@ -101,34 +101,34 @@ script_3: https://js.stripe.com/v2/
           PNG Image
           %span.canvas-dimensions
         %img.generated-png/
-    .setting.settings-component.buy-poster.row
+    .setting.settings-component.buy-print.row
       .columns
         Total Including Shipping
         %strong.total $0.00
       .columns
-        .buy-poster-error.error
+        .buy-print-error.error
         %hr
-      .buy-poster-step.size-and-orientation
-        %form{action: '/buy-poster/', method: 'get', target: '_blank'}
+      .buy-print-step.size-and-orientation
+        %form{action: '/buy-print/', method: 'get', target: '_blank'}
           .columns
             %label
-              Poster Size
-              %select{name: 'poster-size'}
+              Print Size
+              %select{name: 'print-size'}
                 %option{value: 'small'} Small - 8.5x11'
                 %option{value: 'medium'} Medium - 16x20'
                 %option{value: 'large'} Large - 20x30'
           .columns
             %label
-              Poster Orientation
-              %select{name: 'poster-orientation'}
+              Print Orientation
+              %select{name: 'print-orientation'}
                 %option{value: 'landscape'} Landscape
                 %option{value: 'portrait'} Portrait
         .columns
-          %button.buy-poster-preview.full-width Preview
+          %button.buy-print-preview.full-width Preview
         .columns
           %hr
           %button.payment-step.full-width Next Step
-      .buy-poster-step.payment
+      .buy-print-step.payment
         %form.create-payment-token-form{autocomplete: 'off'}
           .columns.large-8.medium-8.small-8
             %label
@@ -152,11 +152,11 @@ script_3: https://js.stripe.com/v2/
           .columns.large-5.medium-5.small-5
         .columns
           %hr
-          %button.size-and-orientation-step.half-width.left Poster Size
+          %button.size-and-orientation-step.half-width.left Print Size
           %button.create-payment-token.half-width Shipping
-      .buy-poster-step.shipping
-        %form.ship-poster-form{action: '/buy-poster/', autocomplete: 'off', method: 'post'}
-          %input#buy-poster-token{type: 'hidden'}
+      .buy-print-step.shipping
+        %form.ship-print-form{action: '/buy-print/', autocomplete: 'off', method: 'post'}
+          %input#buy-print-token{type: 'hidden'}
           .columns
             %label
               %span Name
@@ -188,7 +188,7 @@ script_3: https://js.stripe.com/v2/
         .columns
           %hr
           %button.payment-step.full-width Back to Payment
-      .buy-poster-step.success
+      .buy-print-step.success
         .columns
           %h4 Success!!
           %p
@@ -197,4 +197,4 @@ script_3: https://js.stripe.com/v2/
             We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please
             = succeed '.' do
               %a{href: '/about.html'} contact us
-          %button.size-and-orientation-step.full-width Buy Another Poster
+          %button.size-and-orientation-step.full-width Buy Another Print

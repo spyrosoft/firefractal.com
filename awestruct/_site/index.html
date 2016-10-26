@@ -6,7 +6,7 @@
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Fractal Exploration Tool - Fire Fractal</title>
-    <meta content="Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized posters." name="description">
+    <meta content="Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized prints." name="description">
     <link href="/images/favicon.ico" rel="shortcut icon">
     <!-- Zurb Foundation -->
     <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
@@ -73,7 +73,7 @@
               <button class="colors-setting" title="Hotkey C">Colors</button>
               <button class="controls-setting" title="Hotkey T">Controls</button>
               <button class="share-setting">Share</button>
-              <button class="buy-poster-setting">Buy Poster</button>
+              <button class="buy-print-setting">Buy Print</button>
             </div>
             <hr>
             <a class="half-width" href="/about.html" target="_blank">About</a>
@@ -136,21 +136,21 @@
             <img class="generated-png">
           </div>
         </div>
-        <div class="setting settings-component buy-poster row">
+        <div class="setting settings-component buy-print row">
           <div class="columns">
             Total Including Shipping
             <strong class="total">$0.00</strong>
           </div>
           <div class="columns">
-            <div class="buy-poster-error error"></div>
+            <div class="buy-print-error error"></div>
             <hr>
           </div>
-          <div class="buy-poster-step size-and-orientation">
-            <form action="/buy-poster/" method="get" target="_blank">
+          <div class="buy-print-step size-and-orientation">
+            <form action="/buy-print/" method="get" target="_blank">
               <div class="columns">
                 <label>
-                  Poster Size
-                  <select name="poster-size">
+                  Print Size
+                  <select name="print-size">
                     <option value="small">Small - 8.5x11'</option>
                     <option value="medium">Medium - 16x20'</option>
                     <option value="large">Large - 20x30'</option>
@@ -159,8 +159,8 @@
               </div>
               <div class="columns">
                 <label>
-                  Poster Orientation
-                  <select name="poster-orientation">
+                  Print Orientation
+                  <select name="print-orientation">
                     <option value="landscape">Landscape</option>
                     <option value="portrait">Portrait</option>
                   </select>
@@ -168,14 +168,14 @@
               </div>
             </form>
             <div class="columns">
-              <button class="buy-poster-preview full-width">Preview</button>
+              <button class="buy-print-preview full-width">Preview</button>
             </div>
             <div class="columns">
               <hr>
               <button class="payment-step full-width">Next Step</button>
             </div>
           </div>
-          <div class="buy-poster-step payment">
+          <div class="buy-print-step payment">
             <form autocomplete="off" class="create-payment-token-form">
               <div class="columns large-8 medium-8 small-8">
                 <label>
@@ -209,13 +209,13 @@
             </form>
             <div class="columns">
               <hr>
-              <button class="size-and-orientation-step half-width left">Poster Size</button>
+              <button class="size-and-orientation-step half-width left">Print Size</button>
               <button class="create-payment-token half-width">Shipping</button>
             </div>
           </div>
-          <div class="buy-poster-step shipping">
-            <form action="/buy-poster/" autocomplete="off" class="ship-poster-form" method="post">
-              <input id="buy-poster-token" type="hidden">
+          <div class="buy-print-step shipping">
+            <form action="/buy-print/" autocomplete="off" class="ship-print-form" method="post">
+              <input id="buy-print-token" type="hidden">
               <div class="columns">
                 <label>
                   <span>Name</span>
@@ -263,7 +263,7 @@
               <button class="payment-step full-width">Back to Payment</button>
             </div>
           </div>
-          <div class="buy-poster-step success">
+          <div class="buy-print-step success">
             <div class="columns">
               <h4>Success!!</h4>
               <p>
@@ -273,7 +273,7 @@
                 We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please
                 <a href="/about.html">contact us</a>.
               </p>
-              <button class="size-and-orientation-step full-width">Buy Another Poster</button>
+              <button class="size-and-orientation-step full-width">Buy Another Print</button>
             </div>
           </div>
         </div>

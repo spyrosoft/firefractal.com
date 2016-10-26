@@ -1,8 +1,8 @@
 Dear CUSTOMER-NAME,
 
-We have received your order for a POSTER-SIZE, POSTER-ORIENTATION poster.
+We have received your order for a PRINT-SIZE, PRINT-ORIENTATION print.
 
-The poster will be shipped to the following address:
+The print will be shipped to the following address:
 SHIPPING-ADDRESS
 SHIPPING-CITY, SHIPPING-STATE SHIPPING-ZIP
 
@@ -11,7 +11,7 @@ Your order total came out to $ORDER-TOTAL.
 If you would ever like to explore this area again, here is a permalink:
 DESTINATION-LINK
 
-We are ecstatic that you bought a Fire Fractal poster!
+We are ecstatic that you bought a Fire Fractal print!
 
 If you are interested, let me tell you the story of how firefractal.com came to be. When I was in high school, a burgeoning programmer, I came across someone's blog post about his experience making a Mandelbrot program for fun. He described how blown away he was by the simplicity of the code. I was equally blown away. Here it is, verbatim, from firefractal.com:
 

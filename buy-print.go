@@ -22,21 +22,21 @@ func (successMessage *SuccessMessage) SetMessage(success bool, message string) {
 }
 
 var (
-	posterCostInCents = map[string]uint64{
+	printCostInCents = map[string]uint64{
 		"small": 1500,
 		"medium": 4000,
 		"large": 5500,
 	}
 )
 
-func buyPoster(responseWriter http.ResponseWriter, request *http.Request, requestParameters httprouter.Params) {
-	successMessage := validBuyPosterPostVariables(request)
+func buyPrint(responseWriter http.ResponseWriter, request *http.Request, requestParameters httprouter.Params) {
+	successMessage := validBuyPrintPostVariables(request)
 	if ! successMessage.Success {
 		json.NewEncoder(responseWriter).Encode(successMessage)
 		return
 	}
-	buyPosterToken := request.PostFormValue("buy-poster-token")
-	costInCents := posterCostInCents[request.PostFormValue("poster-size")]
+	buyPrintToken := request.PostFormValue("buy-print-token")
+	costInCents := printCostInCents[request.PostFormValue("print-size")]
 	if credentials.LiveOrDev == "live" {
 		stripe.Key = credentials.StripeLiveSecretKey
 	} else {
@@ -47,7 +47,7 @@ func buyPoster(responseWriter http.ResponseWriter, request *http.Request, reques
 		Currency: "usd",
 		Desc: request.PostFormValue("shipping-email") + " " + request.PostFormValue("destination-link"),
 	}
-	chargeParams.SetSource(buyPosterToken)
+	chargeParams.SetSource(buyPrintToken)
 	chargeResults, error := charge.New(chargeParams)
 	if error != nil {
 		successMessage.SetMessage(false, error.Error())
@@ -55,12 +55,12 @@ func buyPoster(responseWriter http.ResponseWriter, request *http.Request, reques
 		return
 	}
 	json.NewEncoder(responseWriter).Encode(successMessage)
-	sendBuyPosterSuccessEmail(request, chargeResults.ID)
+	sendBuyPrintSuccessEmail(request, chargeResults.ID)
 }
 
-func validBuyPosterPostVariables(request *http.Request) SuccessMessage {
+func validBuyPrintPostVariables(request *http.Request) SuccessMessage {
 	successMessage := SuccessMessage{}
-	if request.PostFormValue("buy-poster-token") == "" {
+	if request.PostFormValue("buy-print-token") == "" {
 		successMessage.Message += "Somehow your payment did not go through. Please fill out your payment details again. "
 	}
 	if request.PostFormValue("shipping-name") == "" {
@@ -87,7 +87,7 @@ func validBuyPosterPostVariables(request *http.Request) SuccessMessage {
 	return successMessage
 }
 
-func sendBuyPosterSuccessEmail(request *http.Request, orderId string) SuccessMessage {
+func sendBuyPrintSuccessEmail(request *http.Request, orderId string) SuccessMessage {
 	successMessage := SuccessMessage{Success: true}
 	responseEmailTemplate, error := ioutil.ReadFile("email-templates/order-received.txt")
 	if error != nil {
@@ -101,13 +101,13 @@ func sendBuyPosterSuccessEmail(request *http.Request, orderId string) SuccessMes
 
 func searchReplaceResponseEmailTemplate(request *http.Request, responseEmailTemplate string) string {
 	message := searchReplaceFromForm(request, responseEmailTemplate, "CUSTOMER-NAME", "shipping-name")
-	message = searchReplaceFromForm(request, message, "POSTER-SIZE", "poster-size")
-	message = searchReplaceFromForm(request, message, "POSTER-ORIENTATION", "poster-orientation")
+	message = searchReplaceFromForm(request, message, "PRINT-SIZE", "print-size")
+	message = searchReplaceFromForm(request, message, "PRINT-ORIENTATION", "print-orientation")
 	message = searchReplaceFromForm(request, message, "SHIPPING-ADDRESS", "shipping-address")
 	message = searchReplaceFromForm(request, message, "SHIPPING-CITY", "shipping-city")
 	message = searchReplaceFromForm(request, message, "SHIPPING-STATE", "shipping-state")
 	message = searchReplaceFromForm(request, message, "SHIPPING-ZIP", "shipping-zip")
-	orderTotal := centsToHumanReadableDollars(posterCostInCents[request.PostFormValue("poster-size")])
+	orderTotal := centsToHumanReadableDollars(printCostInCents[request.PostFormValue("print-size")])
 	message = strings.Replace(message, "ORDER-TOTAL", orderTotal, -1)
 	message = searchReplaceFromForm(request, message, "DESTINATION-LINK", "destination-link")
 	return message

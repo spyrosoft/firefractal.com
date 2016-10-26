@@ -1720,9 +1720,9 @@ function buy_print_preview()
 function buy_print_total()
 {
 	var print_prices = {
-		'small' : 15,
-		'medium' : 40,
-		'large' : 55
+		'small' : 200,
+		'medium' : 400,
+		'large' : 600
 	};
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
 	return print_prices[ print_size ];

@@ -1674,9 +1674,11 @@ function display_buy_print_total()
 function buy_print_preview()
 {
 	var print_dimensions = {
-		'small' : [ 8.5, 11 ],
-		'medium' : [ 16, 20 ],
-		'large' : [ 20, 30 ]
+		'11x8.5' : [ 8.5, 11 ]
+		, '24x18' : [ 24, 18 ]
+		, '32x16' : [ 32, 16 ]
+		, '48x16' : [ 48, 16 ]
+		, '60x30' : [ 60, 30 ]
 	};
 	
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
@@ -1720,9 +1722,11 @@ function buy_print_preview()
 function buy_print_total()
 {
 	var print_prices = {
-		'small' : 200,
-		'medium' : 400,
-		'large' : 600
+		'11x8.5' : 200
+		, '24x18' : 400
+		, '32x16' : 400
+		, '48x16' : 600
+		, '60x30' : 1200
 	};
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
 	return print_prices[ print_size ];

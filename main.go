@@ -1,27 +1,28 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"log"
-	"strings"
-	"path"
-	"io/ioutil"
 	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"path"
+	"strings"
+
 	"github.com/julienschmidt/httprouter"
 )
 
 type Credentials struct {
-	LiveOrDev string `json:"live-or-dev"`
-	NoReplyAddressName string `json:"no-reply-address-name"`
-	NoReplyAddress string `json:"no-reply-address"`
-	NoReplyPassword string `json:"no-reply-password"`
-	Host string `json:"no-reply-host"`
-	Port string `json:"no-reply-port"`
-	ReplyAddress string `json:"reply-address"`
-	StripeTestSecretKey string `json:"stripe-test-secret-key"`
+	LiveOrDev                string `json:"live-or-dev"`
+	NoReplyAddressName       string `json:"no-reply-address-name"`
+	NoReplyAddress           string `json:"no-reply-address"`
+	NoReplyPassword          string `json:"no-reply-password"`
+	Host                     string `json:"no-reply-host"`
+	Port                     string `json:"no-reply-port"`
+	ReplyAddress             string `json:"reply-address"`
+	StripeTestSecretKey      string `json:"stripe-test-secret-key"`
 	StripeTestPublishableKey string `json:"stripe-test-publishable-key"`
-	StripeLiveSecretKey string `json:"stripe-live-secret-key"`
+	StripeLiveSecretKey      string `json:"stripe-live-secret-key"`
 	StripeLivePublishableKey string `json:"stripe-live-publishable-key"`
 }
 
@@ -30,8 +31,8 @@ type StaticHandler struct {
 }
 
 var (
-	webRoot = "awestruct/_site"
-	credentials = Credentials{}
+	webRoot                   = "awestruct/_site"
+	credentials               = Credentials{}
 	credentialsHaveBeenLoaded = false
 )
 
@@ -45,23 +46,31 @@ func loadCredentials() {
 
 func (sh *StaticHandler) ServeHttp(responseWriter http.ResponseWriter, request *http.Request) {
 	staticFilePath := staticFilePath(request)
-	
+
 	fileHandle, error := sh.Open(staticFilePath)
-	if serve404OnError(error, responseWriter) { return }
+	if serve404OnError(error, responseWriter) {
+		return
+	}
 	defer fileHandle.Close()
-	
+
 	fileInfo, error := fileHandle.Stat()
-	if serve404OnError(error, responseWriter) { return }
-	
+	if serve404OnError(error, responseWriter) {
+		return
+	}
+
 	if fileInfo.IsDir() {
 		fileHandle, error = sh.Open(staticFilePath + "index.html")
-		if serve404OnError(error, responseWriter) { return }
+		if serve404OnError(error, responseWriter) {
+			return
+		}
 		defer fileHandle.Close()
-		
+
 		fileInfo, error = fileHandle.Stat()
-		if serve404OnError(error, responseWriter) { return }
+		if serve404OnError(error, responseWriter) {
+			return
+		}
 	}
-	
+
 	http.ServeContent(responseWriter, request, fileInfo.Name(), fileInfo.ModTime(), fileHandle)
 }
 
@@ -91,7 +100,11 @@ func serve404OnError(error error, responseWriter http.ResponseWriter) bool {
 	return false
 }
 
-func panicOnError(error error) { if error != nil { log.Panic(error) } }
+func panicOnError(error error) {
+	if error != nil {
+		log.Panic(error)
+	}
+}
 
 func main() {
 	loadCredentials()

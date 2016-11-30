@@ -1,11 +1,12 @@
 package main
 
 import (
-	"strings"
-	"fmt"
-	"net/http"
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
+	"net/http"
+	"strings"
+
 	"github.com/julienschmidt/httprouter"
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/charge"
@@ -23,15 +24,15 @@ func (successMessage *SuccessMessage) SetMessage(success bool, message string) {
 
 var (
 	printCostInCents = map[string]uint64{
-		"small": 20000,
+		"small":  20000,
 		"medium": 40000,
-		"large": 60000,
+		"large":  60000,
 	}
 )
 
 func buyPrint(responseWriter http.ResponseWriter, request *http.Request, requestParameters httprouter.Params) {
 	successMessage := validBuyPrintPostVariables(request)
-	if ! successMessage.Success {
+	if !successMessage.Success {
 		json.NewEncoder(responseWriter).Encode(successMessage)
 		return
 	}
@@ -43,9 +44,9 @@ func buyPrint(responseWriter http.ResponseWriter, request *http.Request, request
 		stripe.Key = credentials.StripeTestSecretKey
 	}
 	chargeParams := &stripe.ChargeParams{
-		Amount: costInCents,
+		Amount:   costInCents,
 		Currency: "usd",
-		Desc: request.PostFormValue("shipping-email") + " " + request.PostFormValue("destination-link"),
+		Desc:     request.PostFormValue("shipping-email") + " " + request.PostFormValue("destination-link"),
 	}
 	chargeParams.SetSource(buyPrintToken)
 	chargeResults, error := charge.New(chargeParams)
@@ -94,8 +95,8 @@ func sendBuyPrintSuccessEmail(request *http.Request, orderId string) SuccessMess
 		successMessage.SetMessage(false, "Unable to open email template file.")
 	}
 	message := searchReplaceResponseEmailTemplate(request, string(responseEmailTemplate))
-	sendEmail(request.PostFormValue("shipping-email"), "Receipt From firefractal.com - Order #" + orderId, message)
-	sendEmail(credentials.ReplyAddress, "Receipt From firefractal.com - Order #" + orderId, message)
+	sendEmail(request.PostFormValue("shipping-email"), "Receipt From firefractal.com - Order #"+orderId, message)
+	sendEmail(credentials.ReplyAddress, "Receipt From firefractal.com - Order #"+orderId, message)
 	return successMessage
 }
 

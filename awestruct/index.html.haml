@@ -1,200 +1,166 @@
 ---
 layout: general
-title: Fractal Exploration Tool
-description: 'Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized prints.'
-jquery_ui: true
-hammer_js: true
-script: /js/mandelbrot/mandelbrot-worker.js
-script_2: /js/mandelbrot/mandelbrot.js
-script_3: https://js.stripe.com/v2/
+title: Fire Fractal
+description: 'Beautiful fractal art for sale.'
+script: /js/art-show.js
+script_2: https://js.stripe.com/v2/
+
 ---
-#canvas-content.canvas-content
-  %canvas#canvas{height: '120', width: '180'}
-  %canvas#canvas-overlay{height: '120', width: '180'}
-.settings.settings-hidden
-  %a.settings-icon{href: '#settings'}
-    %span
-  .settings-content
-    %button.back.display-none Back
-    .settings-navigation.settings-component.row
+.row.text-left
+  .columns
+    %h1 Fire Fractal
+  %hr
+
+.row.buy-print
+  .text-center
+    %h2 Buy Print
+    %p
+      %img.buy-print-display
+  .columns
+    Total Including Shipping
+    %strong.total $0.00
+  .columns
+    .buy-print-error.error
+    %hr
+  .buy-print-step.size-and-orientation
+    %form{action: '/buy-print/', method: 'get', target: '_blank'}
       .columns
-        .clearfix
-          %button.more-detail{title: 'Hotkey M'} More Detail
-          %button.less-detail{title: 'Hotkey L'} Less Detail
-          %button.zoom-faster{title: 'Hotkey +'} Zoom Faster
-          %button.zoom-slower{title: 'Hotkey -'} Zoom Slower
-        .zoom-rate-meter-outer
-          .zoom-rate-meter-inner
-        .clearfix
-          /
-            TODO
-            %button.undo Undo
-            %button.redoRedo
-          %button.full-screen{title: 'Hotkey F11'} Full Screen
-          %button.fit-to-screen Stretch
-          %button.reset-zoom.full-width Zoom All The Way Out
+        %label
+          Print Size
+          %select{name: 'print-size'}
+            %option{value: '11x8.5'} 11 x 8.5"
+            %option{value: '24x18'} 24 x 18"
+            %option{value: '32x16'} 32 x 16"
+            %option{value: '48x16'} 48 x 16"
+            %option{value: '60x30'} 60 x 30"
+      .columns
+        %label
+          Print Orientation
+          %select{name: 'print-orientation'}
+            %option{value: 'landscape'} Landscape
+            %option{value: 'portrait'} Portrait
+    .columns
+      %hr
+      %button.payment-step.full-width Next Step
+  .buy-print-step.payment
+    %form.create-payment-token-form{autocomplete: 'off'}
+      .columns.large-8.medium-8.small-8
+        %label
+          %span Card Number
+          %input{'data-stripe' => 'number', size: '20', type: 'text'}
+      .columns.large-3.medium-3.small-3
+        %label
+          %span CVC
+          %input{'data-stripe' => 'cvc', size: '4', type: 'text'}
+      .columns.large-1.medium-1.small-1
+      .columns
+        %span Expiration
+      .columns.large-3.medium-3.small-3
+        %label
+          %span MM
+          %input{'data-stripe' => 'exp-month', size: '2', type: 'text'}
+      .columns.large-4.medium-4.small-4
+        %label
+          %span YYYY
+          %input{'data-stripe' => 'exp-year', size: '4', type: 'text'}
+      .columns.large-5.medium-5.small-5
+    .columns
+      %hr
+      %button.size-and-orientation-step.half-width.left Print Size
+      %button.create-payment-token.half-width Shipping
+  .buy-print-step.shipping
+    %form.ship-print-form{action: '/buy-print/', autocomplete: 'off', method: 'post'}
+      %input#buy-print-token{type: 'hidden'}
+      .columns
+        %label
+          %span Name
+          %input#shipping-name{type: 'text'}
+      .columns
+        %label
+          %span Shipping Address
+          %input#shipping-address{size: '4', type: 'text'}
+      .columns
+        %label
+          %span City
+          %input#shipping-city{size: '4', type: 'text'}
+      .columns.large-3.medium-3.small-3
+        %label
+          %span State
+          %input#shipping-state{size: '2', type: 'text'}
+      .columns.large-6.medium-6.small-6
+        %label
+          %span Zip
+          %input#shipping-zip{size: '4', type: 'text'}
+      .columns.large-3.medium-3.small-3
+      .columns
+        %label
+          %span Email
+          %input#shipping-email{type: 'email'}
+      .columns
         %hr
-        .clearfix
-          %label
-            Fractal Types
-            %select.fractal
-              %option{value: 'leaves'} Leaves
-              %option{value: 'tendrils'} Tendrils
-              %option{value: 'ocean-floor'} Ocean Floor
-              %option{value: 'lace'} Lace
-              %option{value: 'space'} Space
-              %option{value: 'quantum'} Quantum
-              %option{value: 'generalized-celtic'} Generalized Celtic
-              %option{value: 'burning-ship'} Burning Ship
-              %option{value: 'halloween'} Halloween
-              %option{value: 'angles'} Angles
-              / %option{value: 'test'} Test
-          %label{for: 'gradient-colors-presets'} Color Presets
-          %select#gradient-colors-presets.gradient-colors-presets
-            %option
-          %button.colors-setting{title: 'Hotkey C'} Colors
-          %button.controls-setting{title: 'Hotkey T'} Controls
-          %button.share-setting Share
-          %button.buy-print-setting Buy Print
-        %hr
-        %a.half-width{href: '/about.html', target: '_blank'} About
-        %a.half-width{href: '/how-to.html', target: '_blank'} How To
-        %a.half-width{href: 'https://cash.me/$spyrosoft', target: '_blank'} Donate
-        %a.half-width{href: '/gallery.html', target: '_blank'} Gallery
-    .setting.settings-component.colors.text-center.row
-      .columns
-        .colors-controls
-          %button.reverse{title: 'Hotkey R'} Reverse
-          %button.invert{title: 'Hotkey I'} Invert
-      .gradient-colors
-        .color.columns
-          %input{type: 'color', value: '#000000'}
-          .color-controls.clearfix
-            .move ↕
-            %button.plus +
-            %button.minus -
-    .setting.settings-component.controls.row
-      .columns
-        %label{for: 'max-iterations'} Max Iterations
-        %input#max-iterations{type: 'text', value: '200'}
-      .columns.small-6.medium-6.large-6
-        %label{for: 'canvas-width'} Width
-        %input#canvas-width{type: 'text', value: '180'}
-      .columns.small-6.medium-6.large-6
-        %label{for: 'canvas-height'} Height
-        %input#canvas-height{type: 'text', value: '120'}
-      .columns
-        %label{for: 'zoom-rate'} Zoom Rate
-        %input#zoom-rate{type: 'text', value: '3'}
-        %label{for: 'zoom-level'} Zoom Level
-        %input#zoom-level{type: 'text', value: '60'}
-        %label{for: 'x'} X - Real
-        %input#x{type: 'text', value: '-0.75'}
-        %label{for: 'y'} Y - Imaginary
-        %input#y{type: 'text', value: '0'}
-    .setting.settings-component.share.row
-      .columns
-        %label{for: 'share-url'} Permalink
-        %input#share-url{type: 'text'}
-        %hr
-        %p.text-center
-          PNG Image
-          %span.canvas-dimensions
-        %img.generated-png/
-    .setting.settings-component.buy-print.row
-      .columns
-        Total Including Shipping
-        %strong.total $0.00
-      .columns
-        .buy-print-error.error
-        %hr
-      .buy-print-step.size-and-orientation
-        %form{action: '/buy-print/', method: 'get', target: '_blank'}
-          .columns
-            %label
-              Print Size
-              %select{name: 'print-size'}
-                %option{value: 'small'} Small - 8.5x11'
-                %option{value: 'medium'} Medium - 16x20'
-                %option{value: 'large'} Large - 20x30'
-          .columns
-            %label
-              Print Orientation
-              %select{name: 'print-orientation'}
-                %option{value: 'landscape'} Landscape
-                %option{value: 'portrait'} Portrait
-        .columns
-          %button.buy-print-preview.full-width Preview
-        .columns
-          %hr
-          %button.payment-step.full-width Next Step
-      .buy-print-step.payment
-        %form.create-payment-token-form{autocomplete: 'off'}
-          .columns.large-8.medium-8.small-8
-            %label
-              %span Card Number
-              %input{'data-stripe' => 'number', size: '20', type: 'text'}
-          .columns.large-3.medium-3.small-3
-            %label
-              %span CVC
-              %input{'data-stripe' => 'cvc', size: '4', type: 'text'}
-          .columns.large-1.medium-1.small-1
-          .columns
-            %span Expiration
-          .columns.large-3.medium-3.small-3
-            %label
-              %span MM
-              %input{'data-stripe' => 'exp-month', size: '2', type: 'text'}
-          .columns.large-4.medium-4.small-4
-            %label
-              %span YYYY
-              %input{'data-stripe' => 'exp-year', size: '4', type: 'text'}
-          .columns.large-5.medium-5.small-5
-        .columns
-          %hr
-          %button.size-and-orientation-step.half-width.left Print Size
-          %button.create-payment-token.half-width Shipping
-      .buy-print-step.shipping
-        %form.ship-print-form{action: '/buy-print/', autocomplete: 'off', method: 'post'}
-          %input#buy-print-token{type: 'hidden'}
-          .columns
-            %label
-              %span Name
-              %input#shipping-name{type: 'text'}
-          .columns
-            %label
-              %span Shipping Address
-              %input#shipping-address{size: '4', type: 'text'}
-          .columns
-            %label
-              %span City
-              %input#shipping-city{size: '4', type: 'text'}
-          .columns.large-3.medium-3.small-3
-            %label
-              %span State
-              %input#shipping-state{size: '2', type: 'text'}
-          .columns.large-6.medium-6.small-6
-            %label
-              %span Zip
-              %input#shipping-zip{size: '4', type: 'text'}
-          .columns.large-3.medium-3.small-3
-          .columns
-            %label
-              %span Email
-              %input#shipping-email{type: 'email'}
-          .columns
-            %hr
-            %button.full-width Submit Order
-        .columns
-          %hr
-          %button.payment-step.full-width Back to Payment
-      .buy-print-step.success
-        .columns
-          %h4 Success!!
-          %p
-            We have received your order.
-          %p
-            We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please
-            = succeed '.' do
-              %a{href: '/about.html'} contact us
-          %button.size-and-orientation-step.full-width Buy Another Print
+        %button.full-width Submit Order
+    .columns
+      %hr
+      %button.payment-step.full-width Back to Payment
+  .buy-print-step.success
+    .columns
+      %h4 Success!!
+      %p
+        We have received your order.
+      %p
+        We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please
+        = succeed '.' do
+          %a{href: '/about.html'} contact us
+      %button.size-and-orientation-step.full-width Buy Another Print
+
+.row.gallery.art-show
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/blue-spiral-by-void.png', alt: '/explore/#zoom-level=1641305705&canvas-width=440&canvas-height=340&x=0.250388657742208&y=0.000012216857424334074&max-iterations=1000&gradient-colors=0000ff000000&fractal=leaves'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/cyan-diamond-mandelbrot-with-webs.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/double-smoke-two-spiral.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/electric-eel-flexy-leaf-with-falling-voids.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/fire-four-swirl-with-octovoid.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/green-squiggly-spiral.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/light-embers-slight-spiral-with-bulbs.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/medusa-spiral-hand-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/neon-four-sun-tree-surrounded-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/neon-lightning-spiral-with-hands.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/neon-microbe-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/orange-lightning-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/orange-lightning-tendril-four-spin-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/pink-sharp-feather-mandelbrot-with-hands.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/priests-of-destiny.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/purple-inner-mandlerbrot-with-hooks.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/rainbow-eight-curly-mandelbrot-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/red-eight-star-spiral-with-galaxies.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/red-eight-star-with-four-stars-and-sea-horses.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/double-smoke-four-spiral-with-eight-merge-void.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/red-spider-galaxy-with-galaxy-void-four-to-eight-spiral.png', href: '/explore/#'}
+  .columns.medium-6.large-4
+    %img{src: '/images/gallery/art-show/soft-red-yellow-blue-round-mandelbrot.png', href: '/explore/#'}
+  .columns.medium-6.large-4.left
+    %img{src: '/images/gallery/art-show/teal-blue-spiral-hand-island.png', href: '/explore/#'}
+  .columns.medium-6.large-4.left
+    %img{src: '/images/gallery/art-show/the-face-of-hades.png', href: '/explore/#'}
+  .columns.medium-6.large-4.left
+    %img{src: '/images/gallery/art-show/water-wind-five-spiral.png', href: '/explore/#'}

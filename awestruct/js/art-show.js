@@ -210,7 +210,8 @@ function populate_ship_print_text_fields()
 function populate_ship_print_additional_fields( ship_print_data )
 {
 	ship_print_data[ 'destination-link' ]
-		= $('.buy-print-display').attr('alt');
+		= window.location.origin
+		+ $('.buy-print-display').attr('alt');
 	
 	ship_print_data[ 'print-size' ]
 		= document.getElementsByName( 'print-size' )[ 0 ].value;

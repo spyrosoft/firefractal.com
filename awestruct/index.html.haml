@@ -11,7 +11,7 @@ script_2: https://js.stripe.com/v2/
     %h1 Fire Fractal
   %hr
 
-.row.buy-print
+.row.buy-print.text-left
   .text-center
     %h2 Buy Print
     %p
@@ -33,7 +33,7 @@ script_2: https://js.stripe.com/v2/
             %option{value: '32x16'} 32 x 16"
             %option{value: '48x16'} 48 x 16"
             %option{value: '60x30'} 60 x 30"
-      .columns
+      .columns.display-none
         %label
           Print Orientation
           %select{name: 'print-orientation'}
@@ -111,9 +111,11 @@ script_2: https://js.stripe.com/v2/
         We sent you an email receipt. Make sure you receive it, it should only take a few minutes. If you don't get it, please
         = succeed '.' do
           %a{href: '/about.html'} contact us
-      %button.size-and-orientation-step.full-width Buy Another Print
+      %button.buy-another-print.full-width Buy Another Print
 
 .row.gallery.art-show
+  .columns.text-left
+    Click an image to purchase a print.
   .columns.medium-6.large-4
     %img{src: '/images/gallery/art-show/blue-spiral-by-void.png', alt: '/explore/#zoom-level=1641305705&canvas-width=440&canvas-height=340&x=0.250388657742208&y=0.000012216857424334074&max-iterations=1000&gradient-colors=0000ff000000&fractal=leaves'}
   .columns.medium-6.large-4

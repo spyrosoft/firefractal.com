@@ -45,6 +45,9 @@ $( '.create-payment-token-form' ).find( 'input' )
 $( '.ship-print-form' )
 	.submit( ship_print_form_submit );
 
+$( 'button.buy-another-print' )
+	.click( hide_buy_print );
+
 var dev_or_live = 'live';
 if ( window.location.hostname === 'localhost' ) {
 	dev_or_live = 'dev';
@@ -259,6 +262,10 @@ function clear_credit_card_fields()
 	$( '#buy-print-token' ).val( '' );
 }
 
+function hide_buy_print() {
+	$('.buy-print').hide();
+}
+
 function format_human_readable_dollars(number) {
 	if ( parseFloat( number ) != number ) { throw 'The argument provided was not a number: ' + number; }
 	return '$' + number.toFixed( 2 );
@@ -275,6 +282,3 @@ function initialize_test_cc_info() {
 	$('#shipping-state').val('CA');
 	$('#shipping-zip').val('99999');
 }
-
-//TODO: Delete me:
-//buy_print('the-face-of-hades');

@@ -1,6 +1,6 @@
 Dear CUSTOMER-NAME,
 
-We have received your order for a PRINT-SIZE, PRINT-ORIENTATION print.
+Your order has been received for a PRINT-SIZE, PRINT-ORIENTATION print.
 
 The print will be shipped to the following address:
 SHIPPING-ADDRESS
@@ -8,10 +8,10 @@ SHIPPING-CITY, SHIPPING-STATE SHIPPING-ZIP
 
 Your order total came out to $ORDER-TOTAL.
 
-If you would ever like to explore this area again, here is a permalink:
+If you would ever like to explore this area here is a permalink:
 DESTINATION-LINK
 
-We are ecstatic that you bought a Fire Fractal print!
+I am ecstatic that you bought a Fire Fractal print!
 
 If you are interested, let me tell you the story of how firefractal.com came to be. When I was in high school, a burgeoning programmer, I came across someone's blog post about his experience making a Mandelbrot program for fun. He described how blown away he was by the simplicity of the code. I was equally blown away. Here it is, verbatim, from firefractal.com:
 
@@ -41,12 +41,7 @@ No kidding. The x0 and y0 are coordinates for each pixel on the screen. The rest
 
 Eventually the itch to make my own got me and I wrote version 1.0. It was a bit buggy and hard to use. Years later, after having explored quite a bit, it was time to rewrite it with a (much) better user interface. There are many fractal exploration tools out there. Quite a few of them have features that the others don't. It is our goal that firefractal.com be the combination of all of the best features in one.
 
-We would love to hear from you if you have:
-* Feedback about what could be better.
-* Any other comments, questions or ideas.
-* (Our favorite) An inkling to just to say hi!
-
-Hit reply and we'll get your message.
+I would love to hear from you. Hit reply and I will receive your message.
 
 Thank you sincerely,
 

@@ -1722,11 +1722,11 @@ function buy_print_preview()
 function buy_print_total()
 {
 	var print_prices = {
-		'11x8.5' : 200
-		, '24x18' : 400
-		, '32x16' : 400
-		, '48x16' : 600
-		, '60x30' : 1200
+		'11x8.5' : 100
+		, '24x18' : 200
+		, '32x16' : 200
+		, '48x16' : 400
+		, '60x30' : 600
 	};
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
 	return print_prices[ print_size ];

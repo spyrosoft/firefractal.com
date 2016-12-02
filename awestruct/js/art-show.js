@@ -14,11 +14,11 @@ var buy_print_steps = [
 ];
 
 var print_prices = {
-	'11x8.5' : 200
-	, '24x18' : 400
-	, '32x16' : 400
-	, '48x16' : 600
-	, '60x30' : 1200
+	'11x8.5' : 100
+	, '24x18' : 200
+	, '32x16' : 200
+	, '48x16' : 400
+	, '60x30' : 600
 };
 
 $( '.buy-print-step.size-and-orientation select[name="print-size"]' )

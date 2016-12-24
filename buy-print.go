@@ -40,10 +40,10 @@ func buyPrint(responseWriter http.ResponseWriter, request *http.Request, request
 	}
 	buyPrintToken := request.PostFormValue("buy-print-token")
 	costInCents := printCostInCents[request.PostFormValue("print-size")]
-	if credentials.LiveOrDev == "live" {
-		stripe.Key = credentials.StripeLiveSecretKey
+	if siteData.LiveOrDev == "live" {
+		stripe.Key = siteData.StripeLiveSecretKey
 	} else {
-		stripe.Key = credentials.StripeTestSecretKey
+		stripe.Key = siteData.StripeTestSecretKey
 	}
 	chargeParams := &stripe.ChargeParams{
 		Amount:   costInCents,
@@ -98,7 +98,7 @@ func sendBuyPrintSuccessEmail(request *http.Request, orderId string) SuccessMess
 	}
 	message := searchReplaceResponseEmailTemplate(request, string(responseEmailTemplate))
 	sendEmail(request.PostFormValue("shipping-email"), "Receipt From firefractal.com - Order #"+orderId, message)
-	sendEmail(credentials.ReplyAddress, "Receipt From firefractal.com - Order #"+orderId, message)
+	sendEmail(siteData.ReplyAddress, "Receipt From firefractal.com - Order #"+orderId, message)
 	return successMessage
 }
 

@@ -20,6 +20,6 @@ func feedbackSubmission(responseWriter http.ResponseWriter, request *http.Reques
 	if messageValue != "" {
 		message += messageValue
 	}
-	sendEmail(credentials.ReplyAddress, "Feedback Form Submission - firefractal.com", message)
+	sendEmail(siteData.ReplyAddress, "Feedback Form Submission - firefractal.com", message)
 	fmt.Fprint(responseWriter, "{\"success\":true}")
 }

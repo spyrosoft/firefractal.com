@@ -9,11 +9,11 @@ import (
 )
 
 func sendEmail(recipientAddress string, subject string, messageBody string) {
-	if ! credentialsHaveBeenLoaded {
-		log.Panic("Outgoing email credentials have not been set. Cannot send message.")
+	if ! siteDataLoaded {
+		log.Panic("Outgoing email siteData have not been set. Cannot send message.")
 	}
 	
-	from := mail.Address{credentials.NoReplyAddressName, credentials.NoReplyAddress}
+	from := mail.Address{siteData.NoReplyAddressName, siteData.NoReplyAddress}
 	
 	headers := make(map[string]string)
 	headers["From"] = from.String()
@@ -26,23 +26,23 @@ func sendEmail(recipientAddress string, subject string, messageBody string) {
 	}
 	message += "\r\n" + messageBody
 	
-	mailAuth := smtp.PlainAuth("", credentials.NoReplyAddress, credentials.NoReplyPassword, credentials.Host)
+	mailAuth := smtp.PlainAuth("", siteData.NoReplyAddress, siteData.NoReplyPassword, siteData.Host)
 	
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: true,
-		ServerName: credentials.Host,
+		ServerName: siteData.Host,
 	}
 	
-	tcpConnection, error := tls.Dial("tcp", credentials.Host + ":" + credentials.Port, tlsConfig)
+	tcpConnection, error := tls.Dial("tcp", siteData.Host + ":" + siteData.Port, tlsConfig)
 	panicOnError(error)
 	
-	smtpClient, error := smtp.NewClient(tcpConnection, credentials.Host)
+	smtpClient, error := smtp.NewClient(tcpConnection, siteData.Host)
 	panicOnError(error)
 	
 	error = smtpClient.Auth(mailAuth)
 	panicOnError(error)
 	
-	error = smtpClient.Mail(credentials.NoReplyAddress)
+	error = smtpClient.Mail(siteData.NoReplyAddress)
 	panicOnError(error)
 	
 	error = smtpClient.Rcpt(recipientAddress)

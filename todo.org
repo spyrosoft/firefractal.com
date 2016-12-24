@@ -157,6 +157,14 @@
 
 * Marketing/Publicity
 
+** Create a Fire Fractal Twitter account
+
+*** Auto-follow dev/math people
+
+*** Fire Fractal of the Week
+
+** Create a Show Hackernews post
+
 ** Split one piece into two, and group them together in a show - sell them separately
 
 ** Thirteen pieces make a show

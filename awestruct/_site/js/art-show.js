@@ -14,7 +14,7 @@ var buy_print_steps = [
 ];
 
 var print_prices = {
-	'11x8.5' : 100
+	'11x8.5' : 75
 	, '24x18' : 200
 	, '32x16' : 200
 	, '48x16' : 400

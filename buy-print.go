@@ -24,7 +24,7 @@ func (successMessage *SuccessMessage) SetMessage(success bool, message string) {
 
 var (
 	printCostInCents = map[string]uint64{
-		"11x8.5": 10000,
+		"11x8.5": 7500,
 		"24x18":  20000,
 		"32x16":  20000,
 		"48x16":  40000,

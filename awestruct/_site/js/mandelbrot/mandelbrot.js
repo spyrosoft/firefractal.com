@@ -340,7 +340,6 @@ function initialize_event_listeners()
 		.keydown( text_input_escape_input );
 	
 	$( window ).on( 'hashchange', hash_changed );
-	window.addEventListener( 'popstate', hash_changed );
 	
 	$( 'button.reverse' )
 		.click( reverse_gradient_colors );

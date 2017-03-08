@@ -2140,46 +2140,8 @@ function check_for_enter_key_event( key_event )
 
 function format_human_readable_dollars( number )
 {
-	if ( isNaN( number ) ) { throw "Input to format_human_readable_dollars must be a number. The following was provided: " + number; }
-	var number_string = number.toString();
-	if ( ! number_string.match( /\./ ) )
-	{
-		number_string += '.00';
-	}
-	var dollars_and_cents = number_string.split( '.' );
-	if ( dollars_and_cents[ 1 ].length > 2 )
-	{
-		// It's not very obvious what's happening here.
-		// We know that we have more digits than we need, so we want to round up:
-		// We take the first three digits
-		// Convert them to an integer, divide by 10, and take the ceiling
-		dollars_and_cents[ 1 ]
-			= Math.ceil(
-				parseInt(
-					dollars_and_cents[ 1 ]
-						.substring( 0, 3 )
-				) / 10
-			).toString();
-	}
-	while ( dollars_and_cents[ 1 ].length < 2 )
-	{
-		dollars_and_cents[ 1 ] += '0';
-	}
-	if ( dollars_and_cents[ 0 ].length > 3 )
-	{
-		var dollars = dollars_and_cents[ 0 ];
-		var new_dollars_and_cents = '';
-		for ( var i = 0; i < dollars.length; i++ )
-		{
-			if ( i != 0 && i % 3 === 0 )
-			{
-				new_dollars_and_cents = ',' + new_dollars_and_cents;
-			}
-			new_dollars_and_cents = dollars[ dollars.length - 1 - i ] + new_dollars_and_cents;
-		}
-		dollars_and_cents[ 0 ] = new_dollars_and_cents;
-	}
-	return '$' + dollars_and_cents[ 0 ] + '.' + dollars_and_cents[ 1 ];
+	if ( parseFloat( number ) != number ) { throw "Input to format_human_readable_dollars must be a number. The following was provided: " + number; }
+	return '$' + number.toFixed( 2 );
 }
 
 /* --------------------Utilities-------------------- */

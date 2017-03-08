@@ -1674,10 +1674,10 @@ function buy_print_preview()
 {
 	var print_dimensions = {
 		'11x8.5' : [ 8.5, 11 ]
-		, '24x18' : [ 24, 18 ]
-		, '32x16' : [ 32, 16 ]
-		, '48x16' : [ 48, 16 ]
-		, '60x30' : [ 60, 30 ]
+		, '18x24' : [ 18, 24 ]
+		, '16x32' : [ 16, 32 ]
+		, '16x48' : [ 16, 48 ]
+		, '30x60' : [ 30, 60 ]
 	};
 	
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
@@ -1721,11 +1721,11 @@ function buy_print_preview()
 function buy_print_total()
 {
 	var print_prices = {
-		'11x8.5' : 100
-		, '24x18' : 200
-		, '32x16' : 200
-		, '48x16' : 400
-		, '60x30' : 600
+		'11x8.5' : 75
+		, '18x24' : 200
+		, '16x32' : 200
+		, '16x48' : 400
+		, '30x60' : 600
 	};
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
 	return print_prices[ print_size ];

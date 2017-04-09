@@ -4,11 +4,11 @@ title: Fractal Exploration Tool
 description: 'Fractal Explorer - Zoom in and out of the Mandelbrot Set, customize the colors, and buy personalized prints.'
 jquery_ui: true
 hammer_js: true
-script: /js/mandelbrot/mandelbrot-worker.js
-script_2: /js/mandelbrot/mandelbrot.js
+script: /js/mandelbrot-worker.js
+script_2: /js/mandelbrot.js
 script_3: https://js.stripe.com/v2/
 ---
-#canvas-content.canvas-content
+.canvas-content
   %canvas#canvas{height: '120', width: '180'}
   %canvas#canvas-overlay{height: '120', width: '180'}
 .settings.settings-hidden
@@ -16,24 +16,52 @@ script_3: https://js.stripe.com/v2/
     %span
   .settings-content
     %button.back.display-none Back
-    .settings-navigation.settings-component.row
+    .setting.settings-navigation.settings-component.row
+      .clear.text-center
+        .clearfix
+          %a.half-width{href: '/about.html', target: '_blank'} About
+          %a.half-width{href: '/how-to.html', target: '_blank'} How To
+          %a.half-width{href: '/donate.html', target: '_blank'} Donate
+          %a.half-width{href: '/gallery.html', target: '_blank'} Gallery
+        %hr
+        .clearfix
+          %button.colors-setting{title: 'Hotkey C'} Colors
+          %button.controls-setting{title: 'Hotkey T'} Controls
+          %button.share-setting Share
+          %button.buy-print-setting Buy Print
+    .setting.settings-component.colors.row
+      .columns
+        %label{for: 'gradient-colors-presets'} Color Presets
+        %select#gradient-colors-presets.gradient-colors-presets
+          %option
+      .columns
+        .colors-controls.half-width-buttons
+          %button.reverse{title: 'Hotkey R'} Reverse
+          %button.invert{title: 'Hotkey I'} Invert
+      .gradient-colors
+        .color.columns
+          %input{type: 'color', value: '#000000'}
+          .color-controls.clearfix
+            .move ↕
+            %button.plus +
+            %button.minus -
+    .setting.settings-component.controls.row
       .columns
         .clearfix
-          %button.more-detail{title: 'Hotkey M'} More Detail
-          %button.less-detail{title: 'Hotkey L'} Less Detail
-          %button.zoom-faster{title: 'Hotkey +'} Zoom Faster
-          %button.zoom-slower{title: 'Hotkey -'} Zoom Slower
-        .zoom-rate-meter-outer
-          .zoom-rate-meter-inner
-        .clearfix
-          /
-            TODO
-            %button.undo Undo
-            %button.redoRedo
-          %button.full-screen{title: 'Hotkey F11'} Full Screen
-          %button.fit-to-screen Stretch
+          .half-width-buttons
+            %button.more-detail{title: 'Hotkey M'} More Detail
+            %button.less-detail{title: 'Hotkey L'} Less Detail
+            %button.zoom-faster{title: 'Hotkey +'} Zoom Faster
+            %button.zoom-slower{title: 'Hotkey -'} Zoom Slower
+            .zoom-rate-meter-outer
+              .zoom-rate-meter-inner
+            /
+              TODO
+              %button.undo Undo
+              %button.redoRedo
+            %button.full-screen{title: 'Hotkey F11'} Full Screen
+            %button.fit-to-screen Stretch
           %button.reset-zoom.full-width Zoom All The Way Out
-        %hr
         .clearfix
           %label
             Fractal Types
@@ -49,31 +77,8 @@ script_3: https://js.stripe.com/v2/
               %option{value: 'halloween'} Halloween
               %option{value: 'angles'} Angles
               / %option{value: 'test'} Test
-          %label{for: 'gradient-colors-presets'} Color Presets
-          %select#gradient-colors-presets.gradient-colors-presets
-            %option
-          %button.colors-setting{title: 'Hotkey C'} Colors
-          %button.controls-setting{title: 'Hotkey T'} Controls
-          %button.share-setting Share
-          %button.buy-print-setting Buy Print
-        %hr
-        %a.half-width{href: '/about.html', target: '_blank'} About
-        %a.half-width{href: '/how-to.html', target: '_blank'} How To
-        %a.half-width{href: 'https://cash.me/$spyrosoft', target: '_blank'} Donate
-        %a.half-width{href: '/gallery.html', target: '_blank'} Gallery
-    .setting.settings-component.colors.text-center.row
-      .columns
-        .colors-controls
-          %button.reverse{title: 'Hotkey R'} Reverse
-          %button.invert{title: 'Hotkey I'} Invert
-      .gradient-colors
-        .color.columns
-          %input{type: 'color', value: '#000000'}
-          .color-controls.clearfix
-            .move ↕
-            %button.plus +
-            %button.minus -
-    .setting.settings-component.controls.row
+          %button.advanced-controls-setting.full-width{title: 'Hotkey A'} Advanced Controls
+    .setting.settings-component.advanced-controls.row
       .columns
         %label{for: 'max-iterations'} Max Iterations
         %input#max-iterations{type: 'text', value: '200'}

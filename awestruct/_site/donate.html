@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>500 Internal Server Error - Fire Fractal</title>
+    <title>Donate - Fire Fractal</title>
     <link href="/images/favicon.ico" rel="shortcut icon">
     <!-- Zurb Foundation -->
     <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
@@ -14,6 +14,7 @@
     <!-- End Zurb Foundation -->
     <link href="/css/styles.css" rel="stylesheet" type="text/css">
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/utilities.js"></script>
   </head>
   <body>
     <div class="row">
@@ -38,20 +39,29 @@
         <hr class="no-margin">
       </div>
     </div>
-    <div class="row text-center">
-      <div class="columns">
-        <h1 class="medium-margin">500 Internal Server Error</h1>
-        <p>
-          Something has gone wrong on the server.
-        </p>
-        <p>
-          Please try back again after a while. If you know how to contact us, please let us know that something is wrong.
-        </p>
+    <div class="donate text-left large-margin-top">
+      <div class="row step payment-amount">
+        <div class="columns large-8 medium-8">
+          <label>
+            <div class="payment-amount-error error"></div>
+            <input class="large" id="payment-amount" placeholder="$300.00" type="text">
+          </label>
+        </div>
+        <div class="columns large-4 medium-4">
+          <button class="button large expand next-step donate">
+            Donate
+          </button>
+        </div>
       </div>
     </div>
+    <script>
+      document.getElementById('payment-amount').focus();
+    </script>
     <script src="/js/foundation.min.js"></script>
     <script>
       $(document).foundation();
     </script>
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <script src="/js/donate.js"></script>
   </body>
 </html>

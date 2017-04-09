@@ -1,30 +1,72 @@
 /* --------------------Color Presets-------------------- */
 
+/* Color Permutations
+
+== One Color ==
+
+red
+pink
+purple
+blue
+cyan
+green
+yellow
+orange
+
+== Two Colors ==
+
+red yellow
+red orange
+red purple
+
+purple red
+purple blue
+
+blue purple
+blue green
+
+green blue
+green yellow
+
+yellow green
+yellow red
+
+== Dark ==
+
+
+
+*/
+
 var gradient_colors_presets = {
 	'Custom' : '',
-	'Fire' : '000000ff0000ff9000000000',
-	'Water' : '00ffff00014000ffff000000',
-	'Earth' : '0000002114000013008a5400000000',
-	'Wind' : 'ffffff0000c68d90ff0000670000ffffffff',
+	'Dark Fire' : '000000ff0000ff9000000000',
+	'Ice' : '00ffff00014000ffff000000',
 	'Smoke' : 'ff0000151515000000',
+	'Double Smoke' : 'ff0000151515ff0000151515000000',
 	'Embers' : '0000002c2c2c0c0c0c2c2c2c0000002c2c2c0c0c0c1818180000001818180c0c0c1818180000001818180c0c0c1818180000002c2c2c0c0c0c2c2c2c0000002c2c2c0c0c0c1818180000001818180c0c0cff0000181818000000',
-	'Ice' : 'ffffff00ffff006fffffffff',
-	'Black and White' : 'ffffff000000',
-	'Red' : '100000cc0000330000ff0000100000',
-	'Orange' : '000000ff3e00ff9000ff3e00000000',
-	'Yellow' : 'ffff00ff9000ffff00000000',
-	'Green' : '00000000ff00008c0000ff00000000',
-	'Blue' : '0000060000230000c60000670000ff000000',
-	'Purple' : '100010cc00cc330033ff00ff100010',
+	'Dark Double Green' : '00000000ff00008c0000ff00000000',
+	'Double Purple' : '100010cc00cc330033ff00ff000000',
 	'Cyan' : '00000000ffff000000',
-	'Pink' : 'ff007f5b002eff007f000000',
-	'Vampire' : '0000002c0000100000710000ff0000000000',
-	'Rainbow' : 'ff0000ffff0000ff000000ffff00ff000000',
 	'Neon' : 'ff00000003ff00ff00ffff00000000',
+	'Rainbow' : 'ff0000ffff0000ff000000ffff00ff000000',
+	'Black and White' : 'ffffff000000',
+	'Water' : '00ffff0048a4006fffffffff',
+	'Double Red' : 'ff0000330000ff0000000000',
+	'Double Orange' : '000000ff3e00ff9000ff3e00000000',
+	'Double Yellow' : 'ffff00ff9000ffff00000000',
+	'Double Green' : '00ff00008c0000ff00000000',
+	'Double Blue' : '0000060000230000c60000670000ff000000',
+	'Fire' : 'ff0000ff9000000000',
+	'Red' : 'ff0000000000',
+	'Blue' : '0000ff000000',
+	'Pink' : 'ff007f5b002eff007f000000',
+	'Wind' : '0000670000c68d90ff0000c6ffffff0000ffffffff',
+	'Vampire' : '0000002c0000100000710000ff0000000000',
 	'Medusa' : '00ff00002e0000ff0000000000ff00002e0000ff0000000000ff00002e0000ff0000000000ff00002e0000ff0000000000ff00002e0000ff0000000000ff00002e0000ff00000000',
 	'Electric Eel' : '00000000ffff004f4f00ffff004f4f00ffff004f4f00ffff004f4f00ffff004f4f00ffff004f4f00ffff000000',
+	'Snow Cone' : '00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff000000000000',
 	'Pastel' : '00245cff0000ff900004a03f',
-	'Snow Cone' : '00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff00000000ff00002e0000ff000000000000'
+	'Earth' : '0000002114000013008a5400000000'
 };
 
 /* --------------------Color Presets-------------------- */
@@ -55,7 +97,7 @@ var default_settings = {
 	'y' : 0,
 	'zoom-rate' : 4,
 	'max-iterations' : 200,
-	'gradient-colors' : gradient_colors_presets[ 'Fire' ],
+	'gradient-colors' : gradient_colors_presets[ 'Dark Fire' ],
 	'fractal' : 'leaves'
 };
 var load_setting_function_table = {
@@ -115,6 +157,10 @@ var keyboard_shortcut_function_table = {
 		show_settings_menu();
 		show_setting( 'controls' );
 	},
+	'65' : function() { //a
+		show_settings_menu();
+		show_setting( 'advanced-controls' );
+	},
 	'82' : reverse_gradient_colors, //r
 	'73' : invert_gradient_colors //i
 };
@@ -133,6 +179,8 @@ initialize_settings();
 initialize_gradient_color_presets();
 
 initialize_event_listeners();
+
+display_buy_print_total();
 
 $( '.setting' ).hide();
 $( '.buy-print-step' ).hide();
@@ -296,6 +344,9 @@ function initialize_event_listeners()
 				.click( show_setting_button_click );
 		}
 	);
+
+	$( 'button.advanced-controls-setting' )
+		.click( toggle_advanced_controls );
 	
 	$( 'button.zoom-faster, button.zoom-slower' )
 		.click( set_zoom_rate_meter );
@@ -335,7 +386,7 @@ function initialize_event_listeners()
 	$( 'select.fractal' )
 		.change( load_fractal_type );
 	
-	$( '.setting.controls input[type="text"]' )
+	$( '.setting.advanced-controls input[type="text"]' )
 		.keydown( load_settings_on_enter )
 		.keydown( text_input_escape_input );
 	
@@ -748,7 +799,7 @@ function show_settings_menu()
 	$( '.setting' ).hide();
 	$( '.settings' ).removeClass( 'settings-hidden' );
 	$( '.settings-navigation' ).show();
-	$( '.settings button.back' ).addClass( 'display-none' );
+	$( '.settings button.back' ).hide();
 }
 
 function settings_icon_click( click_event )
@@ -762,6 +813,9 @@ function toggle_settings_hidden()
 	if ( $( '.settings' ).first().hasClass( 'settings-hidden' ) )
 	{
 		$( '.settings' ).removeClass( 'settings-hidden' );
+		if ( $('.settings-component:visible').length === 0 ) {
+			$( '.settings-navigation' ).show();
+		}
 	}
 	else
 	{
@@ -779,7 +833,15 @@ function show_setting( setting )
 {
 	$( '.setting.' + setting ).show();
 	$( '.settings-navigation' ).hide();
-	$( '.settings button.back' ).removeClass( 'display-none' );
+	$( '.settings button.back' ).show();
+}
+
+function toggle_advanced_controls() {
+	if ( $( '.setting.advanced-controls:visible' ).length === 0 ) {
+		$( '.setting.advanced-controls' ).show();
+	} else {
+		$( '.setting.advanced-controls' ).hide();
+	}
 }
 
 function remove_gradient_color()
@@ -803,11 +865,11 @@ function show_or_hide_gradient_color_plus_minus_buttons()
 {
 	if ( $( '.color-controls' ).length <= 2 )
 	{
-		$( '.color-controls button.minus' ).addClass( 'display-none' );
+		$( '.color-controls button.minus' ).hide();
 	}
 	else
 	{
-		$( '.color-controls button.minus' ).removeClass( 'display-none' );
+		$( '.color-controls button.minus' ).show();
 	}
 }
 

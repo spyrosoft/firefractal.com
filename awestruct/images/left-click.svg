@@ -2,7 +2,7 @@
 		baseProfile="full"
 		width="150" height="200"
 		xmlns="http://www.w3.org/2000/svg"
-		stroke="white"
+		stroke="black"
 		stroke-width="2px"
 		fill="transparent">
 	
@@ -13,11 +13,11 @@
 		A 50 55, 0, 0, 1, 125 75
 		V 125
 		A 50 50, 0, 0, 1, 25 130
-		V 75" fill="black" />
+		V 75" fill="white" />
 	
 	<!-- Button -->
 	<path d="M 30 70
 		A 50 55, 0, 0, 1, 75 25
-		V 70" stroke="transparent" fill="white" />
+		V 70" stroke="transparent" fill="black" />
 	
 </svg>

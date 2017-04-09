@@ -31,6 +31,7 @@ func main() {
 	router := httprouter.New()
 	router.POST("/feedback", feedbackSubmission)
 	router.POST("/buy-print", buyPrint)
+	router.POST("/donate", donate)
 	router.NotFound = http.HandlerFunc(serveStaticFilesOr404)
 	log.Fatal(http.ListenAndServe(":8082", router))
 }

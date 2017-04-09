@@ -1,6 +1,6 @@
-$foreground-color: #FFFFFF
-$background-color: #000000
-$background-color-transparent: rgba(0, 0, 0, 0.8)
+$foreground-color: #000000
+$background-color: #FFFFFF
+$background-color-transparent: rgba(255, 255, 255, 0.8)
 $invert-foreground-color: $background-color
 $invert-background-color: $foreground-color
 
@@ -28,9 +28,14 @@ $input-control-padding: 0.7rem
 
 .half-width
 	width: 50%
+	float: left
 
 .full-width
 	width: 100%
+
+.half-width-buttons button
+	width: 50%
+	float: left
 
 .wait-cursor, .canvas-content canvas.wait-cursor
 	cursor: wait
@@ -43,6 +48,9 @@ $input-control-padding: 0.7rem
 
 .large-margin
 	margin: $large-spacing
+
+.large-margin-top
+	margin-top: $large-spacing
 
 .medium-margin-bottom
 	margin-bottom: $medium-spacing
@@ -63,8 +71,24 @@ $input-control-padding: 0.7rem
 ol, ul
 	margin-left: $medium-spacing
 
-.text-left
-	text-align: left
+input.large
+	font-size: $large-spacing
+	line-height: $large-spacing
+	height: ($large-spacing + 1rem)
+
+.button.large
+	height: ($large-spacing + 1rem)
+	font-size: $medium-spacing
+
+.clear
+	clear: both
+
+.text-center
+	text-align: center !important
+	
+	button
+		text-align: center !important
+
 
 /* --------------------General Purpose-------------------- */
 
@@ -101,6 +125,7 @@ textarea
 input[type="text"]:focus,
 input[type="email"]:focus,
 textarea:focus
+	background-color: $invert-background-color
 	color: $invert-foreground-color
 	border: $thin-border
 
@@ -132,13 +157,10 @@ select:focus, option:focus,
 	background-color: $invert-background-color
 
 button, .button, .tabs .tab-title a
-	height: 38px
-	margin: 0
 	background-color: $background-color
 	outline-color: $foreground-color
 	color: $foreground-color
 	border: none
-	font-size: 1rem
 	line-height: 100%
 	padding: $input-control-padding
 	font-weight: normal
@@ -206,28 +228,36 @@ $settings-spacing: 10px
 	background-color: $background-color
 	margin-bottom: $small-spacing
 
-.settings-navigation a
-	display: block
-	float: left
-	text-align: center
-	line-height: 200%
+.settings-navigation
+	
+	button, .button, .tabs .tab-title a
+		height: 38px
+		margin: 0
+		font-size: 1rem
+		text-align: left
+	
+	a
+		display: block
+		float: left
+		text-align: center
+		line-height: 200%
+	
+	button
+		width: 50%
+		display: block
+		float: left
+		
+	button.display-none
+		display: none
+	
+	button.full-width
+		width: 100%
 
 .page-navigation
 	border-bottom: 1px solid $foreground-color
 
 .page-navigation .button
 	float: right
-
-.settings-navigation button
-	width: 50%
-	display: block
-	float: left
-
-.settings-navigation button.display-none
-	display: none
-
-.settings-navigation button.full-width
-	width: 100%
 
 select.gradient-colors-presets option
 	width: 100%

@@ -2,7 +2,7 @@
 		baseProfile="full"
 		width="125" height="125"
 		xmlns="http://www.w3.org/2000/svg"
-		stroke="white"
+		stroke="black"
 		stroke-width="2px"
 		fill="transparent">
 	
@@ -18,7 +18,7 @@
 			V 115
 			H 20
 			V 55"
-		fill="black" />
+		fill="white" />
 	
 	<path
 		d="M 25 55
@@ -26,7 +26,7 @@
 			V 65
 			A 30 30, 0, 0, 1 25 65
 			V 55"
-		fill="black" />
+		fill="white" />
 	
 	
 	<path
@@ -35,7 +35,7 @@
 			V 115
 			H 65
 			V 40"
-		fill="black" />
+		fill="white" />
 	
 	<path
 		d="M 70 40
@@ -43,6 +43,6 @@
 			V 50
 			A 30 30, 0, 0, 1 70 50
 			V 40"
-		fill="black" />
+		fill="white" />
 	
 </svg>

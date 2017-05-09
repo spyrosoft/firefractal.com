@@ -123,6 +123,34 @@ var valid_settings_keys_and_types = {
 	'fractal' : 'string'
 };
 
+var print_sizes = {
+	'11x8.5' : {
+		'dimensions' : [ 8.5, 11 ]
+		, 'price' : 75
+		, 'label' : '8.5 x 11"'
+	}
+	, '24x18' : {
+		'dimensions' : [ 24, 18 ]
+		, 'price' : 200
+		, 'label' : '24 x 18"'
+	}
+	, '32x16' : {
+		'dimensions' : [ 32, 16 ]
+		, 'price' : 200
+		, 'label' : '32 x 16"'
+	}
+	, '48x16' : {
+		'dimensions' : [ 48, 16 ]
+		, 'price' : 400
+		, 'label' : '48 x 16"'
+	}
+	, '60x30' : {
+		'dimensions' : [ 60, 30 ]
+		, 'price' : 600
+		, 'label' : '60 x 30"'
+	}
+};
+
 var gradient_colors;
 
 if ( window.Worker )
@@ -180,7 +208,7 @@ initialize_gradient_color_presets();
 
 initialize_event_listeners();
 
-display_buy_print_total();
+initialize_buy_print();
 
 $( '.setting' ).hide();
 $( '.buy-print-step' ).hide();
@@ -1706,6 +1734,25 @@ function text_input_escape_input( key_event )
 
 /* --------------------Buy Print-------------------- */
 
+function initialize_buy_print() {
+	populate_buy_poster_sizes();
+	display_buy_print_total();
+}
+
+function populate_buy_poster_sizes() {
+	for (var size in print_sizes) {
+		$('.print-size').append(
+			$(
+				'<option>',
+				{
+					value : size
+					, text : print_sizes[ size ][ 'label' ]
+				}
+			)
+		);
+	}
+}
+
 function show_buy_print_step( buy_print_step )
 {
 	$( '.buy-print-step' ).hide();
@@ -1734,14 +1781,6 @@ function display_buy_print_total()
 
 function buy_print_preview()
 {
-	var print_dimensions = {
-		'11x8.5' : [ 8.5, 11 ]
-		, '18x24' : [ 18, 24 ]
-		, '16x32' : [ 16, 32 ]
-		, '16x48' : [ 16, 48 ]
-		, '30x60' : [ 30, 60 ]
-	};
-	
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
 	var print_orientation = document.getElementsByName( 'print-orientation' )[ 0 ].value;
 	
@@ -1749,15 +1788,28 @@ function buy_print_preview()
 	var screen_width = $( 'html' ).width();
 	var screen_height = $( 'html' ).height();
 	var print_width, print_height;
+	
+	var l = print_sizes[ print_size ][ 'dimensions' ][ 0 ];
+	var w = print_sizes[ print_size ][ 'dimensions' ][ 1 ];
 	if ( print_orientation === 'portrait' )
 	{
-		print_width = print_dimensions[ print_size ][ 0 ];
-		print_height = print_dimensions[ print_size ][ 1 ];
+		if (l < w) {
+			print_width = l;
+			print_height = w;
+		} else {
+			print_width = w;
+			print_height = l;
+		}
 	}
 	else
 	{
-		print_width = print_dimensions[ print_size ][ 1 ];
-		print_height = print_dimensions[ print_size ][ 0 ];
+		if (l > w) {
+			print_width = l;
+			print_height = w;
+		} else {
+			print_width = w;
+			print_height = l;
+		}
 	}
 	var screen_ratio = screen_width / screen_height;
 	var print_ratio = print_width / print_height;
@@ -1782,15 +1834,8 @@ function buy_print_preview()
 
 function buy_print_total()
 {
-	var print_prices = {
-		'11x8.5' : 75
-		, '18x24' : 200
-		, '16x32' : 200
-		, '16x48' : 400
-		, '30x60' : 600
-	};
 	var print_size = document.getElementsByName( 'print-size' )[ 0 ].value;
-	return print_prices[ print_size ];
+	return print_sizes[ print_size ][ 'price' ];
 }
 
 function create_payment_token_form_submit( submit_event )

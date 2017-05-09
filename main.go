@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -34,4 +35,18 @@ func main() {
 	router.POST("/donate", donate)
 	router.NotFound = http.HandlerFunc(serveStaticFilesOr404)
 	log.Fatal(http.ListenAndServe(":8082", router))
+}
+
+func debug(things ...interface{}) {
+	if siteData.LiveOrDev == "dev" {
+		fmt.Println("====================")
+		for _, thing := range things {
+			fmt.Printf("%+v\n", thing)
+		}
+		fmt.Println("^^^^^^^^^^^^^^^^^^^^")
+	}
+}
+
+func debugType(thing interface{}) {
+	fmt.Printf("%T\n", thing)
 }

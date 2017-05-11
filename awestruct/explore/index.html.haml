@@ -49,10 +49,11 @@ script_3: https://js.stripe.com/v2/
       .columns
         .clearfix
           .half-width-buttons
-            %button.more-detail{title: 'Hotkey M'} More Detail
-            %button.less-detail{title: 'Hotkey L'} Less Detail
-            %button.zoom-faster{title: 'Hotkey +'} Zoom Faster
-            %button.zoom-slower{title: 'Hotkey -'} Zoom Slower
+            .clearfix
+              %button.less-detail{title: 'Hotkey L'} Less Detail
+              %button.more-detail{title: 'Hotkey M'} More Detail
+              %button.zoom-slower.no-margin-bottom{title: 'Hotkey -'} Zoom Slower
+              %button.zoom-faster.no-margin-bottom{title: 'Hotkey +'} Zoom Faster
             .zoom-rate-meter-outer
               .zoom-rate-meter-inner
             /

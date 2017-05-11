@@ -160,7 +160,6 @@ if ( window.Worker )
 
 var SETTINGS_TIMEOUT_DELAY = 500;
 var hide_settings_timeout;
-var hide_zoom_rate_meter_timeout;
 
 var wait_cursor_selectors = [
 	'#canvas-overlay',
@@ -207,6 +206,8 @@ initialize_settings();
 initialize_gradient_color_presets();
 
 initialize_event_listeners();
+
+set_zoom_rate_meter();
 
 initialize_buy_print();
 
@@ -1013,7 +1014,6 @@ function lower_zoom_rate()
 
 function set_zoom_rate_meter()
 {
-	$( '.zoom-rate-meter-outer' ).show();
 	var zoom_rate_proportion = ( ( settings[ 'zoom-rate' ] - ZOOM_RATE_MIN ) * 10 / ( ZOOM_RATE_MAX - ZOOM_RATE_MIN ) ) * 10;
 	if ( zoom_rate_proportion > 100 )
 	{
@@ -1021,15 +1021,6 @@ function set_zoom_rate_meter()
 	}
 	$( '.zoom-rate-meter-inner' )
 		.css( 'width', zoom_rate_proportion + '%' );
-
-	clearTimeout( hide_zoom_rate_meter_timeout );
-	hide_zoom_rate_meter_timeout
-		= setTimeout(
-			function() {
-				$( '.zoom-rate-meter-outer' ).hide();
-			},
-			1000
-		);
 }
 
 function hash_changed()

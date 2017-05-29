@@ -155,7 +155,7 @@ var gradient_colors;
 
 if ( window.Worker )
 {
-	var mandelbrot_worker = new Worker( '/js/mandelbrot/mandelbrot-worker.js' );
+	var mandelbrot_worker = new Worker( '/js/mandelbrot-worker.js' );
 }
 
 var SETTINGS_TIMEOUT_DELAY = 500;

@@ -15,6 +15,7 @@ var fractal_function_table = {
 	'burning-ship' : fractal_burning_ship,
 	'halloween' : fractal_halloween,
 	'angles' : fractal_angles,
+	'scenic' : fractal_scenic,
 	'test' : fractal_test
 };
 
@@ -330,6 +331,27 @@ function fractal_angles( x0, y0 )
 	return iteration;
 }
 
+function fractal_scenic( x0, y0 )
+{
+	var x = 0;
+	var y = 0;
+	
+	var iteration = 0;
+	
+	while ( x*x + y*y < 10 && iteration < max_iterations )
+	{
+		var x_temporary = x*x + x - y*y + x0;
+		
+		y = 2*x*y + y0;
+		
+		x = x_temporary;
+		
+		iteration++;
+	}
+	
+	return iteration;
+}
+
 function fractal_test( x0, y0 )
 {
 	var x = 0;
@@ -337,9 +359,9 @@ function fractal_test( x0, y0 )
 	
 	var iteration = 0;
 	
-	while ( x*x + y*y < 100 && iteration < max_iterations )
+	while ( x*x + y*y < 10 && iteration < max_iterations )
 	{
-		var x_temporary = ( x*x ) - Math.atan( y*y ) + x0;
+		var x_temporary = x*x+x - y*y + x0;
 		
 		y = 2*x*y + y0;
 		

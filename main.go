@@ -34,7 +34,7 @@ func main() {
 	router.POST("/buy-print", buyPrint)
 	router.POST("/donate", donate)
 	router.GET("/png", png)
-	router.NotFound = http.HandlerFunc(serveStaticFilesOr404)
+	router.NotFound = http.HandlerFunc(requestCatchAll)
 	log.Fatal(http.ListenAndServe(":8082", router))
 }
 

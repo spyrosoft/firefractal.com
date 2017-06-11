@@ -367,42 +367,38 @@ nav.main li a:hover {
     text-align: center; } }
 /* --------------------Nav-------------------- */
 /* --------------------Pages-------------------- */
-/* line 361, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
-.art-show img {
-  cursor: pointer; }
-
-/* line 364, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 360, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .buy-print {
   display: none;
   max-width: 20rem;
   margin-top: 2rem;
   margin-bottom: 4rem; }
-/* line 370, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 366, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .buy-print .buy-print-step {
   display: none; }
 
-/* line 373, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 369, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .how-to .columns.separation {
   border: 1px solid #000000;
   border-top: none;
   border-bottom: none; }
 
-/* line 378, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 374, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .gallery .columns {
   margin-bottom: 2rem; }
 
-/* line 381, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 377, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts ul {
   list-style-type: none; }
 
-/* line 384, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 380, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts strong {
   text-align: right;
   width: 12rem;
   display: inline-block;
   padding: 0 1rem; }
 
-/* line 390, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 386, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts span {
   text-align: left;
   width: 20rem;

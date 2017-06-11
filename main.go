@@ -33,11 +33,12 @@ func main() {
 	router.POST("/feedback", feedbackSubmission)
 	router.POST("/buy-print", buyPrint)
 	router.POST("/donate", donate)
+	router.GET("/png", png)
 	router.NotFound = http.HandlerFunc(serveStaticFilesOr404)
 	log.Fatal(http.ListenAndServe(":8082", router))
 }
 
-func debug(things ...interface{}) {
+func dump(things ...interface{}) {
 	if siteData.LiveOrDev == "dev" {
 		fmt.Println("====================")
 		for _, thing := range things {
@@ -47,6 +48,6 @@ func debug(things ...interface{}) {
 	}
 }
 
-func debugType(thing interface{}) {
+func dumpType(thing interface{}) {
 	fmt.Printf("%T\n", thing)
 }

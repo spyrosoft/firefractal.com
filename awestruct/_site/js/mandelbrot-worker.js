@@ -361,9 +361,9 @@ function fractal_test( x0, y0 )
 	
 	while ( x*x + y*y < 10 && iteration < max_iterations )
 	{
-		var x_temporary = x*x+x - y*y + x0;
+		var x_temporary = x*x - y*y + x0;
 		
-		y = 2*x*y + y0;
+		y = 2*x*y+y + y0;
 		
 		x = x_temporary;
 		

@@ -1,10 +1,3 @@
-.sass-cache
-web-root/images/gallery/*.png
-web-root/images/fractals/*.png
-generate-mandelbrot-png
-web-root/stress-test
-generate-png-queue
-/logs
-/web-root/stress-test
 /private
 /firefractal.com
+/awestruct/_site/images/gallery

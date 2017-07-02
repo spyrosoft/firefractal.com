@@ -35,7 +35,7 @@ func main() {
 	router.POST("/donate", donate)
 	router.GET("/png", png)
 	router.NotFound = http.HandlerFunc(requestCatchAll)
-	log.Fatal(http.ListenAndServe(":8082", router))
+	log.Fatal(http.ListenAndServe(":8084", router))
 }
 
 func dump(things ...interface{}) {

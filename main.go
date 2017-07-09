@@ -19,6 +19,7 @@ type SiteData struct {
 	ReplyAddress          string            `json:"reply-address"`
 	StripeTestSecretKey   string            `json:"stripe-test-secret-key"`
 	StripeLiveSecretKey   string            `json:"stripe-live-secret-key"`
+	WebPort               string            `json:"web-port"`
 }
 
 var (
@@ -35,7 +36,7 @@ func main() {
 	router.POST("/donate", donate)
 	router.GET("/png", png)
 	router.NotFound = http.HandlerFunc(requestCatchAll)
-	log.Fatal(http.ListenAndServe(":8084", router))
+	log.Fatal(http.ListenAndServe(":"+siteData.WebPort, router))
 }
 
 func dump(things ...interface{}) {

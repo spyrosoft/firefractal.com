@@ -1,0 +1,54 @@
+---
+layout: general
+title: Feedback
+description: 'Comments or questions about Fire Fractal? Send us a note.'
+nav: true
+---
+.row.text-left
+  .columns
+    %h1 Feedback
+    %form#feedback-form{action: '/feedback', method: 'post', target: '_blank'}
+      .row
+        .columns.large-6.medium-6
+          %input{name: 'name', placeholder: 'Name (Optional)', type: 'text'}
+      .row
+        .columns.large-6.medium-6
+          %input{name: 'email', placeholder: 'Email (Optional)', type: 'text'}
+      .row
+        .columns
+          %textarea{name: 'message', placeholder: 'Feedback (Required)', rows: '10'}
+      %input{name: 'subject', type: 'hidden', value: 'Feedback - firefractal.com'}
+      %button.full-width{type: 'submit'} Send Feedback
+    :javascript
+      $( '#feedback-form' ).submit( feedback_form_sumbission );
+      function feedback_form_sumbission( submission_event )
+      {
+        submission_event.preventDefault();
+        var feedback_submission_name = $( '#feedback-form [name=name]' ).val();
+        var feedback_submission_email = $( '#feedback-form [name=email]' ).val();
+        var feedback_submission_message = $( '#feedback-form [name=message]' ).val();
+        if ( feedback_submission_message === '' )
+        {
+          alert( 'The Message field is required.' );
+          $( '#feedback-form [name=message]' ).focus();
+          return;
+        }
+        var feedback_sumbission_object = new Object;
+        feedback_sumbission_object[ 'name' ] = feedback_submission_name;
+        feedback_sumbission_object[ 'email' ] = feedback_submission_email;
+        feedback_sumbission_object[ 'message' ] = feedback_submission_message;
+        $.post( '/feedback', feedback_sumbission_object )
+          .done(
+            function() {
+              alert( 'Thank you for your feedback.'  );
+              $( '#feedback-form [name=name]' ).val( '' );
+              $( '#feedback-form [name=email]' ).val( '' );
+              $( '#feedback-form [name=message]' ).val( '' );
+            }
+          )
+          .fail(
+            function() {
+              alert( 'Connection with the server failed. Please check your internet connection. Otherwise, something is wrong on our end - please try again later.' );
+            }
+          );
+      }

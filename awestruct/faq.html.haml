@@ -1,0 +1,40 @@
+---
+layout: general
+title: FAQ
+nav: true
+---
+.row.text-left
+  .columns
+    %h1 FAQ
+  .columns.medium-6
+    %p
+      %strong Q:
+      What is this site for?
+    %p
+      %strong A:
+      Firefractal.com was created with the dream of making it possible for anyone to explore the Mandelbrot Set and print high quality, cost effective fractal prints of their own creation.
+    %p
+      %strong Q:
+      If I zoom in really far, the image becomes pixelated. Is this a bug?
+    %p
+      %strong A:
+      This is a limitation of JavaScript/web browsers. For computer/math people, JavaScript is limited to 64bit floats. An arbitrary precision approach may be implemented in the future.
+    %p
+      %strong Q:
+      How many calculations does the computer do to make one image?
+    %p
+      %strong A:
+      Using a large monitor with high detail, one frame can be around five and a half billion calculations, performed by your browser. Hard to imagine.
+  .columns.medium-6
+    %p
+      %strong Q:
+      What sets firefractal.com apart from the others?
+    %strong A:
+    The way the Mandelbrot Set is portrayed here is, as far as we know, unique for the following reasons:
+    %ol
+      %li
+        Other software tends to use a set range of colors - usually a rainbow so that it overflows to the other end of the spectrum without any additional effort. We intentionally avoided this technique in favor of custom gradient colors. Originally just two, which we still think produces some of the nicest imagery.
+      %li
+        Other software tends not utilize the entire range of colors available. This is silly. For example, the minimum iteration will often be something like 14. We use an equation to map iterations to
+        %em all
+        available colors, resulting in more prominent contrast and ultimately more beautiful imagery.

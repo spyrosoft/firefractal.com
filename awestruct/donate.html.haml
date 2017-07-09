@@ -6,14 +6,16 @@ utilities: true
 script: https://checkout.stripe.com/checkout.js
 script_2: /js/donate.js
 ---
-.donate.text-left.large-margin-top
-  .row.step.payment-amount
-    .columns.large-8.medium-8
-      %label
-        .payment-amount-error.error
-        %input.large#payment-amount{type: "text", placeholder: "$300.00"}
-    .columns.large-4.medium-4
-      %button.button.large.expand.next-step.donate
-        Donate
+.row
+  .columns
+    %h1 Donate
+.row
+  .columns.large-8.medium-8
+    %label
+      .payment-amount-error.error
+      %input.large#payment-amount{type: "text", placeholder: "$20.00"}
+  .columns.large-4.medium-4
+    %button.button.large.expand
+      Submit
 :javascript
   document.getElementById('payment-amount').focus();

@@ -101,7 +101,6 @@ input.large
 body
 	background-color: $background-color
 	color: $foreground-color
-	text-align: center
 	min-width: 320px
 	width: 100%
 
@@ -164,11 +163,15 @@ button, .button, .tabs .tab-title a
 	background-color: $background-color
 	outline-color: $foreground-color
 	color: $foreground-color
-	border: none
+	border: 1px solid $foreground-color
 	line-height: 100%
 	padding: $input-control-padding
 	font-weight: normal
 	text-decoration: none
+
+.settings
+	button, .button, .tabs .tab-title a
+		border: none
 
 button:hover, button:focus, .button:hover, .button:focus, .tabs .tab-title a:hover
 	background-color: $invert-background-color
@@ -366,20 +369,18 @@ nav.main li a:hover
 	.buy-print-step
 		display: none
 
-.how-to .columns.separation
-	border: $thin-border
-	border-top: none
-	border-bottom: none
-
-.gallery .columns
-	margin-bottom: 2rem
+.gallery
+	.columns
+		margin-bottom: 2rem
+	img
+		min-height: 20px
 
 .instructions-keyboard-shortcuts ul
 	list-style-type: none
 
 .instructions-keyboard-shortcuts strong
 	text-align: right
-	width: 12rem
+	width: 4rem
 	display: inline-block
 	padding: 0 $small-spacing
 

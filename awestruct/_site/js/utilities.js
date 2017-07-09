@@ -227,6 +227,14 @@ var Utilities = {
 			return parsed;
 		} catch(e) {}
 		return undefined;
+	},
+	
+	limitDecimalPlaces : function( number, places ) {
+		if ( typeof number !== 'number' ) { return undefined; }
+		if (String(number).length > places + 3) {
+			return parseFloat(number.toFixed(2));
+		}
+		return number;
 	}
 };
 

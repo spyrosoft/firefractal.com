@@ -98,37 +98,36 @@ input.large {
 body {
   background-color: #FFFFFF;
   color: #000000;
-  text-align: center;
   min-width: 320px;
   width: 100%; }
 
-/* line 108, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 107, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 h1, h2, h3, h4, h5, h6, label, a, a:active, a:visited, a:hover {
   color: #000000; }
 
-/* line 111, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 110, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 a {
   text-decoration: underline; }
 
-/* line 114, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 113, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 a:hover {
   text-decoration: none; }
 
 /* --------------------Elements-------------------- */
 /* --------------------Form Elements-------------------- */
-/* line 122, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 121, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 input[type="text"], input[type="email"], textarea {
   background-color: #FFFFFF;
   color: #000000;
   border: 1px solid #000000; }
 
-/* line 129, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 128, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
   background-color: #000000;
   color: #FFFFFF;
   border: 1px solid #000000; }
 
-/* line 136, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 135, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 input[type="color"] {
   background-color: #FFFFFF;
   color: #000000;
@@ -137,64 +136,68 @@ input[type="color"] {
   margin: 0;
   cursor: pointer; }
 
-/* line 144, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 143, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 select, option, select:hover, option:hover, select:focus, option:focus {
   background-color: #FFFFFF;
   width: 100%; }
 
-/* line 150, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 149, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .switch label {
   background-color: #FFFFFF;
   border: 0.25rem solid #000000; }
 
-/* line 154, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 153, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .switch label:after {
   background-color: #000000;
   border: 0.25rem solid #FFFFFF;
   width: 1rem;
   height: 1rem; }
 
-/* line 160, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 159, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .switch input:checked + label {
   background-color: #000000; }
 
-/* line 163, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 162, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 button, .button, .tabs .tab-title a {
   background-color: #FFFFFF;
   outline-color: #000000;
   color: #000000;
-  border: none;
+  border: 1px solid #000000;
   line-height: 100%;
   padding: 0.7rem;
   font-weight: normal;
   text-decoration: none; }
 
 /* line 173, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+.settings button, .settings .button, .settings .tabs .tab-title a {
+  border: none; }
+
+/* line 176, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 button:hover, button:focus, .button:hover, .button:focus, .tabs .tab-title a:hover {
   background-color: #000000;
   color: #FFFFFF; }
 
-/* line 177, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 180, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 button.disabled, button[disabled], .button.disabled, .button[disabled], button.disabled:hover, button[disabled]:hover, .button.disabled:hover, .button[disabled]:hover, button.disabled:focus, button[disabled]:focus, .button.disabled:focus, .button[disabled]:focus {
   background-color: #FFFFFF;
   color: #000000;
   cursor: not-allowed; }
 
-/* line 182, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 185, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 select, option {
   color: #000000; }
 
-/* line 185, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 188, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .error {
   color: #ff0000; }
 
 /* --------------------Form Elements-------------------- */
 /* --------------------Settings-------------------- */
-/* line 195, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 198, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings {
   opacity: 0.85; }
 
-/* line 199, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 202, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-icon {
   display: block;
   width: 40px;
@@ -203,13 +206,13 @@ select, option {
   background-color: #FFFFFF;
   float: left; }
 
-/* line 207, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 210, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-icon span {
   display: block;
   box-shadow: 0 1px 0 1px #000000, 0 9px 0 1px #000000, 0 17px 0 1px #000000;
   width: 18px; }
 
-/* line 212, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 215, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings {
   position: absolute;
   top: 0;
@@ -221,113 +224,113 @@ select, option {
   overflow: auto;
   background-color: #FFFFFF; }
 
-/* line 223, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 226, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-hidden {
   width: 40px;
   height: 38px;
   overflow: hidden; }
 
-/* line 228, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 231, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-hidden .settings-content {
   display: none; }
 
-/* line 231, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 234, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .setting, .settings-navigation, .page-navigation {
   background-color: #FFFFFF;
   margin-bottom: 1rem; }
 
-/* line 237, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 240, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-navigation button, .settings-navigation .button, .settings-navigation .tabs .tab-title a {
   height: 38px;
   margin: 0;
   font-size: 1rem;
   text-align: left; }
-/* line 243, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 246, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-navigation a {
   display: block;
   float: left;
   text-align: center;
   line-height: 200%; }
-/* line 249, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 252, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-navigation button {
   width: 50%;
   display: block;
   float: left; }
-/* line 254, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 257, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-navigation button.display-none {
   display: none; }
-/* line 257, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 260, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings-navigation button.full-width {
   width: 100%; }
 
-/* line 260, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 263, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .page-navigation {
   border-bottom: 1px solid #000000; }
 
-/* line 263, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 266, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .page-navigation .button {
   float: right; }
 
-/* line 266, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 269, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 select.gradient-colors-presets option {
   width: 100%; }
 
-/* line 269, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 272, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .settings input[type="color"] {
   height: 4rem; }
 
-/* line 272, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 275, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .setting.colors .color .move {
   cursor: move;
   float: left;
   line-height: 100%;
   padding: 0.7rem 1.5rem; }
 
-/* line 278, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 281, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .setting.colors button.plus, .setting.colors button.minus {
   float: right; }
 
-/* line 281, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 284, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .setting.colors .color-controls {
   background-color: #FFFFFF; }
 
-/* line 284, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 287, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .colors-controls button, .controls-navigation .tabs .tab-title {
   width: 50%;
   text-align: center; }
 
-/* line 288, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 291, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .colors-controls, .controls-navigation .tabs .tab-title {
   border-bottom: 1px solid #000000;
   margin-bottom: 1rem; }
 
-/* line 292, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 295, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .controls-navigation {
   margin-bottom: 1rem; }
 
-/* line 295, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 298, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .quick-controls .row {
   margin-bottom: 1rem; }
 
-/* line 298, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 301, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 img.generated-png {
   border: 1px solid #000000; }
 
-/* line 301, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 304, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .zoom-rate-meter-outer {
   border: 1px solid #000000;
   height: 14px;
   padding: 1px;
   margin: 1rem auto; }
 
-/* line 307, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 310, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .zoom-rate-meter-inner {
   background-color: #000000;
   height: 10px; }
 
 /* --------------------Settings-------------------- */
 /* --------------------Canvas-------------------- */
-/* line 317, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 320, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .canvas-content {
   position: relative;
   width: 180px;
@@ -335,7 +338,7 @@ img.generated-png {
   margin-left: auto;
   margin-right: auto; }
 
-/* line 324, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 327, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .canvas-content canvas {
   position: absolute;
   top: 0;
@@ -344,61 +347,58 @@ img.generated-png {
 
 /* --------------------End Canvas-------------------- */
 /* --------------------Nav-------------------- */
-/* line 336, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 339, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 nav.main li {
   float: left;
   list-style-type: none; }
 
-/* line 340, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 343, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 nav.main li a {
   display: block;
   padding: 1rem;
   text-decoration: none;
   font-weight: bold; }
 
-/* line 346, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 349, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 nav.main li a:hover {
   text-decoration: underline; }
 
 @media screen and (max-width: 39.9375em) {
-  /* line 350, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+  /* line 353, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
   nav.main li {
     width: 50%;
     text-align: center; } }
 /* --------------------Nav-------------------- */
 /* --------------------Pages-------------------- */
-/* line 360, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 363, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .buy-print {
   display: none;
   max-width: 20rem;
   margin-top: 2rem;
   margin-bottom: 4rem; }
-/* line 366, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 369, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .buy-print .buy-print-step {
   display: none; }
 
-/* line 369, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
-.how-to .columns.separation {
-  border: 1px solid #000000;
-  border-top: none;
-  border-bottom: none; }
-
-/* line 374, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 373, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .gallery .columns {
   margin-bottom: 2rem; }
+/* line 375, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+.gallery img {
+  min-height: 20px; }
 
-/* line 377, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 378, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts ul {
   list-style-type: none; }
 
-/* line 380, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 381, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts strong {
   text-align: right;
-  width: 12rem;
+  width: 4rem;
   display: inline-block;
   padding: 0 1rem; }
 
-/* line 386, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
+/* line 387, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts span {
   text-align: left;
   width: 20rem;

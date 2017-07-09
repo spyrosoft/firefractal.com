@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>FAQ - Fire Fractal</title>
+    <link href="/images/favicon.ico" rel="shortcut icon">
+    <!-- Zurb Foundation -->
+    <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/foundation.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <!-- End Zurb Foundation -->
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="columns no-padding">
+        <nav class="main clearfix">
+          <li>
+            <a href="/">Gallery</a>
+          </li>
+          <li>
+            <a href="/explore/">Explore</a>
+          </li>
+          <li>
+            <a href="/how-to.html">How To</a>
+          </li>
+          <li>
+            <a href="/about.html">About</a>
+          </li>
+          <li>
+            <a href="/faq.html">FAQ</a>
+          </li>
+          <li>
+            <a href="/feedback.html">Feedback</a>
+          </li>
+          <li>
+            <a href="/donate.html">Donate</a>
+          </li>
+        </nav>
+        <hr class="no-margin">
+      </div>
+    </div>
+    <div class="row text-left">
+      <div class="columns">
+        <h1>FAQ</h1>
+      </div>
+      <div class="columns medium-6">
+        <p>
+          <strong>Q:</strong>
+          What is this site for?
+        </p>
+        <p>
+          <strong>A:</strong>
+          Firefractal.com was created with the dream of making it possible for anyone to explore the Mandelbrot Set and print high quality, cost effective fractal prints of their own creation.
+        </p>
+        <p>
+          <strong>Q:</strong>
+          If I zoom in really far, the image becomes pixelated. Is this a bug?
+        </p>
+        <p>
+          <strong>A:</strong>
+          This is a limitation of JavaScript/web browsers. For computer/math people, JavaScript is limited to 64bit floats. An arbitrary precision approach may be implemented in the future.
+        </p>
+        <p>
+          <strong>Q:</strong>
+          How many calculations does the computer do to make one image?
+        </p>
+        <p>
+          <strong>A:</strong>
+          Using a large monitor with high detail, one frame can be around five and a half billion calculations, performed by your browser. Hard to imagine.
+        </p>
+      </div>
+      <div class="columns medium-6">
+        <p>
+          <strong>Q:</strong>
+          What sets firefractal.com apart from the others?
+        </p>
+        <strong>A:</strong>
+        The way the Mandelbrot Set is portrayed here is, as far as we know, unique for the following reasons:
+        <ol>
+          <li>
+            Other software tends to use a set range of colors - usually a rainbow so that it overflows to the other end of the spectrum without any additional effort. We intentionally avoided this technique in favor of custom gradient colors. Originally just two, which we still think produces some of the nicest imagery.
+          </li>
+          <li>
+            Other software tends not utilize the entire range of colors available. This is silly. For example, the minimum iteration will often be something like 14. We use an equation to map iterations to
+            <em>all</em>
+            available colors, resulting in more prominent contrast and ultimately more beautiful imagery.
+          </li>
+        </ol>
+      </div>
+    </div>
+    <script src="/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

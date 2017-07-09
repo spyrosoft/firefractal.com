@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Feedback - Fire Fractal</title>
+    <meta content="Comments or questions about Fire Fractal? Send us a note." name="description">
+    <link href="/images/favicon.ico" rel="shortcut icon">
+    <!-- Zurb Foundation -->
+    <link href="/css/normalize.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/foundation.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <!-- End Zurb Foundation -->
+    <link href="/css/styles.css" rel="stylesheet" type="text/css">
+    <script src="/js/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="columns no-padding">
+        <nav class="main clearfix">
+          <li>
+            <a href="/">Gallery</a>
+          </li>
+          <li>
+            <a href="/explore/">Explore</a>
+          </li>
+          <li>
+            <a href="/how-to.html">How To</a>
+          </li>
+          <li>
+            <a href="/about.html">About</a>
+          </li>
+          <li>
+            <a href="/faq.html">FAQ</a>
+          </li>
+          <li>
+            <a href="/feedback.html">Feedback</a>
+          </li>
+          <li>
+            <a href="/donate.html">Donate</a>
+          </li>
+        </nav>
+        <hr class="no-margin">
+      </div>
+    </div>
+    <div class="row text-left">
+      <div class="columns">
+        <h1>Feedback</h1>
+        <form action="/feedback" id="feedback-form" method="post" target="_blank">
+          <div class="row">
+            <div class="columns large-6 medium-6">
+              <input name="name" placeholder="Name (Optional)" type="text">
+            </div>
+          </div>
+          <div class="row">
+            <div class="columns large-6 medium-6">
+              <input name="email" placeholder="Email (Optional)" type="text">
+            </div>
+          </div>
+          <div class="row">
+            <div class="columns">
+              <textarea name="message" placeholder="Feedback (Required)" rows="10"></textarea>
+            </div>
+          </div>
+          <input name="subject" type="hidden" value="Feedback - firefractal.com">
+          <button class="full-width" type="submit">Send Feedback</button>
+        </form>
+        <script>
+          $( '#feedback-form' ).submit( feedback_form_sumbission );
+          function feedback_form_sumbission( submission_event )
+          {
+            submission_event.preventDefault();
+            var feedback_submission_name = $( '#feedback-form [name=name]' ).val();
+            var feedback_submission_email = $( '#feedback-form [name=email]' ).val();
+            var feedback_submission_message = $( '#feedback-form [name=message]' ).val();
+            if ( feedback_submission_message === '' )
+            {
+              alert( 'The Message field is required.' );
+              $( '#feedback-form [name=message]' ).focus();
+              return;
+            }
+            var feedback_sumbission_object = new Object;
+            feedback_sumbission_object[ 'name' ] = feedback_submission_name;
+            feedback_sumbission_object[ 'email' ] = feedback_submission_email;
+            feedback_sumbission_object[ 'message' ] = feedback_submission_message;
+            $.post( '/feedback', feedback_sumbission_object )
+              .done(
+                function() {
+                  alert( 'Thank you for your feedback.'  );
+                  $( '#feedback-form [name=name]' ).val( '' );
+                  $( '#feedback-form [name=email]' ).val( '' );
+                  $( '#feedback-form [name=message]' ).val( '' );
+                }
+              )
+              .fail(
+                function() {
+                  alert( 'Connection with the server failed. Please check your internet connection. Otherwise, something is wrong on our end - please try again later.' );
+                }
+              );
+          }
+        </script>
+      </div>
+    </div>
+    <script src="/js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+  </body>
+</html>

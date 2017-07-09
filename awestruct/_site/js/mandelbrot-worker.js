@@ -17,7 +17,7 @@ var fractal_function_table = {
 	'angles' : fractal_angles,
 	'scenic' : fractal_scenic,
 	'clouds' : fractal_clouds,
-	'melty-bulbs' : fractal_melty_bulbs,
+	'demons' : fractal_demons,
 	'test' : fractal_test
 };
 
@@ -375,7 +375,7 @@ function fractal_clouds( x0, y0 )
 	return iteration;
 }
 
-function fractal_melty_bulbs( x0, y0 )
+function fractal_demons( x0, y0 )
 {
 	var x = 0;
 	var y = 0;

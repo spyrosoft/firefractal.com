@@ -385,7 +385,7 @@ nav.main li a:hover {
   margin-bottom: 2rem; }
 /* line 375, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .gallery img {
-  min-height: 20px; }
+  min-height: 200px; }
 
 /* line 378, /home/path/sites/firefractal.com/awestruct/css/styles.sass */
 .instructions-keyboard-shortcuts ul {
